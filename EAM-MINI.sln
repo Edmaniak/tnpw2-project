@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAM-MINI", "EAM-MINI\EAM-MINI.csproj", "{569EC2A5-DE53-4AB8-8535-911567535A1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{E980332A-AB39-4C6E-B8A0-A1CC0431D14E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{569EC2A5-DE53-4AB8-8535-911567535A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{569EC2A5-DE53-4AB8-8535-911567535A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{569EC2A5-DE53-4AB8-8535-911567535A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{569EC2A5-DE53-4AB8-8535-911567535A1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E980332A-AB39-4C6E-B8A0-A1CC0431D14E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E980332A-AB39-4C6E-B8A0-A1CC0431D14E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E980332A-AB39-4C6E-B8A0-A1CC0431D14E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E980332A-AB39-4C6E-B8A0-A1CC0431D14E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
