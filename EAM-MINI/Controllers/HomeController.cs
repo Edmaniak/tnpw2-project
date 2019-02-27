@@ -6,15 +6,14 @@ using DataAccess;
 using DataAccess.Dao;
 using DataAccess.Model;
 
+
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            UserDao users = new UserDao();
-            IList<User> us = users.GetAll();
-         
             return View();
         }
 
