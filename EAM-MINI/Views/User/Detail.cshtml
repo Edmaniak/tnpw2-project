@@ -1,18 +1,16 @@
-@using DataAccess.Model
-@using DataAccess.Dao
-@model User
+@model DataAccess.Model.User
 @{
-    ViewBag.Title = "Přidat uživatele";
+    ViewBag.Title = Model.GetFullName();
 }
 
 <div class="row">
     <div class="col-4">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Zadejte údaje</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Osobní údaje</h6>
             </div>
             <div class="card-body">
-                @using (Html.BeginForm("Create", "User", FormMethod.Post))
+                @using (Html.BeginForm("Edit", "User", FormMethod.Post))
                 {
                     <div class="form-group">
                         <label for="name">Jméno:</label>
@@ -39,8 +37,9 @@
                         @Html.DropDownList("roleId", new SelectList(ViewBag.roles, "Id", "Title"), new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Role)
                     </div>
+                    @Html.HiddenFor(x=>x.Id)
                     <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Vytvořit</button>
+                        <button class="btn btn-primary" type="submit">Uložit</button>
                     </div>
                 }
             </div>
