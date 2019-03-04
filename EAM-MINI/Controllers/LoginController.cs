@@ -22,5 +22,12 @@ namespace EAM_MINI.Controllers
             TempData["error"] = "Login failed";
             return RedirectToAction("Index", "Login");
         }
+
+        public ActionResult LogOut()
+        {
+            if (User.Identity.Name == null) return Redirect(Request.UrlReferrer.ToString());
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
