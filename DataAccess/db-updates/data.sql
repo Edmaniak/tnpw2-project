@@ -1,0 +1,3 @@
+INSERT INTO tnpw_eam.dbo.users__role (id, title, description) VALUES (1, 'admin', 'He has all the privililages and he can enter every section of the app');
+INSERT INTO tnpw_eam.dbo.users__user (id, name, surname, password, email, role_id) VALUES (1, 'Adam', 'Ouhrabka', '930318', 'adam.ouhrabka@gmail.com', 1);
+INSERT INTO tnpw_eam.dbo.users__user (id, name, surname, password, email, role_id) VALUES (2, 'Tomáš', 'Tremp', '930318', 'tomas.tremp@gmail.com', 1);

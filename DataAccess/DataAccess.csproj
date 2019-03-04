@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
+        <TargetFramework>net471</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -10,7 +10,14 @@
 
     <ItemGroup>
       <None Remove="Mappings\User.hbm.xml" />
+      <EmbeddedResource Include="Mappings\Role.hbm.xml" />
       <EmbeddedResource Include="Mappings\User.hbm.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.ComponentModel.DataAnnotations" />
+      <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net471'" />
+      <Reference Include="System.Web.ApplicationServices" />
     </ItemGroup>
 
 </Project>

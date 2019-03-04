@@ -1,0 +1,11 @@
+main {
+    height: 100vh;
+}
+#login .logo {
+    color: white;
+    font-size: 4em;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+}
