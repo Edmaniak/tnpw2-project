@@ -28,6 +28,11 @@
                         @Html.ValidationMessageFor(x => x.Email)
                     </div>
                     <div class="form-group">
+                        <label for="email">Telefon:</label>
+                        @Html.TextBoxFor(x => x.Phone, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Phone)
+                    </div>
+                    <div class="form-group">
                         <label for="password">Heslo:</label>
                         @Html.TextBoxFor(x => x.Password, new {@class = "form-control", @type = "password"})
                         @Html.ValidationMessageFor(x => x.Password)

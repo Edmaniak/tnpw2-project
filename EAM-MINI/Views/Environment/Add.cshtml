@@ -1,0 +1,54 @@
+@model DataAccess.Model.Environment
+
+@{
+    ViewBag.Title = "Přidat vybavení";
+}
+
+<div class="row">
+    <div class="col-4">
+        <div class="card shadow">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Popis prostředí</h6>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Create", "Environment", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="name">Název:</label>
+                        @Html.TextBoxFor(x => x.Name, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Name)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Popis:</label>
+                        @Html.TextAreaFor(x => x.Description, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Description)
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label for="name">Ulice:</label>
+                        @Html.TextBoxFor(x => x.Address.Street, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Address.Street)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Ulice:</label>
+                        @Html.TextBoxFor(x => x.Address.City, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Address.City)
+                    </div> 
+                    <div class="form-group">
+                        <label for="name">PSČ:</label>
+                        @Html.TextBoxFor(x => x.Address.Zip, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Address.Zip)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Stát:</label>
+                        @Html.TextBoxFor(x => x.Address.State, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Address.State)
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Vytvořit</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,9 @@
         <property name="Name" column="name"/>
         <property name="Surname" column="surname"/>
         <property name="Email" column="email"/>
+        <property name="Phone" column="phone"/>
         <property name="Password" column="password"/>
         <many-to-one name="Role" column="role_id" foreign-key="role_id"/>
+        <one-to-one name="Address" foreign-key="FK_users__user_address__address" class="Address" cascade="all" constrained="true" />
     </class>
 </hibernate-mapping>

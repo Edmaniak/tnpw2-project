@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <None Remove="Mappings\User.hbm.xml" />
+      <EmbeddedResource Include="Mappings\Address.hbm.xml" />
       <EmbeddedResource Include="Mappings\Role.hbm.xml" />
       <EmbeddedResource Include="Mappings\User.hbm.xml" />
     </ItemGroup>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+    <class name="Equipment" table="equipments__equipment">
+        <id name="Id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="Title" column="title"/>
+        <property name="Description" column="description"/>
+        <property name="Code" column="code"/>
+        <property name="Purchased" column="purchased"/>
+        <property name="Warranty" column="warranty"/>
+        <many-to-one name="Room" class="Room" column="room_id" />
+    </class>
+</hibernate-mapping>
