@@ -1,15 +1,14 @@
 @using DataAccess.Model
-@using Environment = DataAccess.Model.Environment
-@model List<DataAccess.Model.Environment>
+@model List<DataAccess.Model.Room>
 @{
-    ViewBag.Title = "Prostředí";
+    ViewBag.Title = "Místnosti";
 }
 
 <div class="row">
     <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Přehled prostředí</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Přehled místností</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -18,26 +17,24 @@
                         <tr>
                             <th>Kód</th>
                             <th>Název</th>
-                            <th>Popis</th>
+                            <th>Účel</th>
                             <th>Akce</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach (Environment e in Model)
+                        @foreach (Room r in Model)
                         {
                             <tr>
                                 <td>
-                                    <a href="@Url.Action("Detail", "Environment", new {id = e.Id})">@e.Code</a>
+                                    <a href="@Url.Action("Detail", "User", new {id = r.Id})">@r.Code</a>
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Detail", "Environment", new {id = e.Id})">@e.Name</a>
+                                    <a href="@Url.Action("Detail", "User", new {id = r.Id})">@r.Name</a>
                                 </td>
+                                <td>@r.Purpouse</td>
                                 <td>
-                                    @e.Description
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("Detail", "Environment", new {id = e.Id})" class="btn btn-primary">Detail</a>
-                                    <a href="@Url.Action("Delete", "Environment", new {id = e.Id})" class="btn btn-danger">Smazat</a>
+                                    <a href="@Url.Action("Detail", "User", new {id = r.Id})" class="btn btn-primary">Detail</a>
+                                    <a href="@Url.Action("Delete", "User", new {id = r.Id})" class="btn btn-danger">Smazat</a>
                                 </td>
                             </tr>
                         }

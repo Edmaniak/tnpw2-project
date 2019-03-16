@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
-    <class name="Business" table="bussiness_bussiness" lazy="false">
+    <class name="Business" table="bussiness__bussiness" lazy="false">
         <id name="Id" column="id">
             <generator class="native"/>
         </id>

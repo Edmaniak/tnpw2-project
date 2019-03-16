@@ -1771,6 +1771,8 @@
         <Content Include="Views\Equipment\Index.cshtml" />
         <Content Include="Views\Login\Index.cshtml" />
         <Content Include="Views\Room\Add.cshtml" />
+        <Content Include="Views\Room\Detail.cshtml" />
+        <Content Include="Views\Room\Index.cshtml" />
         <Content Include="Views\User\Add.cshtml" />
         <Content Include="Views\User\Detail.cshtml" />
         <Content Include="Views\User\Index.cshtml" />

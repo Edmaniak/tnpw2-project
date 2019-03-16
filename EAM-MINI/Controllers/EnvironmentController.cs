@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using DataAccess.Dao;
 using DataAccess.Model;
@@ -27,7 +29,14 @@ namespace EAM_MINI.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            List<Environment> environments = _environmentDao.GetAll().ToList(); 
+            return View(environments);
+        }
+        
+        public ActionResult Delete(int id)
+        {
+            _environmentDao.Delete(_environmentDao.GetById(id));
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult Create(Environment environment)

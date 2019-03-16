@@ -1,5 +1,5 @@
 @using DataAccess.Model
-@model DataAccess.Model.Environment
+@model DataAccess.Model.Room
 @{
     ViewBag.Title = "Přidat místnost";
 }
@@ -12,16 +12,25 @@
                     <h6 class="m-0 font-weight-bold text-primary">Zadejte údaje</h6>
                 </div>
                 <div class="card-body">
-
                     <div class="form-group">
-                        <label for="name">Titulek:</label>
+                        <label for="name">Prostředí:</label>
+                        @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name"), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Environment)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Podlaží:</label>
+                        @Html.TextBoxFor(x => x.Floor, new {@class = "form-control", @type="number"})
+                        @Html.ValidationMessageFor(x => x.Floor)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Jméno:</label>
                         @Html.TextBoxFor(x => x.Name, new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Name)
                     </div>
                     <div class="form-group">
                         <label for="name">Popis:</label>
-                        @Html.TextAreaFor(x => x.Description, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Description)
+                        @Html.TextAreaFor(x => x.Purpouse, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Purpouse)
                     </div>
                     <div class="form-group">
                         <label for="name">Kód:</label>
@@ -30,35 +39,6 @@
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Vytvořit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">Adresa</h6>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="name">Ulice:</label>
-                        @Html.TextBoxFor(x => x.Address.Street, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Address.Street)
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Město:</label>
-                        @Html.TextBoxFor(x => x.Address.City, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Address.City)
-                    </div>
-                    <div class="form-group">
-                        <label for="email">PSČ: </label>
-                        @Html.TextBoxFor(x => x.Address.Zip, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Address.Zip)
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Stát: </label>
-                        @Html.TextBoxFor(x => x.Address.State, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Address.State)
                     </div>
                 </div>
             </div>
