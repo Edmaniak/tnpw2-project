@@ -10,6 +10,6 @@
         <property name="Phone" column="phone"/>
         <property name="Password" column="password"/>
         <many-to-one name="Role" column="role_id" foreign-key="role_id"/>
-        <one-to-one name="Address" foreign-key="FK_users__user_address__address" class="Address" cascade="all" constrained="true" />
+        <many-to-one name="Address" column="address_id" foreign-key="address_id" cascade="all" />
     </class>
 </hibernate-mapping>

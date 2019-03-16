@@ -21,8 +21,10 @@ namespace DataAccess.Model
 
         [Required(ErrorMessage = "Heslo uživatele je povinný údaj")]
         public virtual string Password { get; set; }
-        
+
         public virtual string Phone { get; set; }
+
+        public virtual Address Address { get; set; }
 
         public virtual Role Role { get; set; }
 
