@@ -16,8 +16,16 @@ namespace DataAccess
                 if (_factory == null)
                 {
                     var cfg = new Configuration();
-                    _factory = cfg.Configure(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hibernate.cfg.xml"))
-                        .BuildSessionFactory();
+                    try
+                    {
+                        _factory = cfg
+                            .Configure(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hibernate.cfg.xml"))
+                            .BuildSessionFactory();
+                    }
+                    catch (Exception e)
+                    {
+                        string m = e.Message;
+                    }
                 }
 
                 return _factory.OpenSession();

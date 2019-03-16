@@ -5,6 +5,7 @@ namespace DataAccess.Model
 {
     public class Control : IEntity
     {
+        public virtual int Id { get; set; }
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
         public virtual DateTime DatePerformed { get; set; }

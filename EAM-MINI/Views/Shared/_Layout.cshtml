@@ -44,6 +44,12 @@
             <span>Přehled</span>
         </a>
     </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="@Url.Action("Index", "Home")">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Business nastavení</span>
+        </a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -55,11 +61,11 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userModul" aria-expanded="true" aria-controls="userModul">
             <i class="fas fa-users"></i>
             <span>Uživatelé</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="userModul" class="collapse" aria-labelledby="headingTwo" data-parent="#userModul">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Uživatelský modul</h6>
                 <a class="collapse-item" href="@Url.Action("Add", "User")">Přidat uživatele</a>
@@ -68,22 +74,54 @@
         </div>
     </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#equipmentModule" aria-expanded="true" aria-controls="equipmentModule">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
+            <span>Vybavení</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="equipmentModule" class="collapse" aria-labelledby="headingTwo" data-parent="#equipmentModule">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
+                <h6 class="collapse-header">Uživatelský modul</h6>
+                <a class="collapse-item" href="@Url.Action("Add", "Equipment")">Přidat vybavení</a>
+                <a class="collapse-item" href="@Url.Action("Index", "Equipment")">Přehled vybavení</a>
             </div>
         </div>
     </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#controlModule" aria-expanded="true" aria-controls="controlModule">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Plánování kontrol</span>
+        </a>
+        <div id="controlModule" class="collapse" aria-labelledby="headingTwo" data-parent="#controlModule">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Modul Kontrol</h6>
+                <a class="collapse-item" href="@Url.Action("Add", "Control")">Naplánovat kontroly</a>
+                <a class="collapse-item" href="@Url.Action("Index", "Control")">Kontroly</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#environmentModule" aria-expanded="true" aria-controls="environmentModule">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Prostředí</span>
+        </a>
+        <div id="environmentModule" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Prostředí</h6>
+                <a class="collapse-item" href="@Url.Action("Add", "Environment")">Přidat prostředí</a>
+                <a class="collapse-item" href="@Url.Action("Index", "Environment")">Prostředí</a>
+                <h6 class="collapse-header">Místnosti</h6>
+                <a class="collapse-item" href="@Url.Action("Add", "Room")">Přidat místnost</a>
+                <a class="collapse-item" href="@Url.Action("Index", "Room")">Místnosti</a>
+            </div>
+        </div>
+    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -374,7 +412,7 @@
             </div>
             <div class="modal-body">Klikněte na "Odhlásit se" chcete-li opravdu ukončit běžící seanci.</div>
             <div class="modal-footer">
-                <a class="btn btn-primary" href="@Url.Action("Logout","Login")">Odhlásit se</a>
+                <a class="btn btn-primary" href="@Url.Action("Logout", "Login")">Odhlásit se</a>
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Zrušit</button>
             </div>
         </div>

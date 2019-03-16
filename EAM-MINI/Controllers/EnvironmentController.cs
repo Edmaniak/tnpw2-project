@@ -6,13 +6,25 @@ namespace EAM_MINI.Controllers
 {
     public class EnvironmentController : BaseController
     {
-        private EnvironmentDao _environmentDao = new EnvironmentDao();
-        
+        private BusinessDao _businessDao;
+        private EnvironmentDao _environmentDao;
+
+        public EnvironmentController()
+        {
+            _businessDao = new BusinessDao();
+            _environmentDao = new EnvironmentDao();
+        }
+
         public ActionResult Add()
         {
             return View();
         }
-        
+
+        public ActionResult Detail()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -28,6 +40,5 @@ namespace EAM_MINI.Controllers
 
             return View("Add", environment);
         }
-        
     }
 }

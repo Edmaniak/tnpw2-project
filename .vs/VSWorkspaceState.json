@@ -1,8 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\EAM-MINI"
+    "\\DataAccess",
+    "\\DataAccess\\Mappings"
   ],
-  "SelectedNode": "\\EAM-MINI.sln",
   "PreviewInSolutionExplorer": false
 }

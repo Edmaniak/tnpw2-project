@@ -135,8 +135,12 @@
         <Compile Include="Class\MembershipProvider.cs" />
         <Compile Include="Class\RoleProvider.cs" />
         <Compile Include="Controllers\BaseController.cs" />
+        <Compile Include="Controllers\ControlController.cs" />
+        <Compile Include="Controllers\EnvironmentController.cs" />
+        <Compile Include="Controllers\EquipmentController.cs" />
         <Compile Include="Controllers\HomeController.cs" />
         <Compile Include="Controllers\LoginController.cs" />
+        <Compile Include="Controllers\RoomController.cs" />
         <Compile Include="Controllers\UserController.cs" />
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
@@ -1756,7 +1760,17 @@
         <Content Include="Scripts\modernizr-2.6.2.js" />
         <Content Include="Scripts\respond.js" />
         <Content Include="Scripts\respond.min.js" />
+        <Content Include="Views\Control\Add.cshtml" />
+        <Content Include="Views\Control\Detail.cshtml" />
+        <Content Include="Views\Control\Index.cshtml" />
+        <Content Include="Views\Environment\Add.cshtml" />
+        <Content Include="Views\Environment\Detail.cshtml" />
+        <Content Include="Views\Environment\Index.cshtml" />
+        <Content Include="Views\Equipment\Add.cshtml" />
+        <Content Include="Views\Equipment\Detail.cshtml" />
+        <Content Include="Views\Equipment\Index.cshtml" />
         <Content Include="Views\Login\Index.cshtml" />
+        <Content Include="Views\Room\Add.cshtml" />
         <Content Include="Views\User\Add.cshtml" />
         <Content Include="Views\User\Detail.cshtml" />
         <Content Include="Views\User\Index.cshtml" />

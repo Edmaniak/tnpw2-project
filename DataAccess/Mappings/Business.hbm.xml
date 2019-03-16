@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
-    <class name="Environment" table="environments__environment" lazy="false">
+    <class name="Business" table="bussiness_bussiness" lazy="false">
         <id name="Id" column="id">
             <generator class="native"/>
         </id>
         <property name="Name" column="name"/>
         <property name="Description" column="description"/>
-        <property name="Code" column="code"/>
         <many-to-one name="Address" column="address_id" foreign-key="address_id" cascade="all" />
-        <many-to-one name="Business" column="bussiness_id" foreign-key="bussiness_id" cascade="all" />
     </class>
 </hibernate-mapping>
