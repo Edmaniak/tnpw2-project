@@ -29,13 +29,15 @@ namespace EAM_MINI.Controllers
 
         public ActionResult Delete(int id)
         {
-            _environmentDao.Delete(_environmentDao.GetById(id));
+            _roomDao.Delete(_roomDao.GetById(id));
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        public ActionResult Detail()
+        public ActionResult Detail(int id)
         {
-            return View();
+            Room room = _roomDao.GetById(id);
+            ViewBag.environments = _environments;
+            return View(room);
         }
 
         public ActionResult Index()

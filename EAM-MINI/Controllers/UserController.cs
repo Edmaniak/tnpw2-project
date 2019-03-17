@@ -46,7 +46,8 @@ namespace EAM_MINI.Controllers
             ViewBag.roles = _roles;
             return View(user);
         }
-
+        
+        [HttpPost]
         public ActionResult Edit(User user, string roleId)
         {
             if (ModelState.IsValid)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DataAccess.Interface;
 
 namespace DataAccess.Model
@@ -10,5 +11,7 @@ namespace DataAccess.Model
         public virtual string Code { get; set; }
         public virtual Business Business { get; set; }
         public virtual Address Address { get; set; }
+        
+        public virtual IList<Room> Rooms { get; set; }
     }
 }

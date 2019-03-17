@@ -1,53 +1,65 @@
-@model DataAccess.Model.User
+@using DataAccess.Model
+@model Equipment
 @{
-    ViewBag.Title = Model.GetFullName();
+    ViewBag.Title = Model.Title;
 }
-
-<div class="row">
-    <div class="col-4">
-        <div class="card shadow">
-            <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Osobní údaje</h6>
+@using (Html.BeginForm("Create", "Equipment", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Údaje</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="name">Titulek:</label>
+                        @Html.TextBoxFor(x => x.Title, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Title)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Popis:</label>
+                        @Html.TextAreaFor(x => x.Description, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Description)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Kód:</label>
+                        @Html.TextBoxFor(x => x.Code, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Code)
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Pořízeno dne:</label>
+                        @Html.TextBoxFor(x => x.Purchased, "{0:dd. MM. yyyy}", new {@class = "form-control", @type = "date"})
+                        @Html.ValidationMessageFor(x => x.Purchased)
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Záruka končí:</label>
+                        @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control", @type = "date"})
+                        @Html.ValidationMessageFor(x => x.Warranty)
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Vytvořit</button>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                @using (Html.BeginForm("Edit", "User", FormMethod.Post))
-                {
+        </div>
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Umístění</h6>
+                </div>
+                <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Jméno:</label>
-                        @Html.TextBoxFor(x => x.Name, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Name)
+                        <label for="name">Prostředí:</label>
+                        @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name"), new {@class = "form-control"})
                     </div>
-                    <div class="form-group">
-                        <label for="name">Příjmení:</label>
-                        @Html.TextBoxFor(x => x.Surname, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Surname)
-                    </div>
-                    <div class="form-group">
-                        <label for="email">E-mail:</label>
-                        @Html.TextBoxFor(x => x.Email, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Email)
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Telefon:</label>
-                        @Html.TextBoxFor(x => x.Phone, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Phone)
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Heslo:</label>
-                        @Html.TextBoxFor(x => x.Password, new {@class = "form-control", @type = "password"})
-                        @Html.ValidationMessageFor(x => x.Password)
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role:</label>
-                        @Html.DropDownList("roleId", new SelectList(ViewBag.roles, "Id", "Title"), new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Role)
-                    </div>
-                    @Html.HiddenFor(x=>x.Id)
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Uložit</button>
-                    </div>
-                }
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <script>
+        $('#environmentId').click(function() {
+            
+        })
+    </script>
+}

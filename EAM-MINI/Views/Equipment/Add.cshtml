@@ -6,13 +6,12 @@
 @using (Html.BeginForm("Create", "Equipment", FormMethod.Post))
 {
     <div class="row">
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="card shadow">
                 <div class="card-header">
                     <h6 class="m-0 font-weight-bold text-primary">Zadejte údaje</h6>
                 </div>
                 <div class="card-body">
-
                     <div class="form-group">
                         <label for="name">Titulek:</label>
                         @Html.TextBoxFor(x => x.Title, new {@class = "form-control"})
@@ -44,5 +43,55 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Umístění</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="name">Prostředí:</label>
+                        @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name"), new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Místnost:</label>
+                        <select name="roomId" id="roomSelect" class="form-control"></select>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label for="name">Hledat:</label>
+                        <input type="text" id="searchRoom" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script>
+        
+        function fetchRooms() {
+            var val = $('#environmentId').val();
+            $.ajax({
+                url: "@Url.Action("Rooms", "Equipment")",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#roomSelect').children().remove();
+                    res.forEach(function(value) {
+                        $('#roomSelect').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                    });
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { environmentId: val }
+            });
+        }
+        
+        fetchRooms();
+        
+        $('#environmentId').on('change',
+            function() {
+                fetchRooms();
+            });
+    </script>
 }

@@ -1,36 +1,44 @@
 @using DataAccess.Model
-@model List<DataAccess.Model.User>
+@model List<DataAccess.Model.Equipment>
 @{
-    ViewBag.Title = "Uživatelé";
+    ViewBag.Title = "Vybavení";
 }
 
 <div class="row">
     <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Přehled uživatelů</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Přehled vybavení</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Jméno</th>
-                            <th>Role</th>
+                            <th>Kód</th>
+                            <th>Název</th>
+                            <th>Umístění</th>
+                            <th>Záruka vyprší</th>
+                            <th>Stav</th>
                             <th>Akce</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach (User u in Model)
+                        @foreach (Equipment e in Model)
                         {
                             <tr>
                                 <td>
-                                    <a href="@Url.Action("Detail", "User", new {id = u.Id})">@u.Name @u.Surname</a>
+                                    <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})">@e.Code</a>
                                 </td>
-                                <td>@u.Role.Title</td>
                                 <td>
-                                    <a href="@Url.Action("Detail", "User", new {id = u.Id})" class="btn btn-primary">Detail</a>
-                                    <a href="@Url.Action("Delete", "User", new {id = u.Id})" class="btn btn-danger">Smazat</a>
+                                    <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})">@e.Title</a>
+                                </td>
+                                <td></td>
+                                <td>@e.Warranty</td>
+                                <td>@e.Status</td>
+                                <td>
+                                    <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})" class="btn btn-primary">Detail</a>
+                                    <a href="@Url.Action("Delete", "Equipment", new {id = e.Id})" class="btn btn-danger">Smazat</a>
                                 </td>
                             </tr>
                         }

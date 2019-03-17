@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using DataAccess.Dao;
 using DataAccess.Model;
+using NHibernate.Mapping;
 
 namespace EAM_MINI.Controllers
 {
@@ -22,17 +23,18 @@ namespace EAM_MINI.Controllers
             return View();
         }
 
-        public ActionResult Detail()
+        public ActionResult Detail(int id)
         {
-            return View();
+            Environment environment = _environmentDao.GetById(id);
+            return View(environment);
         }
 
         public ActionResult Index()
         {
-            List<Environment> environments = _environmentDao.GetAll().ToList(); 
+            List<Environment> environments = _environmentDao.GetAll().ToList();
             return View(environments);
         }
-        
+
         public ActionResult Delete(int id)
         {
             _environmentDao.Delete(_environmentDao.GetById(id));
@@ -49,5 +51,7 @@ namespace EAM_MINI.Controllers
 
             return View("Add", environment);
         }
+
+
     }
 }
