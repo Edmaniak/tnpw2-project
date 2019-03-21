@@ -25,6 +25,7 @@ namespace DataAccess
                     catch (Exception e)
                     {
                         string m = e.Message;
+                        Console.WriteLine(m);
                     }
                 }
 

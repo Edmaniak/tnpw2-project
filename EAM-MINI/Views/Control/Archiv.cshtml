@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Naplánovat kontrolu";
 }
-@using (Html.BeginForm("Create", "Control", FormMethod.Post))
+@using (Html.BeginForm("Create", "User", FormMethod.Post))
 {
     <div class="row">
         <div class="col-4">
@@ -20,22 +20,22 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Vybavení:</label>
-                        @Html.DropDownList("equipmentId", new SelectList(ViewBag.equipments, "Id", "Title"), new {@class = "form-control searchSelect"})
+                        @Html.DropDownListFor(x => x.Equipment, new SelectList(ViewBag.equipments, "Id", "Title"), new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Equipment)
                     </div>
                     <div class="form-group">
                         <label for="name">Popis a účel:</label>
-                        @Html.TextAreaFor(x => x.Description, new {@class = "form-control "})
+                        @Html.TextAreaFor(x => x.Description, new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Description)
                     </div>
                     <div class="form-group">
-                        <label for="email">Deadline:</label>
+                        <label for="email">Naplánováno na:</label>
                         @Html.TextBoxFor(x => x.DatePlanned, "{0:dd. MM. yyyy}", new {@class = "form-control", @type = "date"})
                         @Html.ValidationMessageFor(x => x.DatePlanned)
                     </div>
                     <div class="form-group">
                         <label for="email">Delegovat uživateli:</label>
-                        @Html.DropDownList("userId", new SelectList(ViewBag.users, "Id", "FullName"), new {@class = "form-control searchSelect"})
+                        @Html.DropDownListFor(x => x.UserToPerform, new SelectList(ViewBag.users, "Id", "FullName"), new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.UserToPerform)
                     </div>
                     <div class="form-group">

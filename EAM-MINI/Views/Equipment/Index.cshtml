@@ -30,10 +30,20 @@
                                 <td>
                                     <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})">@e.Code</a>
                                 </td>
+                               
                                 <td>
                                     <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})">@e.Title</a>
                                 </td>
-                                <td></td>
+                                <td>
+                                    @if (@e.Room != null)
+                                    {
+                                        <span>@e.Room.Name (@e.Room.Environment.Name)</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Neuvedeno</span>
+                                    }
+                                </td>
                                 <td>@e.Warranty</td>
                                 <td>@e.Status</td>
                                 <td>

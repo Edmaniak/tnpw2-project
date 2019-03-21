@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+    <class name="Control" table="controls__control">
+        <id name="Id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="Title" column="title"/>
+        <property name="Description" column="description"/>
+        <property name="DatePlanned" column="date_planned"/>
+        <property name="DatePerformed" column="date_performed"/>
+        <many-to-one foreign-key="user_performed_id" column="user_performed_id" name="UserPerformed" class="User"/>
+        <many-to-one foreign-key="user_to_perform_id" column="user_to_perform_id" name="UserToPerform" class="User"/>
+        <many-to-one foreign-key="user_planned_id" column="user_planned_id" name="UserPlanned" class="User"/>
+        <many-to-one foreign-key="equipment_id" column="equipment_id" name="Equipment" class="Equipment"/>
+    </class>
+</hibernate-mapping>

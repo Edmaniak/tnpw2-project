@@ -1735,7 +1735,9 @@
         <Content Include="Assets\css\fontawesome-free\webfonts\fa-solid-900.ttf" />
         <Content Include="Assets\css\fontawesome-free\webfonts\fa-solid-900.woff" />
         <Content Include="Assets\css\fontawesome-free\webfonts\fa-solid-900.woff2" />
-        <Content Include="Assets\css\sb-admin-2.min.css" />
+        <Content Include="Assets\css\libs\bootstrap-select.min.css" />
+        <Content Include="Assets\css\libs\sb-admin-2.min.css" />
+        <Content Include="Assets\js\libs\bootstrap-select.min.js" />
         <Content Include="Assets\js\libs\bootstrap.bundle.min.js" />
         <Content Include="Assets\js\libs\dataTables.bootstrap4.min.js" />
         <Content Include="Assets\js\libs\jquery.dataTables.min.js" />
@@ -1761,6 +1763,7 @@
         <Content Include="Scripts\respond.js" />
         <Content Include="Scripts\respond.min.js" />
         <Content Include="Views\Control\Add.cshtml" />
+        <Content Include="Views\Control\Archiv.cshtml" />
         <Content Include="Views\Control\Detail.cshtml" />
         <Content Include="Views\Control\Index.cshtml" />
         <Content Include="Views\Environment\Add.cshtml" />

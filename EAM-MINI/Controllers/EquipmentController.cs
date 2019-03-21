@@ -14,12 +14,12 @@ namespace EAM_MINI.Controllers
     {
         private EnvironmentDao _environmentDao;
         private EquipmentDao _equipmentDao;
-        RoomDao _roomDao;
+        private RoomDao _roomDao;
         private List<Environment> _environments;
 
-        public EquipmentController(RoomDao roomDao)
+        public EquipmentController()
         {
-            _roomDao = roomDao;
+            _roomDao = new RoomDao();
             _environmentDao = new EnvironmentDao();
             _equipmentDao = new EquipmentDao();
             _environments = _environmentDao.GetAll().ToList();
@@ -54,8 +54,9 @@ namespace EAM_MINI.Controllers
         {
             if (ModelState.IsValid)
             {
+                Room room = _roomDao.GetById(roomId);
+                equipment.Room = room;
                 _equipmentDao.Create(equipment);
-                Room room = _roomDao
                 return RedirectToAction("Index", "Equipment");
             }
 

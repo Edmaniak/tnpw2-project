@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using DataAccess.Interface;
 using System.Web;
 using System.Web.Security;
+using NHibernate.Mapping;
 
 namespace DataAccess.Model
 {
@@ -28,9 +29,6 @@ namespace DataAccess.Model
 
         public virtual Role Role { get; set; }
 
-        public string GetFullName()
-        {
-            return Name + " " + Surname;
-        }
+        public virtual string FullName => Name + " " + Surname;
     }
 }
