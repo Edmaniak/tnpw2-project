@@ -1,11 +1,218 @@
 create database tnpw_eam collate Czech_CI_AS
 go
 
-create table fdsa
+drop table controls__control
+go
+
+drop table controls__control_status
+go
+
+drop table environments__category
+go
+
+drop table equipments__equipment
+go
+
+drop table equipments__category
+go
+
+drop table equipments__status
+go
+
+drop table rooms__category
+go
+
+drop table rooms__room
+go
+
+drop table environments__environment
+go
+
+drop table bussiness__bussiness
+go
+
+drop table sysdiagrams
+go
+
+drop table tickets__category
+go
+
+drop table tickets__status
+go
+
+drop table tickets__ticket
+go
+
+drop table users__user
+go
+
+drop table address__address
+go
+
+drop table users__role
+go
+
+drop function fn_diagramobjects
+go
+
+drop procedure sp_alterdiagram
+go
+
+drop procedure sp_creatediagram
+go
+
+drop procedure sp_dropdiagram
+go
+
+drop procedure sp_helpdiagramdefinition
+go
+
+drop procedure sp_helpdiagrams
+go
+
+drop procedure sp_renamediagram
+go
+
+drop procedure sp_upgraddiagrams
+go
+
+drop database tnpw_eam
+go
+
+
+
+create table address__address
 (
-  fdsa nchar(10),
-  af   nchar(10),
-  fds  nchar(10)
+  id     int identity
+    constraint PK_address__address
+      primary key,
+  zip    int,
+  street varchar(255),
+  city   varchar(255),
+  state  varchar(255)
+)
+go
+
+create table bussiness__bussiness
+(
+  id          int identity
+    constraint PK_bussiness__bussiness
+      primary key,
+  name        varchar(255) not null,
+  description text,
+  address_id  int          not null
+    constraint FK_bussiness__bussiness_address__address
+      references address__address
+)
+go
+
+create table controls__control_status
+(
+  id          int identity
+    constraint PK_controls__control_status
+      primary key,
+  title       varchar(100) not null,
+  description text
+)
+go
+
+create table environments__category
+(
+  id          int identity
+    constraint PK_environments__environment_category
+      primary key,
+  title       varchar(255) not null,
+  description text         not null
+)
+go
+
+create table environments__environment
+(
+  id           int identity
+    constraint PK_environments__environment
+      primary key,
+  name         varchar(255) not null,
+  description  text,
+  bussiness_id int
+    constraint FK_environments__environment_bussiness__bussiness
+      references bussiness__bussiness,
+  address_id   int
+    constraint FK_environments__environment_address__address
+      references address__address,
+  category_id  int
+    constraint FK_environments__environment_environments__environment_category
+      references environments__environment_category (id),
+  code         varchar(50)  not null
+)
+go
+
+create table equipments__category
+(
+  id          int identity
+    constraint PK_equipments__equipment_category
+      primary key,
+  title       varchar(255) not null,
+  description text         not null
+)
+go
+
+create table equipments__status
+(
+  id          int identity
+    constraint PK_equipments__status
+      primary key,
+  title       varchar(255) not null,
+  description text
+)
+go
+
+create table rooms__category
+(
+  id          int identity
+    constraint PK_rooms__room_category
+      primary key,
+  title       varchar(255) not null,
+  description text         not null
+)
+go
+
+create table rooms__room
+(
+  id             int identity
+    constraint PK_rooms_room
+      primary key,
+  name           varchar(255) not null,
+  purpouse       text         not null,
+  code           varchar(50)  not null,
+  floor          int          not null,
+  environment_id int
+    constraint FK_rooms_room_environments__environment
+      references environments__environment,
+  category_id    int
+    constraint FK_rooms_room_rooms__room_category
+      references rooms__room_category (id)
+)
+go
+
+create table equipments__equipment
+(
+  id           int identity
+    constraint PK_equipments__equipment
+      primary key,
+  title        varchar(255) not null,
+  description  text,
+  purchased    datetime     not null,
+  warranty     datetime     not null,
+  [status _id] int
+    constraint FK_equipments__equipment_equipments__status
+      references equipments__status,
+  room_id      int
+    constraint FK_equipments__equipment_address__address
+      references rooms__room,
+  category_id  int
+    constraint FK_equipments__equipment_equipments__equipment_category
+      references equipments__category,
+  code         varchar(50)
 )
 go
 
@@ -22,6 +229,27 @@ create table sysdiagrams
 )
 go
 
+create table tickets__category
+(
+  id          int not null
+    constraint PK_tickets__ticket_category
+      primary key,
+  title       varchar(255),
+  description text,
+  color_class varchar(50)
+)
+go
+
+create table tickets__status
+(
+  id          int identity
+    constraint PK_tickets__status
+      primary key,
+  title       varchar(100) not null,
+  description text
+)
+go
+
 create table users__role
 (
   id          int identity
@@ -34,14 +262,65 @@ go
 
 create table users__user
 (
-  id       int identity
+  id         int identity
     constraint PK_user
       primary key,
-  name     varchar(255) not null,
-  surname  varchar(255) not null,
-  password varchar(255),
-  email    varchar(255),
-  role_id  int          not null
+  name       varchar(255) not null,
+  surname    varchar(255) not null,
+  password   varchar(255) not null,
+  email      varchar(255) not null,
+  role_id    int          not null
+    constraint FK_users__user_users__role
+      references users__role,
+  phone      varchar(255) not null,
+  address_id int
+    constraint FK_users__user_address__address
+      references address__address
+)
+go
+
+create table controls__control
+(
+  id                 int identity
+    constraint PK_controls__control
+      primary key,
+  title              varchar(255) not null,
+  description        text         not null,
+  date_performed     datetime,
+  date_planned       datetime,
+  user_to_perform_id int
+    constraint FK_controls__control_users__user1
+      references users__user,
+  equipment_id       int
+    constraint FK_controls__control_equipments__equipment
+      references equipments__equipment,
+  user_performed_id  int
+    constraint FK_controls__control_users__user
+      references users__user,
+  user_planned_id    int
+    constraint FK_controls__control_users__role
+      references users__role,
+  priority           int
+)
+go
+
+create table tickets__ticket
+(
+  id           int identity
+    constraint PK_tickets__problem_ticket
+      primary key,
+  title        varchar(255) not null,
+  description  text         not null,
+  equipment_id int          not null,
+  author_id    int
+    constraint FK_tickets__problem_ticket_users__user
+      references users__user,
+  solver_id    int
+    constraint FK_tickets__problem_ticket_users__user1
+      references users__user,
+  assigned_id  int
+    constraint FK_tickets__problem_ticket_tickets__problem_ticket
+      references users__role
 )
 go
 
