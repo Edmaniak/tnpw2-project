@@ -1,8 +1,8 @@
 @using DataAccess.Model
 @{
-    ViewBag.Title = "Spravovat kategorie vybavení";
+    ViewBag.Title = "Spravovat kategorie problémů";
 }
-@using (Html.BeginForm("Create", "EquipmentCategory", FormMethod.Post))
+@using (Html.BeginForm("Create", "TicketCategory", FormMethod.Post))
 {
     <div class="row">
         <div class="col-12">
@@ -40,7 +40,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @{ Html.RenderPartial("Listing", (List<EquipmentCategory>) ViewBag.categories);}
+                        @{ Html.RenderPartial("Listing", (List<TicketCategory>) ViewBag.categories);}
                         </tbody>
                     </table>
                 </div>
@@ -57,7 +57,7 @@
                     description: $(this).parent('tr').find('[name="description"]').val()
                 }
                 $.ajax({
-                    url: "@Url.Action("Create", "EquipmentCategory")",
+                    url: "@Url.Action("Create", "TicketCategory")",
                     type: "POST",
                     data: data,
                     success: function(res) {

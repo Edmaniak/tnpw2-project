@@ -2,43 +2,28 @@
     ViewBag.Title = "Dashboard";
 }
 <div class="row">
-    <div class="col-12">
-        <a href="#" class="btn btn-primary btn-icon-split btn-lg">
+    <div class="col-12 mb-5">
+        <a href="@Url.Action("Add", "Control")" class="btn btn-danger btn-icon-split btn-lg mr-2">
             <span class="icon text-white-50">
-                <i class="fas fa-flag"></i>
+                <i class="fas fa-bug"></i>
             </span>
             <span class="text">Nahlásit problém</span>
         </a>
-        <a href="#" class="btn btn-primary btn-icon-split btn-lg">
+        <a href="@Url.Action("Add", "Control")" class="btn btn-primary btn-icon-split btn-lg mr-2">
             <span class="icon text-white-50">
-                <i class="fas fa-flag"></i>
+                <i class="fas fa-calendar-check"></i>
             </span>
             <span class="text">Naplánovat kontrolu</span>
         </a>
-        <a href="#" class="btn btn-primary btn-icon-split btn-lg">
+        <a href="@Url.Action("Add", "Equipment")" class="btn btn-success btn-icon-split btn-lg">
             <span class="icon text-white-50">
-                <i class="fas fa-flag"></i>
+                <i class="fas fa-cash-register"></i>
             </span>
             <span class="text">Přidat vybavení</span>
         </a>
     </div>
 </div>
-<div class="row">
-    <div class="col-xl-3 col-md-6">
-        <div class="card border-left-warning shadow py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Řešené problémy</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="row"> 
     <div class="col-xl-3 col-md-6">
         <div class="card border-left-danger shadow py-2">
             <div class="card-body">
@@ -48,7 +33,37 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        <i class="fas fa-bug fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-left-warning shadow py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Řešené problémy</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-bug fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card border-left-primary shadow py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Naplánované kontroly</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-cash-register fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>

@@ -38,11 +38,6 @@ namespace EAM_MINI.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Delete()
-        {
-            return View();
-        }
 
         public ActionResult Index()
         {
