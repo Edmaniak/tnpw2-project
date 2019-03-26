@@ -5,6 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
+      <PackageReference Include="MicrosoftAjax" Version="4.0.20526" />
+      <PackageReference Include="MicrosoftMvcAjax.Mvc5" Version="5.0.0" />
       <PackageReference Include="NHibernate" Version="5.2.3" />
     </ItemGroup>
 
@@ -13,7 +16,12 @@
       <EmbeddedResource Include="Mappings\Address.hbm.xml" />
       <EmbeddedResource Include="Mappings\Business.hbm.xml" />
       <EmbeddedResource Include="Mappings\Control.hbm.xml" />
+      <EmbeddedResource Include="Mappings\EquipmentCategory.hbm.xml" />
+      <EmbeddedResource Include="Mappings\EquipmentStatus.hbm.xml" />
       <EmbeddedResource Include="Mappings\Role.hbm.xml" />
+      <EmbeddedResource Include="Mappings\Ticket.hbm.xml" />
+      <EmbeddedResource Include="Mappings\TicketCategory.hbm.xml" />
+      <EmbeddedResource Include="Mappings\TicketStatus.hbm.xml" />
       <EmbeddedResource Include="Mappings\User.hbm.xml" />
       <None Remove="Mappings\Room.hbm.xml" />
       <None Remove="Mappings\Equipment.hbm.xml" />

@@ -37,6 +37,7 @@ namespace EAM_MINI.Controllers
         {
             Room room = _roomDao.GetById(id);
             ViewBag.environments = _environments;
+            ViewBag.equipments = room.Equipments;
             return View(room);
         }
 

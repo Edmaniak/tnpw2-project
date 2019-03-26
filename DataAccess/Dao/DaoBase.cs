@@ -51,6 +51,12 @@ namespace DataAccess.Dao
             }
         }
 
+        public void DeleteById(int id)
+        {
+            T entity = GetById(id);
+            if (entity != null) Delete(entity);
+        }
+
         public T GetById(int id)
         {
             return session.CreateCriteria<T>().Add(Restrictions.Eq("Id", id)).UniqueResult<T>();

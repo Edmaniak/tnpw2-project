@@ -1,0 +1,24 @@
+@model DataAccess.Model.EquipmentCategory
+
+@using (Html.BeginForm("Create", "EquipmentCategory", FormMethod.Post))
+{
+    <div class="col-md-5">
+        <div class="form-group">
+            <label>Jméno</label>
+            @Html.TextBoxFor(x => x.Title, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <label>Popis</label>
+            @Html.TextBoxFor(x => x.Description, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Akce</label>
+            <button class="btn btn-primary" type="submit">Vytvořit</button>
+        </div>
+    </div>
+
+}

@@ -1,0 +1,18 @@
+@using DataAccess.Model
+@model List<EquipmentStatus>
+
+@foreach (EquipmentStatus s in ViewBag.statuses)
+{
+    <tr data-id="@s.Id">
+        <td>
+            @s.Title
+        </td>
+        <td>
+            @s.Description
+        </td>
+        <td>
+            <a href="@Url.Action("Detail", "EquipmentCategory", new {id = s.Id})" class="btn btn-primary">Editovat</a>
+            <a href="@Url.Action("Delete", "EquipmentCategory", new {id = s.Id})" class="btn btn-danger">Smazat</a>
+        </td>
+    </tr>
+}

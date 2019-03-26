@@ -1,12 +1,15 @@
 main {
     height: 100vh;
 }
+
 body {
     background-color: red;
 }
+
 .card {
     margin-bottom: 3rem;
 }
+
 #login .logo {
     color: white;
     font-size: 4em;
@@ -15,15 +18,30 @@ body {
     transform: translateY(-50%);
     position: relative;
 }
+
 .table-responsive {
     overflow-x: hidden;
 }
+
 .dataTables_filter {
     padding-bottom: 1rem;
 }
-.dataTables_filter,  label {
+
+.dataTables_filter, label {
     display: block;
 }
+
 .dataTables_length label {
     display: block;
+}
+
+.dataTable td {
+    padding: .4rem;
+    vertical-align: middle;
+}
+
+.dataTable th {
+    padding: .4rem;
+    background-color: #e3e6f0;
+    vertical-align: middle;
 }

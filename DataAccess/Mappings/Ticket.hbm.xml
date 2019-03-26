@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
+    <class name="Ticket" table="tickets__ticket">
+        <id name="Id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="Title" column="title"/>
+        <property name="Description" column="description"/>
+        <many-to-one name="Author" class="User" column="author_id" />
+        <many-to-one name="Solver" class="User" column="solver_id" />
+        <many-to-one name="Assigned" class="User" column="assigned_id" />
+        <many-to-one name="Status" class="TicketStatus" column="status_id" />
+        <many-to-one name="Category" class="TicketCategory" column="category_id"/>
+    </class>
+</hibernate-mapping>

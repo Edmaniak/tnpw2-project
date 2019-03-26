@@ -1,0 +1,63 @@
+@using DataAccess.Model
+@model List<EquipmentStatus>
+@{
+    ViewBag.Title = "Spravovat kategorie";
+}
+@using (Html.BeginForm("Create", "Equipment", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Zadejte údaje</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered dataTable">
+                        <thead>
+                        <tr>
+                            <th>
+                                Název
+                            </th>
+                            <th>
+                                Popis
+                            </th>
+                            <th>
+                                Akce
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (EquipmentStatus s in Model)
+                        {
+                            <tr data-id="@s.Id">
+                                <td>
+                                    <input class="form-control" value="@s.Title"/>
+                                </td>
+                                <td>
+                                    <textarea class="form-control" >@s.Description </textarea>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary">Uložit</button>
+                                    <button class="btn btn-danger">Smazat</button>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>
+                                <input class="form-control"/>
+                            </td>
+                            <td>
+                                <textarea class="form-control" ></textarea>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary">Uložit</button>
+                                <button class="btn btn-danger">Smazat</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

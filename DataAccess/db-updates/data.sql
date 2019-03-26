@@ -8,8 +8,8 @@ INSERT INTO tnpw_eam.dbo.address__address (id, zip, street, city, state) VALUES 
 INSERT INTO tnpw_eam.dbo.address__address (id, zip, street, city, state) VALUES (1008, 51200, 'K Zahradě 5', 'Hradec Králové', 'CR');
 INSERT INTO tnpw_eam.dbo.environments__environment (id, name, description, bussiness_id, address_id, category_id, code) VALUES (2, 'Skladiště 1', '12456', null, 1006, null, '1C');
 INSERT INTO tnpw_eam.dbo.environments__environment (id, name, description, bussiness_id, address_id, category_id, code) VALUES (4, 'Výrobní hala 2', 'gfds', null, 1008, null, 'gfds');
-INSERT INTO tnpw_eam.dbo.equipments__equipment (id, title, description, purchased, warranty, [status _id], room_id, category_id, code) VALUES (1, 'Kotel', 'Slouzi k vytapeni', '2019-03-11 00:00:00.000', '2019-03-15 00:00:00.000', null, null, null, 'Kotl');
-INSERT INTO tnpw_eam.dbo.equipments__equipment (id, title, description, purchased, warranty, [status _id], room_id, category_id, code) VALUES (2, 'PC-1', 'fsafsa', '2019-03-22 00:00:00.000', '2019-03-29 00:00:00.000', null, 5, null, '123');
+INSERT INTO tnpw_eam.dbo.equipments__equipment (id, title, description, purchased, warranty, status_id, room_id, category_id, code) VALUES (1, 'Kotel', 'Slouzi k vytapeni', '2019-03-11 00:00:00.000', '2019-03-15 00:00:00.000', null, null, null, 'Kotl');
+INSERT INTO tnpw_eam.dbo.equipments__equipment (id, title, description, purchased, warranty, status_id, room_id, category_id, code) VALUES (2, 'PC-1', 'fsafsa', '2019-03-22 00:00:00.000', '2019-03-29 00:00:00.000', null, 5, null, '123');
 INSERT INTO tnpw_eam.dbo.rooms__room (id, name, purpouse, code, floor, environment_id, category_id) VALUES (4, 'J2', 'kk', 'k', 1, 4, null);
 INSERT INTO tnpw_eam.dbo.rooms__room (id, name, purpouse, code, floor, environment_id, category_id) VALUES (5, 'J3', 'pp', 'oo', 1, 4, null);
 INSERT INTO tnpw_eam.dbo.users__role (id, title, description) VALUES (1, 'admin', 'He has all the privililages and he can enter every section of the app');

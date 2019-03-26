@@ -10,5 +10,7 @@
         <property name="Purchased" column="purchased"/>
         <property name="Warranty" column="warranty"/>
         <many-to-one name="Room" class="Room" column="room_id" />
+        <many-to-one name="Status" class="EquipmentStatus" column="status_id"/>
+        <many-to-one name="Category" class="EquipmentCategory" column="category_id"/>
     </class>
 </hibernate-mapping>

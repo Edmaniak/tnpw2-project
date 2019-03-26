@@ -9,9 +9,9 @@
         <property name="Code" column="code"/>
         <property name="Floor" column="floor"/>
         <many-to-one name="Environment" column="environment_id"/>
-        <!--<bag name="Equipments" cascade="all">-->
-            <!--<key column="id"/>-->
-            <!--<one-to-many class="Equipment"/>-->
-        <!--</bag>-->
+        <bag name="Equipments" cascade="all">
+            <key column="room_id"/>
+            <one-to-many class="Equipment"/>
+        </bag>
     </class>
 </hibernate-mapping>
