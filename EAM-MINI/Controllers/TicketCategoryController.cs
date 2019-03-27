@@ -43,7 +43,7 @@ namespace EAM_MINI.Controllers
             if (ModelState.IsValid)
             {
                 _ticketCategoryDao.Create(category);
-                return RedirectToAction("Index", "EquipmentCategory");
+                return RedirectToAction("Index", "TicketCategory");
             }
 
             ViewBag.categories = _ticketCategoryDao.GetAll().ToList();

@@ -1,0 +1,18 @@
+@using DataAccess.Model
+@model List<TicketStatus>
+
+@foreach (TicketStatus c in ViewBag.statuses)
+{
+    <tr data-id="@c.Id">
+        <td>
+            @c.Title
+        </td>
+        <td>
+            @c.Description
+        </td>
+        <td>
+            <a class="btn btn-primary">Editovat</a>
+            <a href="@Url.Action("Delete", "TicketStatus", new {id = c.Id})" class="btn btn-danger">Smazat</a>
+        </td>
+    </tr>
+}

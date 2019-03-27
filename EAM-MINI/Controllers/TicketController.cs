@@ -13,16 +13,57 @@ namespace EAM_MINI.Controllers
     public class TicketController : BaseController
     {
         private TicketDao _ticketDao;
+        private TicketCategoryDao _ticketCategoryDao;
+        private EnvironmentDao _environmentDao;
+        private RoomDao _roomDao;
+        private EquipmentDao _equipmentDao;
+        private List<TicketCategory> _categories;
 
         public TicketController()
         {
             _ticketDao = new TicketDao();
+            _ticketCategoryDao = new TicketCategoryDao();
+            _environmentDao = new EnvironmentDao();
+            _equipmentDao = new EquipmentDao();
+            _roomDao = new RoomDao();
         }
 
-        public ActionResult Add()
+        public void InitViewBag()
         {
+            ViewBag.categories = _ticketCategoryDao.GetAll().ToList();
+            ViewBag.environments = _environmentDao.GetAll().ToList();
+        }
+
+        public ActionResult Add(int? environmentId, int? roomId)
+        {
+            InitViewBag();
             return View();
         }
+
+        public ActionResult Equipments(int? environmentId, int? roomId)
+        {
+            InitViewBag();
+            List<Equipment> equipments = new List<Equipment>();
+            if (roomId != null)
+            {
+                equipments = _roomDao.GetById(roomId.Value).Equipments.ToList();
+            }
+
+            return PartialView("Equipments", equipments);
+        }
+
+        public ActionResult Search(string phrase)
+        {
+            List<Equipment> equipments = new List<Equipment>();
+
+            if (phrase.Length > 0)
+            {
+                equipments = _equipmentDao.Search(phrase).ToList();
+            }
+
+            return PartialView("Equipments", equipments);
+        }
+
 
         public ActionResult Detail(int id)
         {
@@ -30,7 +71,6 @@ namespace EAM_MINI.Controllers
             return View(ticket);
         }
 
-        [HttpPost]
         public ActionResult Delete(int id)
         {
             return Redirect(Request.UrlReferrer.ToString());

@@ -21,15 +21,18 @@ namespace EAM_MINI.Controllers
         }
         public ActionResult Add()
         {
+
+           
+            
             return View();
         }
 
-        [HttpPost]
         public ActionResult Delete(int id)
         {
+            _ticketStatusDao.DeleteById(id);
             return Redirect(Request.UrlReferrer.ToString());
         }
-
+        
         public ActionResult Detail(int id)
         {
 
@@ -38,7 +41,21 @@ namespace EAM_MINI.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.statuses = _ticketStatusDao.GetAll().ToList();
             return View();
+        }
+        
+        [HttpPost]
+        public ActionResult Create(TicketStatus status)
+        {
+            if (ModelState.IsValid)
+            {
+                _ticketStatusDao.Create(status);
+                return RedirectToAction("Index", "TicketStatus");
+            }
+
+            ViewBag.categories = _ticketStatusDao.GetAll().ToList();
+            return View("Index");
         }
 
           

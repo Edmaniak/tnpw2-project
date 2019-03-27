@@ -35,13 +35,19 @@ body {
     display: block;
 }
 
-.dataTable td {
+.table td {
     padding: .4rem;
     vertical-align: middle;
 }
 
-.dataTable th {
+.table thead th {
+    border-bottom: none;
+}
+
+.table th {
     padding: .4rem;
-    background-color: #e3e6f0;
+    background-color: #4e73df;
+    border: none;
+    color: white;
     vertical-align: middle;
 }

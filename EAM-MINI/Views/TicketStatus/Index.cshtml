@@ -1,44 +1,51 @@
 @using DataAccess.Model
-@model List<DataAccess.Model.User>
 @{
-    ViewBag.Title = "Uživatelé";
+    ViewBag.Title = "Spravovat stavy problémů";
 }
-
-<div class="row">
-    <div class="col-12">
-        <div class="card shadow">
-            <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Přehled uživatelů</h6>
+@using (Html.BeginForm("Create", "TicketStatus", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Přidat stav</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @{ Html.RenderPartial("Add"); }
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered dataTable" width="100%" cellspacing="0">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Přehled stavů</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered dataTable">
                         <thead>
                         <tr>
-                            <th>Jméno</th>
-                            <th>Role</th>
-                            <th>Akce</th>
+                            <th>
+                                Název
+                            </th>
+                            <th>
+                                Popis
+                            </th>
+                            <th>
+                                Akce
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach (User u in Model)
-                        {
-                            <tr>
-                                <td>
-                                    <a href="@Url.Action("Detail", "User", new {id = u.Id})">@u.Name @u.Surname</a>
-                                </td>
-                                <td>@u.Role.Title</td>
-                                <td>
-                                    <a href="@Url.Action("Detail", "User", new {id = u.Id})" class="btn btn-primary">Detail</a>
-                                    <a href="@Url.Action("Delete", "User", new {id = u.Id})" class="btn btn-danger">Smazat</a>
-                                </td>
-                            </tr>
-                        }
+                        @{ Html.RenderPartial("Listing", (List<TicketStatus>) ViewBag.statuses);}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+  
+}

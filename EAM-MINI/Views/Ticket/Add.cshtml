@@ -21,15 +21,140 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Popis:</label>
-                        @Html.TextBoxFor(x => x.Description, new {@class = "form-control"})
+                        @Html.TextAreaFor(x => x.Description, new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Description)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Kategorie:</label>
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title"), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Category)
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Vytvořit</button>
                     </div>
-
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Kde se problém nachází</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Prostředí:</label>
+                                @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name"), new {@class = "form-control", id = "environmentId"})
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Místnost:</label>
+                                <select name="roomId" id="roomSelect" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Hledej:</label>
+                                <div class="input-group">
+                                    <input id="searchEquipment" type="text" class="form-control bg-light border-0 small" placeholder="Vyhledej vybavení" aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @{ Html.RenderPartial("Equipments", new List<Equipment>()); }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+
+
+        function fetchEquipments() {
+            var roomId = $('#roomSelect').val();
+            console.log(roomId);
+            $.ajax({
+                url: "@Url.Action("Equipments", "Ticket")",
+                type: "GET",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#equipmentsTable').html(res);
+                    $('.equipmentsTable').DataTable({
+                        language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Czech.json' },
+                        scrollX: false,
+                        searching: false,
+                        lengthChange: false
+                    });
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { roomId: roomId }
+            });
+        }
+
+        function searchEquipments() {
+            var phrase = $('#searchEquipment').val();
+            console.log(phrase);
+            $.ajax({
+                url: "@Url.Action("Search", "Ticket")",
+                type: "GET",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#equipmentsTable').html(res);
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { phrase: phrase }
+            });
+        }
+
+
+        function fetchRooms() {
+            var val = $('#environmentId').val();
+            $.ajax({
+                url: "@Url.Action("Rooms", "Equipment")",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#roomSelect').children().remove();
+                    res.forEach(function(value) {
+                        $('#roomSelect').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                    });
+                    fetchEquipments();
+                    
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { environmentId: val }
+            });
+        }
+
+        fetchRooms();
+
+        $('#searchEquipment').keyup(function() {
+            searchEquipments();
+        });
+
+        $('#environmentId').on('change',
+            function() {
+                fetchRooms();
+            });
+        $('#roomSelect').on('change',
+            function() {
+                fetchEquipments();
+            });
+    </script>
 }
