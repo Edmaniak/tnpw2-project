@@ -12,5 +12,7 @@
         <many-to-one foreign-key="user_to_perform_id" column="user_to_perform_id" name="UserToPerform" class="User"/>
         <many-to-one foreign-key="user_planned_id" column="user_planned_id" name="UserPlanned" class="User"/>
         <many-to-one foreign-key="equipment_id" column="equipment_id" name="Equipment" class="Equipment"/>
+        <many-to-one foreign-key="status_id" column="status_id" name="Status" class="ControlStatus"/>
+        <many-to-one foreign-key="category_id" column="category_id" name="Category" class="ControlCategory"/>
     </class>
 </hibernate-mapping>

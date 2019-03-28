@@ -24,6 +24,8 @@ namespace DataAccess.Model
         public virtual string Password { get; set; }
 
         public virtual string Phone { get; set; }
+        
+        public virtual string Profession { get; set; }
 
         public virtual Address Address { get; set; }
 

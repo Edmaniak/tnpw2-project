@@ -18,6 +18,7 @@
                             <th>Kód</th>
                             <th>Název</th>
                             <th>Účel</th>
+                            <th>Kategorie</th>
                             <th>Prostředí</th>
                             <th>Akce</th>
                         </tr>
@@ -33,7 +34,9 @@
                                     <a href="@Url.Action("Detail", "Room", new {id = r.Id})">@r.Name</a>
                                 </td>
                                 <td>@r.Purpouse</td>
-                                <td>@r.Environment.Name</td>
+                                <td>@r.Category.Title</td>
+                                <td>
+                                    <a href="@Url.Action("Detail", "Environment", new {id = r.Environment.Id})">@r.Environment.Name</a></td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Room", new {id = r.Id})" class="btn btn-primary">Detail</a>
                                     <a href="@Url.Action("Delete", "Room", new {id = r.Id})" class="btn btn-danger">Smazat</a>

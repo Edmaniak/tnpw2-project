@@ -1,0 +1,34 @@
+@using DataAccess.Model
+@using DataAccess.Dao
+@model ControlStatus
+@{
+    ViewBag.Title = Model.Title;
+}
+@using (Html.BeginForm("Edit", "ControlStatus", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Zadejte údaje</h6>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="name">Jméno:</label>
+                        @Html.TextBoxFor(x => x.Title, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Title)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Popis:</label>
+                        @Html.TextAreaFor(x => x.Description, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Description)
+                    </div>
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Upravit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -34,6 +34,7 @@
                             <th>Kód</th>
                             <th>Název</th>
                             <th>Popis</th>
+                            <th>Kategorie</th>
                             <th>Akce</th>
                         </tr>
                         </thead>
@@ -50,6 +51,7 @@
                                 <td>
                                     @e.Description
                                 </td>
+                                <td>@e.Category.Title</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Environment", new {id = e.Id})" class="btn btn-primary">Detail</a>
                                     <a href="@Url.Action("Delete", "Environment", new {id = e.Id})" class="btn btn-danger">Smazat</a>

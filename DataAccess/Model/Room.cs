@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using DataAccess.Interface;
 
 namespace DataAccess.Model
@@ -7,6 +8,7 @@ namespace DataAccess.Model
     public class Room : IEntity
     {
         public virtual int Id { get; set; }
+        [Required(ErrorMessage = "Titulek je povinný údaj.")]
         public virtual string Name { get; set; }
         public virtual string Purpouse { get; set; }
         public virtual string Code { get; set; }

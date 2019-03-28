@@ -51,7 +51,7 @@ namespace EAM_MINI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Environment environment)
+        public ActionResult Edit(Environment environment, int categoryId)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace EAM_MINI.Controllers
                 env.Name = environment.Name;
                 env.Address = environment.Address;
                 env.Description = environment.Description;
-                env.Category = environment.Category;
+                env.Category = _environmentCategoryDao.GetById(categoryId);
                 
                 _environmentDao.Update(env);
                 return RedirectToAction("Index", "Environment");

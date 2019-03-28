@@ -135,7 +135,9 @@
         <Compile Include="Class\MembershipProvider.cs" />
         <Compile Include="Class\RoleProvider.cs" />
         <Compile Include="Controllers\BaseController.cs" />
+        <Compile Include="Controllers\ControlCategoryController.cs" />
         <Compile Include="Controllers\ControlController.cs" />
+        <Compile Include="Controllers\ControlStatusController.cs" />
         <Compile Include="Controllers\EnvironmentCategoryController.cs" />
         <Compile Include="Controllers\EnvironmentController.cs" />
         <Compile Include="Controllers\EquipmentCategoryController.cs" />
@@ -1769,6 +1771,14 @@
         <Content Include="Scripts\modernizr-2.6.2.js" />
         <Content Include="Scripts\respond.js" />
         <Content Include="Scripts\respond.min.js" />
+        <Content Include="Views\ControlCategory\Add.cshtml" />
+        <Content Include="Views\ControlCategory\Detail.cshtml" />
+        <Content Include="Views\ControlCategory\Index.cshtml" />
+        <Content Include="Views\ControlCategory\Listing.cshtml" />
+        <Content Include="Views\ControlStatus\Add.cshtml" />
+        <Content Include="Views\ControlStatus\Detail.cshtml" />
+        <Content Include="Views\ControlStatus\Index.cshtml" />
+        <Content Include="Views\ControlStatus\Listing.cshtml" />
         <Content Include="Views\Control\Add.cshtml" />
         <Content Include="Views\Control\Archiv.cshtml" />
         <Content Include="Views\Control\Detail.cshtml" />

@@ -1,0 +1,51 @@
+@using DataAccess.Model
+@{
+    ViewBag.Title = "Spravovat kategorie místností";
+}
+@using (Html.BeginForm("Create", "ControlStatus", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Přidat kategorii</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @{ Html.RenderPartial("Add"); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Přehled kategorií</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered dataTable">
+                        <thead>
+                        <tr>
+                            <th>
+                                Název
+                            </th>
+                            <th>
+                                Popis
+                            </th>
+                            <th>
+                                Akce
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @{ Html.RenderPartial("Listing", (List<ControlStatus>) ViewBag.statuses);}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

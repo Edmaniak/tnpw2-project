@@ -4,7 +4,22 @@
 @{
     ViewBag.Title = "Naplánované kontroly";
 }
-
+<div class="row">
+    <div class="col-12 mb-4">
+        <a href="@Url.Action("Add", "Control")" class="btn btn-info btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span class="text">Přidat kontrolu</span>
+        </a>
+        <a href="@Url.Action("Index", "ControlCategory")" class="btn btn-info btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-pen"></i>
+            </span>
+            <span class="text">Spravovat kategorie</span>
+        </a>
+    </div>
+</div>
 <div class="row">
     <div class="col-12">
         <div class="card shadow">
@@ -13,12 +28,13 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%">
                         <thead>
                         <tr>
                             <th>Název</th>
                             <th>Deadline</th>
                             <th>Zodpovědný</th>
+                            <th>Týká se</th>
                             <th>Stav</th>
                             <th>Akce</th>
                         </tr>
@@ -31,7 +47,21 @@
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})">@c.Title</a>
                                 </td>
                                 <td>@c.DatePlanned</td>
-                                <td>@c.UserToPerform</td>
+                                <td>
+                                    <a href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
+                                </td>
+                                <td>
+                                    @if (c.Equipment != null)
+                                    {
+                                        <a href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.Equipment.BaseInfo</a>
+ 
+                                    }
+                                    else
+                                    {
+                                        <span>Není specifikováno</span>
+
+                                    }
+                                </td>
                                 <td>TODO STAV</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>

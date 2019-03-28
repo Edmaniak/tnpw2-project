@@ -5,6 +5,7 @@ using System.Web.ModelBinding;
 using System.Web.Mvc;
 using DataAccess.Dao;
 using DataAccess.Model;
+using NHibernate.Mapping;
 
 namespace EAM_MINI.Controllers
 {
@@ -13,23 +14,36 @@ namespace EAM_MINI.Controllers
         private ControlDao _controlDao;
         private UserDao _userDao;
         private EquipmentDao _equipmentDao;
+        private ControlStatusDao _controlStatusDao;
+        private ControlCategoryDao _controlCategoryDao;
 
         public ControlController()
         {
             _userDao = new UserDao();
             _controlDao = new ControlDao();
+            _controlStatusDao = new ControlStatusDao();
+            _controlCategoryDao = new ControlCategoryDao();
             _equipmentDao = new EquipmentDao();
+        }
+
+        public void InitViewBag()
+        {
+            ViewBag.users = _userDao.GetAll();
+            List<Equipment> equipments = _equipmentDao.GetAll().ToList();
+            ViewBag.equipments = equipments;
+            ViewBag.statuses = _controlStatusDao.GetAll();
+            ViewBag.categories = _controlCategoryDao.GetAll();
         }
 
         public ActionResult Add()
         {
-            ViewBag.users = _userDao.GetAll();
-            ViewBag.equipments = _equipmentDao.GetAll();
+            InitViewBag();
             return View();
         }
 
         public ActionResult Detail()
         {
+            InitViewBag();
             return View();
         }
 
@@ -51,20 +65,25 @@ namespace EAM_MINI.Controllers
             return View(controls);
         }
 
-        public ActionResult Create(Control control, int equipmentId, int userId)
+        public ActionResult Create(Control control, int userId, string equipmentId)
         {
             if (ModelState.IsValid)
             {
-                Equipment equipment = _equipmentDao.GetById(equipmentId);
+                if (equipmentId.Length > 0)
+                {
+                    Equipment equipment = _equipmentDao.GetById(int.Parse(equipmentId));
+                    control.Equipment = equipment;
+                }
+
                 User user = _userDao.GetById(userId);
-                
-                control.Equipment = equipment;
+
                 control.UserToPerform = user;
-                
+
                 _controlDao.Create(control);
                 return RedirectToAction("Index", "Control");
             }
 
+            InitViewBag();
             return View("Add", control);
         }
     }

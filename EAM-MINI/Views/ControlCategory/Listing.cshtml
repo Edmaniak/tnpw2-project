@@ -1,0 +1,22 @@
+@using DataAccess.Model
+@model List<ControlCategory>
+
+@foreach (ControlCategory c in ViewBag.categories)
+{
+    <tr data-id="@c.Id">
+        <td>
+            @c.Title
+        </td>
+        <td>
+            @c.Description
+        </td>
+        <td>
+            @if (c.Deletable)
+            {
+                <a href="@Url.Action("Detail", "ControlCategory", new {id = c.Id})" class="btn btn-primary">Upravit</a>
+                <a href="@Url.Action("Delete", "ControlCategory", new {id = c.Id})" class="btn btn-danger">Smazat</a>
+            }
+        </td>
+    </tr>
+}
+
