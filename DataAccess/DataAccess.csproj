@@ -16,9 +16,11 @@
       <EmbeddedResource Include="Mappings\Address.hbm.xml" />
       <EmbeddedResource Include="Mappings\Business.hbm.xml" />
       <EmbeddedResource Include="Mappings\Control.hbm.xml" />
+      <EmbeddedResource Include="Mappings\EnvironmentCategory.hbm.xml" />
       <EmbeddedResource Include="Mappings\EquipmentCategory.hbm.xml" />
       <EmbeddedResource Include="Mappings\EquipmentStatus.hbm.xml" />
       <EmbeddedResource Include="Mappings\Role.hbm.xml" />
+      <EmbeddedResource Include="Mappings\RoomCategory.hbm.xml" />
       <EmbeddedResource Include="Mappings\Ticket.hbm.xml" />
       <EmbeddedResource Include="Mappings\TicketCategory.hbm.xml" />
       <EmbeddedResource Include="Mappings\TicketStatus.hbm.xml" />

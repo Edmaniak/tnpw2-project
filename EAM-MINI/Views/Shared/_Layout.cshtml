@@ -152,9 +152,11 @@
                 <h6 class="collapse-header">Prostředí</h6>
                 <a class="collapse-item" href="@Url.Action("Add", "Environment")">Přidat prostředí</a>
                 <a class="collapse-item" href="@Url.Action("Index", "Environment")">Prostředí</a>
+                <a class="collapse-item" href="@Url.Action("Index", "EnvironmentCategory")">Kategorie</a>
                 <h6 class="collapse-header">Místnosti</h6>
                 <a class="collapse-item" href="@Url.Action("Add", "Room")">Přidat místnost</a>
                 <a class="collapse-item" href="@Url.Action("Index", "Room")">Místnosti</a>
+                <a class="collapse-item" href="@Url.Action("Index", "RoomCategory")">Kategorie</a>
             </div>
         </div>
     </li>
@@ -360,7 +362,7 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">@ViewBag.title</h1>
+            <h1 class="h3 mb-0 text-gray-800"><i class="@ViewBag.icon"></i> @ViewBag.title</h1>
         </div>
         @RenderBody()
     </div>

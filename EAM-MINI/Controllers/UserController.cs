@@ -55,7 +55,7 @@ namespace EAM_MINI.Controllers
                 Role role = _roleDao.GetById(int.Parse(roleId));
                 user.Role = role;
                 _userDao.Update(user);
-                return Redirect(Request.UrlReferrer.ToString());
+                return RedirectToAction("Index", "User");
             }
 
             ViewBag.roles = _roles;

@@ -1,0 +1,92 @@
+@using DataAccess.Model
+@{
+    ViewBag.Title = "Spravovat kategorie místností";
+}
+@using (Html.BeginForm("Create", "RoomCategory", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Přidat kategorii</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @{ Html.RenderPartial("Add"); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Přehled kategorií</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered dataTable">
+                        <thead>
+                        <tr>
+                            <th>
+                                Název
+                            </th>
+                            <th>
+                                Popis
+                            </th>
+                            <th>
+                                Akce
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @{ Html.RenderPartial("Listing", (List<RoomCategory>) ViewBag.categories);}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.edit-record').click(function() {
+                console.log("clicked");
+                var data = {
+                    id: $(this).parent('tr').data('id'),
+                    name: $(this).parent('tr').find('[name="name"]').val(),
+                    description: $(this).parent('tr').find('[name="description"]').val()
+                }
+                $.ajax({
+                    url: "@Url.Action("Create", "TicketCategory")",
+                    type: "POST",
+                    data: data,
+                    success: function(res) {
+                        console.log(res);
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            });
+            $('.create-record').click(function() {
+                console.log("clicked");
+                var data = {
+                    name: $(this).parent('tr').find('[name="name"]').val(),
+                    description: $(this).parent('tr').find('[name="description"]').val()
+                }
+                $.ajax({
+                    url: "@Url.Action("Create", "EquipmentCategory")",
+                    type: "POST",
+                    data: data,
+                    success: function(res) {
+                        console.log(res);
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            });
+
+        })
+    </script>
+}

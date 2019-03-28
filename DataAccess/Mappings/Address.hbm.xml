@@ -8,6 +8,5 @@
         <property name="Street" column="street"/>
         <property name="City" column="city"/>
         <property name="State" column="state"/>
-        <one-to-one name="User" class="User" />
     </class>
 </hibernate-mapping>

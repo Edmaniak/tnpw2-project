@@ -46,7 +46,6 @@ namespace EAM_MINI.Controllers
             return View();
         }
 
-        [HttpPost]
         public ActionResult Delete(int id)
         {
             _equipmentDao.Delete(_equipmentDao.GetById(id));

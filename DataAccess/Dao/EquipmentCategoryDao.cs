@@ -1,3 +1,4 @@
+using DataAccess.Interface;
 using DataAccess.Model;
 
 namespace DataAccess.Dao

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="DataAccess" namespace="DataAccess.Model">
-    <class name="TicketCategory" table="tickets__category">
+    <class name="RoomCategory" table="rooms__category">
         <id name="Id" column="id">
             <generator class="native"/>
         </id>
         <property name="Title" column="title"/>
         <property name="Description" column="description"/>
         <property name="Deletable" column="deletable"/>
-        <bag name="Tickets" cascade="none">
-            <key column="category_id"/>
-            <one-to-many class="Ticket"/>
-        </bag>
     </class>
 </hibernate-mapping>

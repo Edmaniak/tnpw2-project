@@ -1,7 +1,7 @@
 @using DataAccess.Model
-@model List<TicketCategory>
+@model List<EnvironmentCategory>
 
-@foreach (TicketCategory c in ViewBag.categories)
+@foreach (EnvironmentCategory c in ViewBag.categories)
 {
     <tr data-id="@c.Id">
         <td>
@@ -14,7 +14,7 @@
             <a class="btn btn-primary">Editovat</a>
             @if (c.Deletable)
             {
-                <a href="@Url.Action("Delete", "TicketCategory", new {id = c.Id})" class="btn btn-danger">Smazat</a>
+                <a href="@Url.Action("Delete", "EnvironmentCategory", new {id = c.Id})" class="btn btn-danger">Smazat</a>
             }
         </td>
     </tr>

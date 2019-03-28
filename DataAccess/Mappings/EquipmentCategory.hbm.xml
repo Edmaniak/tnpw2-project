@@ -6,6 +6,7 @@
         </id>
         <property name="Title" column="title"/>
         <property name="Description" column="description"/>
+        <property name="Deletable" column="deletable"/>
         <bag name="Equipments" cascade="none">
             <key column="category_id"/>
             <one-to-many class="Equipment"/>

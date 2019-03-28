@@ -10,6 +10,13 @@ namespace DataAccess.Model
         [Required(ErrorMessage = "Titulek kategorie je povinný údaj.")]
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
+        
+        public virtual bool Deletable { get; set; }
         public virtual IList<Equipment> Equipments{ get; set; }
+        
+        public EquipmentCategory()
+        {
+            Deletable = true;
+        }
     }
 }

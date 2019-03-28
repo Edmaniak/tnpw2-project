@@ -21,9 +21,6 @@ namespace EAM_MINI.Controllers
         }
         public ActionResult Add()
         {
-
-           
-            
             return View();
         }
 
@@ -31,13 +28,7 @@ namespace EAM_MINI.Controllers
         {
             _ticketStatusDao.DeleteById(id);
             return Redirect(Request.UrlReferrer.ToString());
-        }
-        
-        public ActionResult Detail(int id)
-        {
-
-            return View();
-        }
+        } 
 
         public ActionResult Index()
         {

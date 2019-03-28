@@ -23,12 +23,6 @@ namespace EAM_MINI.Controllers
             ViewBag.categories = _categories;
             return View();
         }
-
-        public ActionResult Detail(int id)
-        {
-            return View();
-        }
-
         
         public ActionResult Delete(int id)
         {

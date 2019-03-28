@@ -9,6 +9,7 @@
         <property name="Email" column="email"/>
         <property name="Phone" column="phone"/>
         <property name="Password" column="password"/>
+        <property name="Deletable" column="deletable"/>
         <many-to-one name="Role" column="role_id" foreign-key="role_id"/>
         <many-to-one name="Address" column="address_id" foreign-key="address_id" cascade="all" />
     </class>

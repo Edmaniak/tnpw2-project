@@ -38,6 +38,12 @@ namespace EAM_MINI.Controllers
             return View();
         }
 
+        public ActionResult Delete(int id)
+        {
+            _controlDao.DeleteById(id);
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
 
         public ActionResult Index()
         {
