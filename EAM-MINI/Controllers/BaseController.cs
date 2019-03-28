@@ -18,7 +18,8 @@ namespace EAM_MINI.Controllers
             {
                 ViewBag.User = _userDao.GetByEmail(User.Identity.Name);
             }
-            return base.View(view, model);
+            return base.View(view, model);  
+          
         }
 
         protected override ViewResult View(string viewName, string masterName, object model)
@@ -28,6 +29,11 @@ namespace EAM_MINI.Controllers
                 ViewBag.User = _userDao.GetByEmail(User.Identity.Name);
             }
             return base.View(viewName, masterName, model);
+        }
+
+        protected ActionResult Refresh()
+        {
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

@@ -11,11 +11,19 @@
             @c.Description
         </td>
         <td>
-            <a class="btn btn-primary">Editovat</a>
             @if (c.Deletable)
             {
+                <a href="@Url.Action("Detail", "RoomCategory", new {id = c.Id})" class="btn btn-primary">Upravit</a>
                 <a href="@Url.Action("Delete", "RoomCategory", new {id = c.Id})" class="btn btn-danger">Smazat</a>
             }
         </td>
     </tr>
 }
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div id="editContent" class="modal-content">
+
+        </div>
+    </div>
+</div>

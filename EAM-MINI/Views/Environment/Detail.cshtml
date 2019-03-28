@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Prostředí - " + Model.Name;
 }
-@using (Html.BeginForm("Create", "Environment", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Environment", FormMethod.Post))
 {
     <div class="row">
         <div class="col-md-3">
@@ -23,10 +23,16 @@
                         @Html.ValidationMessageFor(x => x.Description)
                     </div>
                     <div class="form-group">
+                        <label for="name">Kategorie: (<a href="@Url.Action("Index", "EnvironmentCategory")">Přidat</a>)</label>
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title"), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Category)
+                    </div>
+                    <div class="form-group">
                         <label for="name">Kód:</label>
                         @Html.TextBoxFor(x => x.Code, new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Code)
                     </div>
+                    @Html.HiddenFor(x => x.Id)
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Uložit</button>
                     </div>

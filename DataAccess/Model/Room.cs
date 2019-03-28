@@ -12,9 +12,11 @@ namespace DataAccess.Model
         public virtual string Code { get; set; }
         public virtual string Floor { get; set; }
         public virtual Environment Environment { get; set; }
-        
+
+        public virtual RoomCategory Category { get; set; }
+
         public virtual IList<Equipment> Equipments { get; set; }
-        
+
 
         public virtual string GenerateCode()
         {

@@ -47,46 +47,5 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('.edit-record').click(function() {
-                console.log("clicked");
-                var data = {
-                    id: $(this).parent('tr').data('id'),
-                    name: $(this).parent('tr').find('[name="name"]').val(),
-                    description: $(this).parent('tr').find('[name="description"]').val()
-                }
-                $.ajax({
-                    url: "@Url.Action("Create", "TicketCategory")",
-                    type: "POST",
-                    data: data,
-                    success: function(res) {
-                        console.log(res);
-                    },
-                    error: function(err) {
-                        console.log(err);
-                    }
-                });
-            });
-            $('.create-record').click(function() {
-                console.log("clicked");
-                var data = {
-                    name: $(this).parent('tr').find('[name="name"]').val(),
-                    description: $(this).parent('tr').find('[name="description"]').val()
-                }
-                $.ajax({
-                    url: "@Url.Action("Create", "EquipmentCategory")",
-                    type: "POST",
-                    data: data,
-                    success: function(res) {
-                        console.log(res);
-                    },
-                    error: function(err) {
-                        console.log(err);
-                    }
-                });
-            });
 
-        })
-    </script>
 }

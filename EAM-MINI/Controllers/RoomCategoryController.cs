@@ -23,11 +23,35 @@ namespace EAM_MINI.Controllers
             ViewBag.categories = _categories;
             return View();
         }
-        
+
+        public ActionResult Detail(int id)
+        {
+            RoomCategory roomCategory = _roomCategoryDao.GetById(id);
+            return View(roomCategory);
+        }
+
         public ActionResult Delete(int id)
         {
             _roomCategoryDao.DeleteById(id);
             return RedirectToAction("Index", "RoomCategory");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(RoomCategory category)
+        {
+            if (ModelState.IsValid)
+            {
+                RoomCategory cat = _roomCategoryDao.GetById(category.Id);
+
+                cat.Title = category.Title;
+                cat.Description = category.Description;
+
+                _roomCategoryDao.Update(cat);
+                return RedirectToAction("Index", "RoomCategory");
+            }
+
+            ViewBag.categories = _categories;
+            return View("Index");
         }
 
         [HttpPost]

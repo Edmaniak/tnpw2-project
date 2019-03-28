@@ -8,7 +8,8 @@
         <property name="Purpouse" column="purpouse"/>
         <property name="Code" column="code"/>
         <property name="Floor" column="floor"/>
-        <many-to-one name="Environment" column="environment_id"/>
+        <many-to-one name="Environment" column="environment_id" foreign-key="environment_id"/>
+        <many-to-one name="Category" column="category_id" foreign-key="category_id"/>
         <bag name="Equipments" cascade="all">
             <key column="room_id"/>
             <one-to-many class="Equipment"/>

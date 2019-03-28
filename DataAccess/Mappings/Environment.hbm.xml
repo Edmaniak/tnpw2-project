@@ -9,7 +9,8 @@
         <property name="Code" column="code"/>
         <many-to-one name="Address" column="address_id" foreign-key="address_id" cascade="all"/>
         <many-to-one name="Business" column="bussiness_id" foreign-key="bussiness_id" cascade="all"/>
-        <bag name="Rooms" cascade="all">
+        <many-to-one name="Category" column="category_id" foreign-key="category_id" cascade="all"/>
+        <bag name="Rooms" cascade="none">
             <key column="environment_id"/>
             <one-to-many class="Room"/>
         </bag>

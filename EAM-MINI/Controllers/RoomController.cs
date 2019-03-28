@@ -12,18 +12,26 @@ namespace EAM_MINI.Controllers
     {
         private RoomDao _roomDao;
         private EnvironmentDao _environmentDao;
+        private RoomCategoryDao _roomCategoryDao;
         private List<Environment> _environments;
 
         public RoomController()
         {
             _roomDao = new RoomDao();
             _environmentDao = new EnvironmentDao();
+            _roomCategoryDao = new RoomCategoryDao();
             _environments = _environmentDao.GetAll().ToList();
+        }
+
+        public void InitViewBag()
+        {
+            ViewBag.environments = _environmentDao.GetAll().ToList();
+            ViewBag.categories = _roomCategoryDao.GetAll().ToList();
         }
 
         public ActionResult Add()
         {
-            ViewBag.environments = _environments;
+            InitViewBag();
             return View();
         }
 
@@ -36,9 +44,29 @@ namespace EAM_MINI.Controllers
         public ActionResult Detail(int id)
         {
             Room room = _roomDao.GetById(id);
-            ViewBag.environments = _environments;
             ViewBag.equipments = room.Equipments;
+            InitViewBag();
             return View(room);
+        }
+
+        public ActionResult Edit(Room room, int environmentId, int categoryId)
+        {
+            if (ModelState.IsValid)
+            {
+                Room roo = _roomDao.GetById(room.Id);
+
+                roo.Code = room.Code;
+                roo.Name = room.Name;
+                roo.Floor = room.Floor;
+                roo.Category = _roomCategoryDao.GetById(categoryId);
+                roo.Purpouse = room.Purpouse;
+                roo.Environment = _environmentDao.GetById(environmentId);
+                
+                _roomDao.Update(roo);
+                return RedirectToAction("Index", "Environment");
+            }
+
+            return View("Add", room);
         }
 
         public ActionResult Index()
@@ -47,12 +75,12 @@ namespace EAM_MINI.Controllers
             return View(rooms);
         }
 
-        public ActionResult Create(Room room, string environmentId)
+        public ActionResult Create(Room room, int environmentId, int categoryId)
         {
             if (ModelState.IsValid)
             {
-                Environment environment = _environmentDao.GetById(int.Parse(environmentId));
-                room.Environment = environment;
+                room.Category = _roomCategoryDao.GetById(categoryId);
+                room.Environment = _environmentDao.GetById(environmentId);
                 _roomDao.Create(room);
                 return RedirectToAction("Index", "Room");
             }

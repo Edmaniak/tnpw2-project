@@ -10,8 +10,17 @@ namespace DataAccess.Model
         public virtual string Description { get; set; }
         public virtual string Code { get; set; }
         public virtual Business Business { get; set; }
+        public virtual EnvironmentCategory Category { get; set; }
         public virtual Address Address { get; set; }
-        
+       
+
         public virtual IList<Room> Rooms { get; set; }
+
+
+        public void UpdateDataFrom(Environment entity)
+        {
+            Id = entity.Id == null ? Id : entity.Id;
+            Name = entity.Name == null ? Name : entity.Name;
+        }
     }
 }

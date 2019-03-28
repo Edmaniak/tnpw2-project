@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Podlaží:</label>
-                        @Html.TextBoxFor(x => x.Floor, new {@class = "form-control", @type="number"})
+                        @Html.TextBoxFor(x => x.Floor, new {@class = "form-control", @type = "number"})
                         @Html.ValidationMessageFor(x => x.Floor)
                     </div>
                     <div class="form-group">
@@ -31,6 +31,11 @@
                         <label for="name">Popis:</label>
                         @Html.TextAreaFor(x => x.Purpouse, new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Purpouse)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Kategorie: (<a href="@Url.Action("Index", "RoomCategory")">Přidat</a>)</label>
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title"), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Category)
                     </div>
                     <div class="form-group">
                         <label for="name">Kód:</label>
@@ -62,8 +67,12 @@
                             @foreach (Equipment e in ViewBag.equipments)
                             {
                                 <tr>
-                                    <td><a href="@Url.Action("Detail", "Equipment", new {id = e.Id})" >@e.Code</a></td>
-                                    <td><a href="@Url.Action("Detail", "Equipment", new {id = e.Id})" >@e.Title</a></td>
+                                    <td>
+                                        <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})">@e.Code</a>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})">@e.Title</a>
+                                    </td>
                                     <td>@e.Status.Title</td>
                                 </tr>
                             }

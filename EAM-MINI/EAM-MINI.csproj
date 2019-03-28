@@ -1774,6 +1774,7 @@
         <Content Include="Views\Control\Detail.cshtml" />
         <Content Include="Views\Control\Index.cshtml" />
         <Content Include="Views\EnvironmentCategory\Add.cshtml" />
+        <Content Include="Views\EnvironmentCategory\Detail.cshtml" />
         <Content Include="Views\EnvironmentCategory\Index.cshtml" />
         <Content Include="Views\EnvironmentCategory\Listing.cshtml" />
         <Content Include="Views\Environment\Add.cshtml" />
@@ -1792,6 +1793,7 @@
         <Content Include="Views\Equipment\Statuses.cshtml" />
         <Content Include="Views\Login\Index.cshtml" />
         <Content Include="Views\RoomCategory\Add.cshtml" />
+        <Content Include="Views\RoomCategory\Detail.cshtml" />
         <Content Include="Views\RoomCategory\Index.cshtml" />
         <Content Include="Views\RoomCategory\Listing.cshtml" />
         <Content Include="Views\Room\Add.cshtml" />
