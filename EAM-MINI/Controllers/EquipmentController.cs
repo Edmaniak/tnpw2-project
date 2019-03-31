@@ -28,21 +28,19 @@ namespace EAM_MINI.Controllers
             _equipmentDao = new EquipmentDao();
             _equipmentCategoryDao = new EquipmentCategoryDao();
             _equipmentStatusDao = new EquipmentStatusDao();
-            _environments = _environmentDao.GetAll().ToList();
-            _categories = _equipmentCategoryDao.GetAll().ToList();
-            _statuses = _equipmentStatusDao.GetAll().ToList();
         }
 
-        private void InitiateViewBag()
+        private void InitViewBag()
         {
-            ViewBag.environments = _environments;
-            ViewBag.statuses = _statuses;
-            ViewBag.categories = _categories;
+            ViewBag.environments = _environmentDao.GetAll().ToList();
+            ViewBag.statuses = _equipmentStatusDao.GetAll().ToList();
+            ViewBag.categories = _equipmentCategoryDao.GetAll().ToList();
+            ViewBag.rooms = _roomDao.GetAll().ToList();
         }
 
         public ActionResult Add()
         {
-            InitiateViewBag();
+            InitViewBag();
             return View();
         }
 
@@ -55,7 +53,9 @@ namespace EAM_MINI.Controllers
         public ActionResult Detail(int id)
         {
             Equipment equipment = _equipmentDao.GetById(id);
-            ViewBag.environments = _environments;
+            InitViewBag();
+            ViewBag.selectedRoom = equipment.Room.Id;
+            Console.Write(equipment.Room.Id);
             return View(equipment);
         }
 
@@ -78,7 +78,7 @@ namespace EAM_MINI.Controllers
                 return RedirectToAction("Index", "Equipment");
             }
 
-            InitiateViewBag();
+            InitViewBag();
             return View("Add", equipment);
         }
           
@@ -88,12 +88,22 @@ namespace EAM_MINI.Controllers
             return View(statuses);
         }
 
-        public JsonResult Rooms(int environmentId)
+        public ActionResult Rooms(int environmentId)
         {
             List<Room> rooms = _environmentDao.GetById(environmentId).Rooms.ToList();
-            List<Room> roomsReturn = new List<Room>();
-            foreach (Room room in rooms) roomsReturn.Add(new Room {Id = room.Id, Name = room.Name});
-            return Json(roomsReturn);
+            return PartialView("Rooms", rooms);
+        }
+        
+        public ActionResult SearchRooms(string phrase)
+        {
+            List<Room> rooms= new List<Room>();
+
+            if (phrase.Length > 0)
+            {
+                rooms = _roomDao.Search(phrase).ToList();
+            }
+
+            return PartialView("Rooms", rooms);
         }
     }
 }

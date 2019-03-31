@@ -13,22 +13,48 @@ namespace EAM_MINI.Controllers
     public class TicketCategoryController : BaseController
     {
         private TicketCategoryDao _ticketCategoryDao;
+        private List<TicketCategory> _categories;
 
         public TicketCategoryController()
         {
             _ticketCategoryDao = new TicketCategoryDao();
+            _categories = _ticketCategoryDao.GetAll().ToList();
            
         }
         public ActionResult Add()
         {
             return View();
         }
+        
+        public ActionResult Detail(int id)
+        {
+            TicketCategory equipmentCategory = _ticketCategoryDao.GetById(id);
+            return View(equipmentCategory);
+        }
+        
+        [HttpPost]
+        public ActionResult Edit(TicketCategory category)
+        {
+            if (ModelState.IsValid)
+            {
+                TicketCategory cat = _ticketCategoryDao.GetById(category.Id);
+
+                cat.Title = category.Title;
+                cat.Description = category.Description;
+
+                _ticketCategoryDao.Update(cat);
+                return RedirectToAction("Index", "TicketCategory");
+            }
+
+            ViewBag.categories = _categories;
+            return View("Index");
+        }
 
       
         public ActionResult Delete(int id)
         {
             _ticketCategoryDao.Delete(id);
-            return Redirect(Request.UrlReferrer.ToString());
+            return Refresh();
         }
 
         public ActionResult Index()

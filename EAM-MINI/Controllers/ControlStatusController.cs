@@ -27,7 +27,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _controlStatusDao.Delete(id);
-            return Redirect(Request.UrlReferrer.ToString());
+            return Refresh();
         } 
 
         public ActionResult Index()

@@ -1,15 +1,15 @@
 @using DataAccess.Model
 @model Equipment
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = "Přidat vybavení";
 }
 @using (Html.BeginForm("Create", "Equipment", FormMethod.Post))
 {
     <div class="row">
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="card shadow">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">Údaje</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Zadejte údaje</h6>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -23,52 +23,116 @@
                         @Html.ValidationMessageFor(x => x.Description)
                     </div>
                     <div class="form-group">
+                        <label for="name">Kategorie: (<a href="@Url.Action("Index", "EquipmentCategory")">Přidat</a>)</label>
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title" , Model.Category.Id), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Category)
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Status: (<a href="@Url.Action("Index", "EquipmentCategory")">Přidat</a>)</label>
+                        @Html.DropDownList("statusId", new SelectList(ViewBag.statuses, "Id", "Title", Model.Status.Id), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Status)
+                    </div>
+                    <div class="form-group">
                         <label for="name">Kód:</label>
                         @Html.TextBoxFor(x => x.Code, new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Code)
                     </div>
                     <div class="form-group">
                         <label for="email">Pořízeno dne:</label>
-                        @Html.TextBoxFor(x => x.Purchased, "{0:dd. MM. yyyy}", new {@class = "form-control", @type = "date"})
+                        @Html.TextBoxFor(x => x.Purchased, "{0:dd. MM. yyyy}", new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Purchased)
                     </div>
                     <div class="form-group">
                         <label for="email">Záruka končí:</label>
-                        @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control", @type = "date"})
+                        @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Warranty)
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Vytvořit</button>
+                        <button class="btn btn-primary" type="submit">Uložit</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-8">
             <div class="card shadow">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">Umístění</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Kde se vybavení nachází</h6>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="name">Prostředí:</label>
-                        @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name", Model.Room.Environment.Id), new {@class = "form-control"})
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Prostředí:</label>
+                                @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name", Model.Room.Environment.Id), new {@class = "form-control", id = "environmentId"})
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Hledej ve všech místnostech:</label>
+                                <div class="input-group">
+                                    <input id="searchRooms" type="text" class="form-control bg-light border-0 small" placeholder="Vyhledej místnost" aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="name">Místnost:</label>
-                        @Html.DropDownList("roomId", new SelectList(Model.Room.Environment.Rooms, "Id", "Name", Model.Room.Id), new {@class = "form-control"})
-                    </div>
-                    <hr/>
-                    <div class="form-group">
-                        <label for="name">Hledat:</label>
-                        <input type="text" id="searchRoom" class="form-control"/>
+                    <div class="row">
+                        <div class="col-12">
+                            @{ Html.RenderPartial("Rooms", new List<Room>()); }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        $('#environmentId').click(function() {
-            
-        })
+        function fetchRooms() {
+            var val = $('#environmentId').val();
+            $.ajax({
+                url: "@Url.Action("Rooms", "Equipment")",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#roomsTable').html(res);
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { environmentId: val }
+            });
+        }
+        
+        function searchRooms() {
+            var phrase = $('#searchRooms').val();
+            $.ajax({
+                url: "@Url.Action("SearchRooms", "Equipment")",
+                type: "GET",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#roomsTable').html(res);
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { phrase: phrase }
+            });
+        }
+
+        fetchRooms();
+
+        $('#environmentId').on('change',
+            function() {
+                fetchRooms();
+            });
+        
+        $('#searchRooms').keyup(function() {
+            searchRooms();
+        });
+
+
     </script>
 }

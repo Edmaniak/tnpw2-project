@@ -7,7 +7,7 @@ using DataAccess.Model;
 
 namespace EAM_MINI.Controllers
 {
-    public class ControlCategoryController : Controller
+    public class ControlCategoryController : BaseController
     {
         private ControlCategoryDao _controlCategoryDao;
 
@@ -25,7 +25,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _controlCategoryDao.Delete(id);
-            return RedirectToAction("Index", "EnvironmentCategory");
+            return Refresh();
         }
 
         public ActionResult Detail(int id)

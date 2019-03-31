@@ -13,10 +13,12 @@ namespace EAM_MINI.Controllers
     public class TicketStatusController : BaseController
     {
         private TicketStatusDao _ticketStatusDao;
+        private List<TicketStatus> _statuses;
 
         public TicketStatusController()
         {
             _ticketStatusDao = new TicketStatusDao();
+            _statuses = _ticketStatusDao.GetAll().ToList();
            
         }
         public ActionResult Add()
@@ -27,8 +29,32 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _ticketStatusDao.Delete(id);
-            return Redirect(Request.UrlReferrer.ToString());
+            return Refresh();
         } 
+        
+        public ActionResult Detail(int id)
+        {
+            TicketStatus ticketStatuses = _ticketStatusDao.GetById(id);
+            return View(ticketStatuses);
+        }
+        
+        [HttpPost]
+        public ActionResult Edit(TicketStatus category)
+        {
+            if (ModelState.IsValid)
+            {
+                TicketStatus stats = _ticketStatusDao.GetById(category.Id);
+
+                stats.Title = category.Title;
+                stats.Description = category.Description;
+
+                _ticketStatusDao.Update(stats);
+                return RedirectToAction("Index", "TicketStatus");
+            }
+
+            ViewBag.statuses = _statuses;
+            return View("Index");
+        }
 
         public ActionResult Index()
         {

@@ -11,9 +11,10 @@
             @c.Description
         </td>
         <td>
-            <a href="#" class="btn btn-primary">Editovat</a>
+           
             @if (c.Deletable)
             {
+                <a href="@Url.Action("Detail", "EquipmentCategory", new {id = c.Id})" class="btn btn-primary">Editovat</a>
                 <a href="@Url.Action("Delete", "EquipmentCategory", new {id = c.Id})" class="btn btn-danger">Smazat</a>
             }
         </td>

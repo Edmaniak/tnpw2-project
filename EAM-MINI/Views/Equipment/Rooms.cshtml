@@ -1,0 +1,49 @@
+@using DataAccess.Model
+@model List<DataAccess.Model.Room>
+<div id="roomsTable">
+    <table class="table table-bordered roomsTable">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Označení</th>
+            <th>Prostředí</th>
+            <th>Kategorie</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Room r in Model)
+        {
+            <tr>
+                <td>
+                    @ViewContext.Controller.ViewBag.selectedRoom
+                    <input
+                        @if (ViewContext.Controller.ViewBag.selectedRoom == r.Id)
+                        {<text>checked="checked"</text>}
+                        name="equipmentId" type="radio" name="roomRadio" class="room-radio" value="@r.Id"/>
+                </td>
+                <td>
+
+                    <a href="@Url.Action("Detail", "Room", new {id = r.Id})"> @r.Id (@r.Code)</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Detail", "Room", new {id = r.Id})">@r.Name</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Detail", "Environment", new {id = r.Id})">@r.Environment.Name</a>
+                </td>
+                <td>@r.Category.Title</td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+    @Html.Hidden("roomId")
+</div>
+
+<script>
+    $('.room-radio').click(function() {
+        console.log("dsa");
+        $('#roomId').val($(this).val());
+    })
+</script>

@@ -39,12 +39,12 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Pořízeno dne:</label>
-                        @Html.TextBoxFor(x => x.Purchased, "{0:dd. MM. yyyy}", new {@class = "form-control", @type = "date"})
+                        @Html.TextBoxFor(x => x.Purchased, "{0:dd. MM. yyyy}", new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Purchased)
                     </div>
                     <div class="form-group">
                         <label for="email">Záruka končí:</label>
-                        @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control", @type = "date"})
+                        @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Warranty)
                     </div>
                     <div class="form-group">
@@ -53,30 +53,43 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-8">
             <div class="card shadow">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">Umístění</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Kde se vybavení nachází</h6>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="name">Prostředí:</label>
-                        @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name"), new {@class = "form-control"})
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Prostředí:</label>
+                                @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name"), new {@class = "form-control", id = "environmentId"})
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Hledej ve všech místnostech:</label>
+                                <div class="input-group">
+                                    <input id="searchRooms" type="text" class="form-control bg-light border-0 small" placeholder="Vyhledej místnost" aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="name">Místnost:</label>
-                        <select name="roomId" id="roomSelect" class="form-control"></select>
-                    </div>
-                    <hr/>
-                    <div class="form-group">
-                        <label for="name">Hledat:</label>
-                        <input type="text" id="searchRoom" class="form-control"/>
+                    <div class="row">
+                        <div class="col-12">
+                            @{ Html.RenderPartial("Rooms", new List<Room>()); }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>   
+    <script>
         function fetchRooms() {
             var val = $('#environmentId').val();
             $.ajax({
@@ -84,10 +97,7 @@
                 type: "POST",
                 contentType: "application/x-www-form-urlencoded",
                 success: function(res) {
-                    $('#roomSelect').children().remove();
-                    res.forEach(function(value) {
-                        $('#roomSelect').append('<option value="' + value.Id + '">' + value.Name + '</option>');
-                    });
+                    $('#roomsTable').html(res);
                 },
                 error: function(err) {
                     console.log(err);
@@ -96,11 +106,33 @@
             });
         }
         
+        function searchRooms() {
+            var phrase = $('#searchRooms').val();
+            $.ajax({
+                url: "@Url.Action("SearchRooms", "Equipment")",
+                type: "GET",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#roomsTable').html(res);
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { phrase: phrase }
+            });
+        }
+
         fetchRooms();
-        
+
         $('#environmentId').on('change',
             function() {
                 fetchRooms();
             });
+        
+        $('#searchRooms').keyup(function() {
+            searchRooms();
+        });
+
+
     </script>
 }

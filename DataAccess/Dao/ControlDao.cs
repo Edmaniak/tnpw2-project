@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI.WebControls;
 using DataAccess.Model;
+using NHibernate.Criterion;
 
 namespace DataAccess.Dao
 {
@@ -24,10 +26,32 @@ namespace DataAccess.Dao
             Control c = GetById(id);
             Archivate(c);
         }
+        
+        public void Unarchivate(Control control)
+        {
+            control.Status = _controlStatusDao.GetById(ControlStatusDao.Constants.NO_CATEGORY);
+            Update(control);
+        }
+
+        public void Unarchivate(int id)
+        {
+            Control c = GetById(id);
+            Unarchivate(c);
+        }
 
         public List<Control> GetAllNotArchivated()
         {
-            
+            return session.Query<Control>().Where(c => c.Status.Id != ControlStatusDao.Constants.ARCHIVATED).ToList();
+        }
+        
+        public List<Control> GetAllArchivated()
+        {
+            return session.Query<Control>().Where(c => c.Status.Id == ControlStatusDao.Constants.ARCHIVATED).ToList();
+        }
+
+        public List<Control> GetPlanned()
+        {
+            return session.Query<Control>().Where(c => c.Status.Id == ControlStatusDao.Constants.PLANNED).ToList();
         }
         
         

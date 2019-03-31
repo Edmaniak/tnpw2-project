@@ -3,7 +3,22 @@
 @{
     ViewBag.Title = "Vybavení";
 }
-
+<div class="row">
+    <div class="col-12 mb-4">
+        <a href="@Url.Action("Add", "Equipment")" class="btn btn-info btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span class="text">Přidat vybavení</span>
+        </a>
+        <a href="@Url.Action("Index", "EquipmentCategory")" class="btn btn-info btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-pen"></i>
+            </span>
+            <span class="text">Spravovat kategorie</span>
+        </a>
+    </div>
+</div>
 <div class="row">
     <div class="col-12">
         <div class="card shadow">
@@ -19,6 +34,7 @@
                             <th>Název</th>
                             <th>Umístění</th>
                             <th>Záruka vyprší</th>
+                            <th>Kategorie</th>
                             <th>Stav</th>
                             <th>Akce</th>
                         </tr>
@@ -44,7 +60,8 @@
                                         <span>Neuvedeno</span>
                                     }
                                 </td>
-                                <td>@e.Warranty</td>
+                                <td>@e.Warranty.ToString("d. M. yyyy")</td>
+                                <td>@e.Category.Title</td>
                                 <td>@e.Status.Title</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})" class="btn btn-primary">Detail</a>

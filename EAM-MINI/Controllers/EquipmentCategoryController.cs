@@ -29,6 +29,30 @@ namespace EAM_MINI.Controllers
             _equipmentCategoryDao.Delete(id);
             return RedirectToAction("Index", "EquipmentCategory");
         }
+        
+        public ActionResult Detail(int id)
+        {
+            EquipmentCategory equipmentCategory = _equipmentCategoryDao.GetById(id);
+            return View(equipmentCategory);
+        }
+        
+        [HttpPost]
+        public ActionResult Edit(EquipmentCategory category)
+        {
+            if (ModelState.IsValid)
+            {
+                EquipmentCategory cat = _equipmentCategoryDao.GetById(category.Id);
+
+                cat.Title = category.Title;
+                cat.Description = category.Description;
+
+                _equipmentCategoryDao.Update(cat);
+                return RedirectToAction("Index", "EquipmentCategory");
+            }
+
+            ViewBag.categories = _categories;
+            return View("Index");
+        }
 
         [HttpPost]
         public ActionResult Create(EquipmentCategory category)

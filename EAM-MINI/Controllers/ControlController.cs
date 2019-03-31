@@ -48,16 +48,28 @@ namespace EAM_MINI.Controllers
             return View(control);
         }
 
-        public ActionResult Archiv(int id)
+        public ActionResult Archivate(int id)
         {
-            _controlDao.Archivate();
-            return View();
+            _controlDao.Archivate(id);
+            return Refresh();
+        }
+
+        public ActionResult UnArchivate(int id)
+        {
+            _controlDao.Unarchivate(id);
+            return Refresh();
+        }
+
+        public ActionResult Archive()
+        {
+            List<Control> controls = _controlDao.GetAllArchivated();
+            return View(controls);
         }
 
         public ActionResult Delete(int id)
         {
             _controlDao.Delete(id);
-            return Redirect(Request.UrlReferrer.ToString());
+            return Refresh();
         }
 
         [HttpPost]
@@ -76,7 +88,7 @@ namespace EAM_MINI.Controllers
 
         public ActionResult Index()
         {
-            List<Control> controls = _controlDao.GetAll().ToList();
+            List<Control> controls = _controlDao.GetAllNotArchivated();
             InitViewBag();
             return View(controls);
         }

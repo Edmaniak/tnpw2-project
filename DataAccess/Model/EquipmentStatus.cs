@@ -13,5 +13,10 @@ namespace DataAccess.Model
         public virtual bool Deletable { get; set; }
         public virtual IList<Equipment> Equipments{ get; set; }
         
+        public EquipmentStatus()
+        {
+            Deletable = true;
+        }
+        
     }
 }

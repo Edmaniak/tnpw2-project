@@ -10,12 +10,12 @@ namespace EAM_MINI.Controllers
     public class EquipmentStatusController : Controller
     {
         private List<EquipmentStatus> _statuses;
-        private EquipmentStatusDao _statusCategoryDao;
+        private EquipmentStatusDao _equipmentStatusDao;
 
         public EquipmentStatusController()
         {
-            _statusCategoryDao = new EquipmentStatusDao();
-            _statuses = _statusCategoryDao.GetAll().ToList();
+            _equipmentStatusDao = new EquipmentStatusDao();
+            _statuses = _equipmentStatusDao.GetAll().ToList();
         }
 
         public ActionResult Index()
@@ -26,13 +26,32 @@ namespace EAM_MINI.Controllers
 
         public ActionResult Detail(int id)
         {
-            return View();
+            EquipmentStatus equipmentStatus = _equipmentStatusDao.GetById(id);
+            return View(equipmentStatus);
+        }
+        
+        [HttpPost]
+        public ActionResult Edit(EquipmentStatus status)
+        {
+            if (ModelState.IsValid)
+            {
+                EquipmentStatus cat = _equipmentStatusDao.GetById(status.Id);
+
+                cat.Title = status.Title;
+                cat.Description = status.Description;
+
+                _equipmentStatusDao.Update(cat);
+                return RedirectToAction("Index", "EquipmentStatus");
+            }
+
+            ViewBag.categories = _statuses;
+            return View("Index");
         }
 
         
         public ActionResult Delete(int id)
         {
-            _statusCategoryDao.Delete(id);
+            _equipmentStatusDao.Delete(id);
             return RedirectToAction("Index", "EquipmentStatus");
         }
 
@@ -41,7 +60,7 @@ namespace EAM_MINI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _statusCategoryDao.Create(status);
+                _equipmentStatusDao.Create(status);
                 return RedirectToAction("Index", "EquipmentStatus");
             }
 

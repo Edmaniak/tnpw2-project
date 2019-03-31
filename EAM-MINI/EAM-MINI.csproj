@@ -1780,7 +1780,7 @@
         <Content Include="Views\ControlStatus\Index.cshtml" />
         <Content Include="Views\ControlStatus\Listing.cshtml" />
         <Content Include="Views\Control\Add.cshtml" />
-        <Content Include="Views\Control\Archiv.cshtml" />
+        <Content Include="Views\Control\Archive.cshtml" />
         <Content Include="Views\Control\Detail.cshtml" />
         <Content Include="Views\Control\Index.cshtml" />
         <Content Include="Views\Control\StatusChangeModal.cshtml" />
@@ -1792,6 +1792,7 @@
         <Content Include="Views\Environment\Detail.cshtml" />
         <Content Include="Views\Environment\Index.cshtml" />
         <Content Include="Views\EquipmentCategory\Add.cshtml" />
+        <Content Include="Views\EquipmentCategory\Detail.cshtml" />
         <Content Include="Views\EquipmentCategory\Index.cshtml" />
         <Content Include="Views\EquipmentCategory\Listing.cshtml" />
         <Content Include="Views\EquipmentStatus\Add.cshtml" />
@@ -1800,6 +1801,7 @@
         <Content Include="Views\EquipmentStatus\Listing.cshtml" />
         <Content Include="Views\Equipment\Add.cshtml" />
         <Content Include="Views\Equipment\Detail.cshtml" />
+        <Content Include="Views\Equipment\Rooms.cshtml" />
         <Content Include="Views\Equipment\Index.cshtml" />
         <Content Include="Views\Equipment\Statuses.cshtml" />
         <Content Include="Views\Login\Index.cshtml" />
@@ -1811,9 +1813,11 @@
         <Content Include="Views\Room\Detail.cshtml" />
         <Content Include="Views\Room\Index.cshtml" />
         <Content Include="Views\TicketCategory\Add.cshtml" />
+        <Content Include="Views\TicketCategory\Detail.cshtml" />
         <Content Include="Views\TicketCategory\Index.cshtml" />
         <Content Include="Views\TicketCategory\Listing.cshtml" />
         <Content Include="Views\TicketStatus\Add.cshtml" />
+        <Content Include="Views\TicketStatus\Detail.cshtml" />
         <Content Include="Views\TicketStatus\Index.cshtml" />
         <Content Include="Views\TicketStatus\Listing.cshtml" />
         <Content Include="Views\Ticket\Add.cshtml" />

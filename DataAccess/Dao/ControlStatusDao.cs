@@ -6,7 +6,8 @@ namespace DataAccess.Dao
     {
         public struct Constants
         {
-            public static int PLANNED = 2;
+            public const int PLANNED = 2;
+            public const int SOLVING = 3;
             public const int NO_CATEGORY = 1;
             public const int ARCHIVATED = 5;
         }
