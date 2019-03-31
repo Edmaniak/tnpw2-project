@@ -42,29 +42,30 @@
                         <tbody>
                         @foreach (DataAccess.Model.Control c in Model)
                         {
-                            <tr>
+                            <tr data-controlId="@c.Id">
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})">@c.Title</a>
                                 </td>
-                                <td>@c.DatePlanned</td>
+                                <td>@c.DatePlanned.Value.ToString("d. M. yyyy")</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
                                 </td>
                                 <td>
                                     @if (c.Equipment != null)
                                     {
-                                        <a href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.Equipment.BaseInfo</a>
- 
+                                        <a href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.EquipmentInfo</a>
                                     }
                                     else
                                     {
-                                        <span>Není specifikováno</span>
-
+                                        <span>@c.EquipmentInfo</span>
                                     }
                                 </td>
-                                <td>TODO STAV</td>
+                                <td>
+                                    @Html.DropDownList("statusId", new SelectList(ViewBag.statuses, "Id", "Title", c.Status.Id), new {@class = "form-control status-change"})
+                                </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>
+                                    <a href="@Url.Action("Archiv", "Control", new {id = c.Id})" class="btn btn-warning">Archivovat</a>
                                     <a href="@Url.Action("Delete", "Control", new {id = c.Id})" class="btn btn-danger">Smazat</a>
                                 </td>
                             </tr>
@@ -76,3 +77,35 @@
         </div>
     </div>
 </div>
+<div id="modalPlaceholder"></div>
+<script>
+    function saveStatus(controlId, statusId) {
+        console.log(controlId);
+        console.log(statusId);
+        $.ajax({
+            url: "@Url.Action("SaveStatus", "Control")",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(res) {
+                console.log(res);
+                console.log("sddd");
+                $('#modalPlaceholder').html(res);
+                $('#statusModal').modal("show");
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            data: {
+                controlId: controlId,
+                statusId: statusId
+            }
+        });
+    }
+
+    $('.status-change').on('change',
+        function() {
+            console.log("DDD");
+            var controlId = $(this).parents('tr').data('controlid');
+            saveStatus(controlId, $(this).val());
+        });
+</script>

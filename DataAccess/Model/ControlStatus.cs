@@ -12,5 +12,7 @@ namespace DataAccess.Model
         public virtual string Description { get; set; }
         public virtual bool Deletable { get; set; }
         public virtual IList<Ticket> Tickets { get; set; }
+        
+        
     }
 }

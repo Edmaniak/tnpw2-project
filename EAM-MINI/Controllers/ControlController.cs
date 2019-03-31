@@ -41,27 +41,43 @@ namespace EAM_MINI.Controllers
             return View();
         }
 
-        public ActionResult Detail()
+        public ActionResult Detail(int id)
         {
             InitViewBag();
-            return View();
+            Control control = _controlDao.GetById(id);
+            return View(control);
         }
 
-        public ActionResult Archiv()
+        public ActionResult Archiv(int id)
         {
+            _controlDao.Archivate();
             return View();
         }
 
         public ActionResult Delete(int id)
         {
-            _controlDao.DeleteById(id);
+            _controlDao.Delete(id);
             return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        [HttpPost]
+        public ActionResult SaveStatus(int controlId, int statusId)
+        {
+            Control control = _controlDao.GetById(controlId);
+            ControlStatus status = _controlStatusDao.GetById(statusId);
+            control.Status = status;
+            ViewBag.statusName = status.Title;
+            ViewBag.controlName = control.Title;
+            ViewBag.controlId = control.Id;
+            _controlDao.Update(control);
+            return PartialView("StatusChangeModal");
         }
 
 
         public ActionResult Index()
         {
             List<Control> controls = _controlDao.GetAll().ToList();
+            InitViewBag();
             return View(controls);
         }
 
@@ -76,8 +92,8 @@ namespace EAM_MINI.Controllers
                 }
 
                 User user = _userDao.GetById(userId);
-
                 control.UserToPerform = user;
+                control.Status = _controlStatusDao.GetById(ControlStatusDao.Constants.PLANNED);
 
                 _controlDao.Create(control);
                 return RedirectToAction("Index", "Control");

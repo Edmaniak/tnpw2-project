@@ -3,7 +3,22 @@
 @{
     ViewBag.Title = "Místnosti";
 }
-
+<div class="row">
+    <div class="col-12 mb-4">
+        <a href="@Url.Action("Add", "Room")" class="btn btn-info btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span class="text">Přidat místnost</span>
+        </a>
+        <a href="@Url.Action("Index", "RoomCategory")" class="btn btn-info btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-pen"></i>
+            </span>
+            <span class="text">Spravovat kategorie</span>
+        </a>
+    </div>
+</div>
 <div class="row">
     <div class="col-12">
         <div class="card shadow">

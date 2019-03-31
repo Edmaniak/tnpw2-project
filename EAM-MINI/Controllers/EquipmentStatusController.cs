@@ -32,7 +32,7 @@ namespace EAM_MINI.Controllers
         
         public ActionResult Delete(int id)
         {
-            _statusCategoryDao.DeleteById(id);
+            _statusCategoryDao.Delete(id);
             return RedirectToAction("Index", "EquipmentStatus");
         }
 

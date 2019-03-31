@@ -32,7 +32,7 @@ namespace EAM_MINI.Controllers
 
         public ActionResult Delete(int id)
         {
-            _roomCategoryDao.DeleteById(id);
+            _roomCategoryDao.Delete(id);
             return RedirectToAction("Index", "RoomCategory");
         }
 

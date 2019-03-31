@@ -1783,6 +1783,7 @@
         <Content Include="Views\Control\Archiv.cshtml" />
         <Content Include="Views\Control\Detail.cshtml" />
         <Content Include="Views\Control\Index.cshtml" />
+        <Content Include="Views\Control\StatusChangeModal.cshtml" />
         <Content Include="Views\EnvironmentCategory\Add.cshtml" />
         <Content Include="Views\EnvironmentCategory\Detail.cshtml" />
         <Content Include="Views\EnvironmentCategory\Index.cshtml" />

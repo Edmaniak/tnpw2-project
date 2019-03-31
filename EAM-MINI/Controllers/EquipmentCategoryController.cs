@@ -26,7 +26,7 @@ namespace EAM_MINI.Controllers
         
         public ActionResult Delete(int id)
         {
-            _equipmentCategoryDao.DeleteById(id);
+            _equipmentCategoryDao.Delete(id);
             return RedirectToAction("Index", "EquipmentCategory");
         }
 

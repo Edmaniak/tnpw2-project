@@ -10,8 +10,13 @@ namespace DataAccess.Model
         [Required(ErrorMessage = "Titulek je povinný údaj.")]
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
-
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public virtual DateTime? DatePerformed { get; set; }
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public virtual DateTime? DatePlanned { get; set; }
         public virtual User UserToPerform{ get; set; }
         public virtual User UserPerformed{ get; set; }
@@ -20,6 +25,17 @@ namespace DataAccess.Model
         public virtual ControlStatus Status { get; set; }
         public virtual ControlCategory Category { get; set; }
         public virtual Equipment Equipment{ get; set; }
+
+        public virtual string EquipmentInfo
+        {
+            get
+            {
+                if (Equipment == null) return "Není specifikováno";
+                return Equipment.BaseInfo;
+            }
+        }
         
+     
+
     }
 }

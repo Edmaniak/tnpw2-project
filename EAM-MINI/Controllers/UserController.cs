@@ -52,9 +52,19 @@ namespace EAM_MINI.Controllers
         {
             if (ModelState.IsValid)
             {
+                User us = _userDao.GetById(user.Id);
                 Role role = _roleDao.GetById(int.Parse(roleId));
-                user.Role = role;
-                _userDao.Update(user);
+
+                us.Name = user.Name;
+                us.Address = user.Address;
+                us.Profession = user.Profession;
+                us.Email = user.Email;
+                us.Phone = user.Phone;
+                us.Password = user.Password;
+                us.Surname = user.Surname;
+                us.Role = role;
+                
+                _userDao.Update(us);
                 return RedirectToAction("Index", "User");
             }
 

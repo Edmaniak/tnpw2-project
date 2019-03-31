@@ -1,53 +1,62 @@
-@model DataAccess.Model.User
+@using DataAccess.Model
+@using DataAccess.Dao
+@model DataAccess.Model.Control
 @{
-    ViewBag.Title = Model.FullName();
+    ViewBag.Title = Model.Title;
 }
-
-<div class="row">
-    <div class="col-4">
-        <div class="card shadow">
-            <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Osobní údaje</h6>
-            </div>
-            <div class="card-body">
-                @using (Html.BeginForm("Edit", "User", FormMethod.Post))
-                {
+@using (Html.BeginForm("Create", "Control", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Zadejte údaje</h6>
+                </div>
+                <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Jméno:</label>
-                        @Html.TextBoxFor(x => x.Name, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Name)
+                        <label for="name">Titulek:</label>
+                        @Html.TextBoxFor(x => x.Title, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Title)
                     </div>
                     <div class="form-group">
-                        <label for="name">Příjmení:</label>
-                        @Html.TextBoxFor(x => x.Surname, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Surname)
+                        <label for="password">Vybavení:</label>
+                        @{
+                            var list = new SelectList(ViewBag.equipments, "Id", "BaseInfo").ToList();
+                            list.Insert(0, new SelectListItem { Value = "", Text = "Žádný"});
+                        }
+                        @Html.DropDownList("equipmentId", list, new {@class = "form-control searchSelect"})
+                        @Html.ValidationMessageFor(x => x.Equipment)
                     </div>
                     <div class="form-group">
-                        <label for="email">E-mail:</label>
-                        @Html.TextBoxFor(x => x.Email, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Email)
+                        <label for="name">Popis a účel:</label>
+                        @Html.TextAreaFor(x => x.Description, new {@class = "form-control "})
+                        @Html.ValidationMessageFor(x => x.Description)
                     </div>
                     <div class="form-group">
-                        <label for="email">Telefon:</label>
-                        @Html.TextBoxFor(x => x.Phone, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Phone)
+                        <label for="name">Kategorie: (<a href="@Url.Action("Index", "ControlCategory")">Přidat</a>)</label>
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title"), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Category)
                     </div>
                     <div class="form-group">
-                        <label for="password">Heslo:</label>
-                        @Html.TextBoxFor(x => x.Password, new {@class = "form-control", @type = "password"})
-                        @Html.ValidationMessageFor(x => x.Password)
+                        <label for="name">Stav: (<a href="@Url.Action("Index", "ControlStatus")">Přidat</a>)</label>
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.statuses, "Id", "Title"), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Status)
                     </div>
                     <div class="form-group">
-                        <label for="role">Role:</label>
-                        @Html.DropDownList("roleId", new SelectList(ViewBag.roles, "Id", "Title"), new {@class = "form-control"})
-                        @Html.ValidationMessageFor(x => x.Role)
+                        <label for="email">Deadline:</label>
+                        @Html.TextBoxFor(x => x.DatePlanned, "{0:dd. MM. yyyy}", new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.DatePlanned)
                     </div>
-                    @Html.HiddenFor(x=>x.Id)
+                    <div class="form-group">
+                        <label for="email">Delegovat uživateli:</label>
+                        @Html.DropDownList("userId", new SelectList(ViewBag.users, "Id", "FullName"), new {@class = "form-control searchSelect"})
+                        @Html.ValidationMessageFor(x => x.UserToPerform)
+                    </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Uložit</button>
                     </div>
-                }
+                </div>
             </div>
         </div>
     </div>
-</div>
+}

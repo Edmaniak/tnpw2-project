@@ -27,7 +27,7 @@ namespace EAM_MINI.Controllers
       
         public ActionResult Delete(int id)
         {
-            _ticketCategoryDao.DeleteById(id);
+            _ticketCategoryDao.Delete(id);
             return Redirect(Request.UrlReferrer.ToString());
         }
 

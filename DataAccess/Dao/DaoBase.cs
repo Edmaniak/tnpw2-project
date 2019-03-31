@@ -51,7 +51,7 @@ namespace DataAccess.Dao
             }
         }
 
-        public void DeleteById(int id)
+        public void Delete(int id)
         {
             T entity = GetById(id);
             if (entity != null) Delete(entity);

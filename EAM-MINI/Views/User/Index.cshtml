@@ -39,6 +39,7 @@
                                     <a href="@Url.Action("Detail", "User", new {id = u.Id})">@u.Name @u.Surname</a>
                                 </td>
                                 <td>@u.Role.Title</td>
+                                <td>@u.Profession</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "User", new {id = u.Id})" class="btn btn-primary">Detail</a>
                                     @if (u.Deletable)
