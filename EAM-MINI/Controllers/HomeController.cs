@@ -21,7 +21,8 @@ namespace EAM_MINI.Controllers
         }
         public ActionResult Index()
         {
-            ViewBag.openTickets = _ticketDao.GetOpenTickets();
+            ViewBag.openTickets = _ticketDao.GetNotAssignedTickets();
+            ViewBag.solvingTickets = _ticketDao.GetSolvingTickets();
             ViewBag.plannedControls = _controlDao.GetPlannedControls();
             return View();
         }

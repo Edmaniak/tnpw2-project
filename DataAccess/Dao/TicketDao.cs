@@ -6,16 +6,7 @@ namespace DataAccess.Dao
 {
     public class TicketDao : DaoBase<Ticket>
     {
-        public List<Ticket> GetOpenTickets()
-        {
-            return session.Query<Ticket>()
-                .Where(
-                    c => c.Status.Id != TicketStatusDao.Constants.ARCHIVATED && 
-                         c.Status.Id != TicketStatusDao.Constants.SOLVED
-                         )
-                .ToList();
-        }
-        
+       
         public List<Ticket> GetSolvingTickets()
         {
             return session.Query<Ticket>()

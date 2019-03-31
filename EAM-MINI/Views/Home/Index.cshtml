@@ -30,8 +30,8 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Problémy k řešení</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Nahlášené problémy bez řešitele</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.plannedControls.Count</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-bug fa-2x text-gray-300"></i>
@@ -46,7 +46,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Řešené problémy</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.solvingTickets.Count</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-bug fa-2x text-gray-300"></i>
