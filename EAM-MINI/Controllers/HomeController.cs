@@ -12,8 +12,17 @@ namespace EAM_MINI.Controllers
     [Authorize]
     public class HomeController : BaseController
     {
+        private ControlDao _controlDao;
+        private TicketDao _ticketDao;
+        public HomeController()
+        {
+            _controlDao = new ControlDao();
+            _ticketDao = new TicketDao();
+        }
         public ActionResult Index()
         {
+            ViewBag.openTickets = _ticketDao.GetOpenTickets();
+            ViewBag.plannedControls = _controlDao.GetPlannedControls();
             return View();
         }
 

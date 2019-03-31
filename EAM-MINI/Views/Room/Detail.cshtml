@@ -62,6 +62,7 @@
                                 <th>Kód</th>
                                 <th>Název</th>
                                 <th>Status</th>
+                                <th>Akce</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -75,6 +76,9 @@
                                         <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})">@e.Title</a>
                                     </td>
                                     <td>@e.Status.Title</td>
+                                    <td>
+                                        <a href="@Url.Action("Add", "Ticket", new {id = e.Id})" class="btn btn-warning">Nahlásit problém</a>
+                                    </td>
                                 </tr>
                             }
                             </tbody>

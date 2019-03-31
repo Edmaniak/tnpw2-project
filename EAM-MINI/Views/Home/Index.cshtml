@@ -1,4 +1,5 @@
-﻿@{
+﻿@using DataAccess.Model
+@{
     ViewBag.Title = "Dashboard";
 }
 <div class="row">
@@ -60,7 +61,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Naplánované kontroly</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.plannedControls.Count</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-cash-register fa-2x text-gray-300"></i>
@@ -78,34 +79,43 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                     <table class="table table-bordered dataTable" id="dataTable" width="100%">
                         <thead>
                         <tr>
-                            <th>Kód</th>
                             <th>Název</th>
-                            <th>Účel</th>
-                            <th>Prostředí</th>
+                            <th>Deadline</th>
+                            <th>Zodpovědný</th>
+                            <th>Týká se</th>
                             <th>Akce</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @*@foreach (Control c in ViewBag.controls)
+                        @foreach (DataAccess.Model.Control c in ViewBag.plannedControls)
                         {
-                            <tr>
+                            <tr data-controlId="@c.Id">
                                 <td>
-                                    <a href="@Url.Action("Detail", "Room", new {id = r.Id})">@r.Code</a>
+                                    <a href="@Url.Action("Detail", "Control", new {id = c.Id})">@c.Title</a>
+                                </td>
+                                <td>@c.DatePlanned.Value.ToString("d. M. yyyy")</td>
+                                <td>
+                                    <a href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Detail", "Room", new {id = r.Id})">@r.Name</a>
+                                    @if (c.Equipment != null)
+                                    {
+                                        <a href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.EquipmentInfo</a>
+                                    }
+                                    else
+                                    {
+                                        <span>@c.EquipmentInfo</span>
+                                    }
                                 </td>
-                                <td>@r.Purpouse</td>
-                                <td>@r.Environment.Name</td>
+
                                 <td>
-                                    <a href="@Url.Action("Detail", "Room", new {id = r.Id})" class="btn btn-primary">Detail</a>
-                                    <a href="@Url.Action("Delete", "Room", new {id = r.Id})" class="btn btn-danger">Smazat</a>
+                                    <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>
                                 </td>
                             </tr>
-                        }*@
+                        }
                         </tbody>
                     </table>
                 </div>
@@ -119,34 +129,43 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Kód</th>
                             <th>Název</th>
-                            <th>Účel</th>
-                            <th>Prostředí</th>
+                            <th>Kategorie</th>
+                            <th>Přiděleno</th>
+                            <th>Status</th>
                             <th>Akce</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @*@foreach (Room r in Model)
+                        @foreach (Ticket t in ViewBag.openTickets)
                         {
                             <tr>
                                 <td>
-                                    <a href="@Url.Action("Detail", "Room", new {id = r.Id})">@r.Code</a>
+                                    <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})">@t.Title</a>
+                                </td>
+                                @* <td>@t.Category.Title</td> *@
+                                <td>
+                                    @if (t.Assigned == null)
+                                    {
+                                        <a href="#" class="btn btn-primary">Přidělit</a>
+                                    }
+                                    else
+                                    {
+                                        @t.Assigned.FullName
+                                    }
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Detail", "Room", new {id = r.Id})">@r.Name</a>
+                                    @* @t.Status.Title *@
                                 </td>
-                                <td>@r.Purpouse</td>
-                                <td>@r.Environment.Name</td>
                                 <td>
-                                    <a href="@Url.Action("Detail", "Room", new {id = r.Id})" class="btn btn-primary">Detail</a>
-                                    <a href="@Url.Action("Delete", "Room", new {id = r.Id})" class="btn btn-danger">Smazat</a>
+                                    <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})" class="btn btn-primary">Detail</a>
+                                    <a href="@Url.Action("Delete", "Ticket", new {id = t.Id})" class="btn btn-danger">Smazat</a>
                                 </td>
                             </tr>
-                        }*@
+                        }
                         </tbody>
                     </table>
                 </div>

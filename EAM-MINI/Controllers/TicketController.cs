@@ -34,7 +34,7 @@ namespace EAM_MINI.Controllers
             ViewBag.environments = _environmentDao.GetAll().ToList();
         }
 
-        public ActionResult Add(int? environmentId, int? roomId)
+        public ActionResult Add(int? equipmentId)
         {
             InitViewBag();
             return View();

@@ -49,7 +49,7 @@ namespace DataAccess.Dao
             return session.Query<Control>().Where(c => c.Status.Id == ControlStatusDao.Constants.ARCHIVATED).ToList();
         }
 
-        public List<Control> GetPlanned()
+        public List<Control> GetPlannedControls()
         {
             return session.Query<Control>().Where(c => c.Status.Id == ControlStatusDao.Constants.PLANNED).ToList();
         }
