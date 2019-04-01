@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [tnpw_eam]    Script Date: 27.03.2019 16:34:48 ******/
+/****** Object:  Database [tnpw_eam]    Script Date: 01.04.2019 13:24:18 ******/
 CREATE DATABASE [tnpw_eam]
   CONTAINMENT = NONE
   ON  PRIMARY
@@ -79,10 +79,10 @@ ALTER DATABASE [tnpw_eam] SET QUERY_STORE = OFF
 GO
 USE [tnpw_eam]
 GO
-/****** Object:  Schema [new_schema]    Script Date: 27.03.2019 16:34:49 ******/
+/****** Object:  Schema [new_schema]    Script Date: 01.04.2019 13:24:19 ******/
 CREATE SCHEMA [new_schema]
 GO
-/****** Object:  Table [dbo].[address__address]    Script Date: 27.03.2019 16:34:49 ******/
+/****** Object:  Table [dbo].[address__address]    Script Date: 01.04.2019 13:24:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -99,7 +99,7 @@ CREATE TABLE [dbo].[address__address](
                                            )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[bussiness__bussiness]    Script Date: 27.03.2019 16:34:49 ******/
+/****** Object:  Table [dbo].[bussiness__bussiness]    Script Date: 01.04.2019 13:24:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -115,7 +115,7 @@ CREATE TABLE [dbo].[bussiness__bussiness](
                                                )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[controls__category]    Script Date: 27.03.2019 16:34:49 ******/
+/****** Object:  Table [dbo].[controls__category]    Script Date: 01.04.2019 13:24:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -123,7 +123,7 @@ GO
 CREATE TABLE [dbo].[controls__category](
                                          [id] [int] IDENTITY(1,1) NOT NULL,
                                          [title] [varchar](50) NULL,
-                                         [description] [text] NOT NULL,
+                                         [description] [text] NULL,
                                          [deletable] [smallint] NOT NULL,
                                          CONSTRAINT [PK_controls__category] PRIMARY KEY CLUSTERED
                                            (
@@ -131,7 +131,7 @@ CREATE TABLE [dbo].[controls__category](
                                              )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[controls__control]    Script Date: 27.03.2019 16:34:50 ******/
+/****** Object:  Table [dbo].[controls__control]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -155,7 +155,7 @@ CREATE TABLE [dbo].[controls__control](
                                             )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[controls__status]    Script Date: 27.03.2019 16:34:50 ******/
+/****** Object:  Table [dbo].[controls__status]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,7 +171,7 @@ CREATE TABLE [dbo].[controls__status](
                                            )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[environments__category]    Script Date: 27.03.2019 16:34:50 ******/
+/****** Object:  Table [dbo].[environments__category]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -187,7 +187,7 @@ CREATE TABLE [dbo].[environments__category](
                                                  )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[environments__environment]    Script Date: 27.03.2019 16:34:50 ******/
+/****** Object:  Table [dbo].[environments__environment]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -206,7 +206,7 @@ CREATE TABLE [dbo].[environments__environment](
                                                     )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[equipments__category]    Script Date: 27.03.2019 16:34:50 ******/
+/****** Object:  Table [dbo].[equipments__category]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -222,7 +222,7 @@ CREATE TABLE [dbo].[equipments__category](
                                                )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[equipments__equipment]    Script Date: 27.03.2019 16:34:50 ******/
+/****** Object:  Table [dbo].[equipments__equipment]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -243,7 +243,7 @@ CREATE TABLE [dbo].[equipments__equipment](
                                                 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[equipments__status]    Script Date: 27.03.2019 16:34:50 ******/
+/****** Object:  Table [dbo].[equipments__status]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -259,7 +259,7 @@ CREATE TABLE [dbo].[equipments__status](
                                              )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[rooms__category]    Script Date: 27.03.2019 16:34:51 ******/
+/****** Object:  Table [dbo].[rooms__category]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -275,7 +275,7 @@ CREATE TABLE [dbo].[rooms__category](
                                           )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[rooms__room]    Script Date: 27.03.2019 16:34:51 ******/
+/****** Object:  Table [dbo].[rooms__room]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -294,7 +294,7 @@ CREATE TABLE [dbo].[rooms__room](
                                       )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tickets__category]    Script Date: 27.03.2019 16:34:51 ******/
+/****** Object:  Table [dbo].[tickets__category]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -312,7 +312,7 @@ CREATE TABLE [dbo].[tickets__category](
                                             )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tickets__status]    Script Date: 27.03.2019 16:34:51 ******/
+/****** Object:  Table [dbo].[tickets__status]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -322,14 +322,14 @@ CREATE TABLE [dbo].[tickets__status](
                                       [title] [varchar](100) NOT NULL,
                                       [description] [text] NULL,
                                       [deletable] [smallint] NOT NULL,
-                                      [color_class] [varchar](50) NOT NULL,
+                                      [color_class] [varchar](50) NULL,
                                       CONSTRAINT [PK_tickets__status] PRIMARY KEY CLUSTERED
                                         (
                                          [id] ASC
                                           )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tickets__ticket]    Script Date: 27.03.2019 16:34:51 ******/
+/****** Object:  Table [dbo].[tickets__ticket]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -352,7 +352,7 @@ CREATE TABLE [dbo].[tickets__ticket](
                                           )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[users__role]    Script Date: 27.03.2019 16:34:51 ******/
+/****** Object:  Table [dbo].[users__role]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -360,14 +360,10 @@ GO
 CREATE TABLE [dbo].[users__role](
                                   [id] [int] IDENTITY(1,1) NOT NULL,
                                   [title] [varchar](255) NULL,
-                                  [description] [varchar](255) NULL,
-                                  CONSTRAINT [users__role_pk] PRIMARY KEY NONCLUSTERED
-                                    (
-                                     [id] ASC
-                                      )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                                  [description] [varchar](255) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[users__user]    Script Date: 27.03.2019 16:34:51 ******/
+/****** Object:  Table [dbo].[users__user]    Script Date: 01.04.2019 13:24:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -382,11 +378,268 @@ CREATE TABLE [dbo].[users__user](
                                   [phone] [varchar](255) NOT NULL,
                                   [address_id] [int] NULL,
                                   [deletable] [smallint] NOT NULL,
+                                  [profession] [varchar](100) NULL,
                                   CONSTRAINT [PK_user] PRIMARY KEY CLUSTERED
                                     (
                                      [id] ASC
                                       )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[address__address] ON
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (1, 51202, N'Drakova 1', N'Hradec Králové', N'Czech Republic')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (3, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (4, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (5, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (6, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (1006, 51200, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (1008, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2002, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2003, 51200, N'K Zahradě 12', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2004, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2005, 51200, N'K Zahradě 12', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2011, 51200, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2012, 51200, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2013, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2014, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2015, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2016, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2017, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2018, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2019, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2020, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2021, 512000, N'K Lopatě', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2022, 512000, N'K Lopatě', N'Hradec Královée', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2023, 512000, N'K Lopatě', N'Hradec Královée', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2024, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2025, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2026, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2027, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2028, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2029, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+INSERT [dbo].[address__address] ([id], [zip], [street], [city], [state]) VALUES (2030, 51200, N'K Zahradě 5', N'Hradec Králové', N'CR')
+GO
+SET IDENTITY_INSERT [dbo].[address__address] OFF
+GO
+SET IDENTITY_INSERT [dbo].[controls__category] ON
+GO
+INSERT [dbo].[controls__category] ([id], [title], [description], [deletable]) VALUES (1, N'Nekategorizováno', N'Kontrola není nijak kategorizovaná', 0)
+GO
+INSERT [dbo].[controls__category] ([id], [title], [description], [deletable]) VALUES (3, N'Povinná záruční kontrola', N'Kontrola podmíněná záručními podmínkami', 1)
+GO
+INSERT [dbo].[controls__category] ([id], [title], [description], [deletable]) VALUES (4, N'Preventivní kontrola', N'Preventivní kontrola (náhodná)', 1)
+GO
+SET IDENTITY_INSERT [dbo].[controls__category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[controls__control] ON
+GO
+INSERT [dbo].[controls__control] ([id], [title], [description], [date_performed], [date_planned], [user_to_perform_id], [equipment_id], [user_performed_id], [user_planned_id], [priority], [status_id], [category_id]) VALUES (1, N'Kontrola kotel pro zaruku', N'gfgdf', NULL, CAST(N'2019-04-18T00:00:00.000' AS DateTime), 3003, 5, NULL, NULL, NULL, 5, NULL)
+GO
+INSERT [dbo].[controls__control] ([id], [title], [description], [date_performed], [date_planned], [user_to_perform_id], [equipment_id], [user_performed_id], [user_planned_id], [priority], [status_id], [category_id]) VALUES (2, N'Kontrola integrity', N'kk', NULL, CAST(N'2019-03-15T00:00:00.000' AS DateTime), 1, NULL, NULL, NULL, NULL, 2, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[controls__control] OFF
+GO
+SET IDENTITY_INSERT [dbo].[controls__status] ON
+GO
+INSERT [dbo].[controls__status] ([id], [title], [description], [deletable]) VALUES (1, N'Nekategorizováno', N'Kontrola není nijak kategorizovaná', 0)
+GO
+INSERT [dbo].[controls__status] ([id], [title], [description], [deletable]) VALUES (2, N'Naplánováno', N'Kontrola je naplánována', 0)
+GO
+INSERT [dbo].[controls__status] ([id], [title], [description], [deletable]) VALUES (3, N'Právě prováděno', N'Kontrola se právě provádí (horizont jednoho až tří dnů)', 1)
+GO
+INSERT [dbo].[controls__status] ([id], [title], [description], [deletable]) VALUES (4, N'Provedeno', N'Kontrola byla provedena', 1)
+GO
+INSERT [dbo].[controls__status] ([id], [title], [description], [deletable]) VALUES (5, N'Archivováno', N'Záznam o kontrole byl archivován', 0)
+GO
+SET IDENTITY_INSERT [dbo].[controls__status] OFF
+GO
+SET IDENTITY_INSERT [dbo].[environments__category] ON
+GO
+INSERT [dbo].[environments__category] ([id], [title], [description], [deletable]) VALUES (1, N'Nekategorizováno', N'Prostředí není nijak kategorizovano', 0)
+GO
+INSERT [dbo].[environments__category] ([id], [title], [description], [deletable]) VALUES (2, N'Budova', N'Klasická budova;jj;;', 1)
+GO
+INSERT [dbo].[environments__category] ([id], [title], [description], [deletable]) VALUES (3, N'Exteriér', N'Exteriér (pozemek)', 1)
+GO
+INSERT [dbo].[environments__category] ([id], [title], [description], [deletable]) VALUES (4, N'Sportoviště', N'Prostředí sportoviště', 1)
+GO
+SET IDENTITY_INSERT [dbo].[environments__category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[environments__environment] ON
+GO
+INSERT [dbo].[environments__environment] ([id], [name], [description], [bussiness_id], [address_id], [category_id], [code]) VALUES (2, N'Skladiště 1234', N'12456', NULL, 2023, 2, N'1C')
+GO
+INSERT [dbo].[environments__environment] ([id], [name], [description], [bussiness_id], [address_id], [category_id], [code]) VALUES (4, N'Výrobní hala 2', N'gfds', NULL, 1008, 2, N'gfds')
+GO
+INSERT [dbo].[environments__environment] ([id], [name], [description], [bussiness_id], [address_id], [category_id], [code]) VALUES (1009, N'Filozofická fakulta', N'Pro filosofy', NULL, 2030, 2, N'123')
+GO
+SET IDENTITY_INSERT [dbo].[environments__environment] OFF
+GO
+SET IDENTITY_INSERT [dbo].[equipments__category] ON
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (3, N'Nekategorizováno', N'Vybavení není nijak kategorizovano', 0)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (4, N'Elektronika', N'Elektronické vybavení', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (5, N'Nábytek', N'Obecně všechno (židle, stoly)', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (6, N'Dekoracee', N'Dekorace', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (7, N'Osvětlení', N'Světla na chodbách a jiné', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (8, N'Krytiny', N'Koberce, parkety atd.', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (9, N'Rozvody', N'Technické věci kolem rozvodů vody, elektroniky a plynu', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (10, N'Vodovodní zařízení', N'Technické věci kolem distribuce vody', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (11, N'Sanitární zařízení', N'WC, umyvadla ...', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (12, N'Topná zařízení', N'Kotle, rozvody plynu...', 1)
+GO
+INSERT [dbo].[equipments__category] ([id], [title], [description], [deletable]) VALUES (13, N'Okna a dveře', N'Okna a dveře', 1)
+GO
+SET IDENTITY_INSERT [dbo].[equipments__category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[equipments__equipment] ON
+GO
+INSERT [dbo].[equipments__equipment] ([id], [title], [description], [purchased], [warranty], [status_id], [room_id], [category_id], [code]) VALUES (5, N'Kotel', N'fdfd', CAST(N'2019-03-13T00:00:00.000' AS DateTime), CAST(N'2019-03-27T00:00:00.000' AS DateTime), 1, 5, 3, N'fdf')
+GO
+INSERT [dbo].[equipments__equipment] ([id], [title], [description], [purchased], [warranty], [status_id], [room_id], [category_id], [code]) VALUES (6, N'PC-2', N'Pc nainstalovany windows', CAST(N'2019-03-21T00:00:00.000' AS DateTime), CAST(N'2019-03-23T00:00:00.000' AS DateTime), 2, 1005, 4, N'123')
+GO
+SET IDENTITY_INSERT [dbo].[equipments__equipment] OFF
+GO
+SET IDENTITY_INSERT [dbo].[equipments__status] ON
+GO
+INSERT [dbo].[equipments__status] ([id], [title], [description], [deletable]) VALUES (1, N'Nekategorizováno', N'Stav není nijak kategorizovan', 0)
+GO
+INSERT [dbo].[equipments__status] ([id], [title], [description], [deletable]) VALUES (2, N'Funkční', N'Zařízení je plně funkční', 0)
+GO
+INSERT [dbo].[equipments__status] ([id], [title], [description], [deletable]) VALUES (3, N'Rozbité (problém se řeší)', N'Zařízení je rozbité a jeho napravení je aktuálně přiděleno nějakému opraváři', 0)
+GO
+INSERT [dbo].[equipments__status] ([id], [title], [description], [deletable]) VALUES (4, N'Rozbité (problém se zatím neřeší)', N'Zařízení je rozbité, ale zatím se k tomu nikdo nedostal', 0)
+GO
+INSERT [dbo].[equipments__status] ([id], [title], [description], [deletable]) VALUES (5, N'Uskladněno', N'Vybavení se nepoužívá a je uskladněno', 1)
+GO
+SET IDENTITY_INSERT [dbo].[equipments__status] OFF
+GO
+SET IDENTITY_INSERT [dbo].[rooms__category] ON
+GO
+INSERT [dbo].[rooms__category] ([id], [title], [description], [deletable]) VALUES (1, N'Nekategorizováno', N'Místnost není nijak kategorizovana', 0)
+GO
+INSERT [dbo].[rooms__category] ([id], [title], [description], [deletable]) VALUES (2, N'Učebna', N'Místnost sloužící k výuce', 1)
+GO
+INSERT [dbo].[rooms__category] ([id], [title], [description], [deletable]) VALUES (3, N'Technické zázemí', N'Místnost pro technické zázemí', 1)
+GO
+INSERT [dbo].[rooms__category] ([id], [title], [description], [deletable]) VALUES (4, N'Kancelář', N'Místnost pro administrativní účely', 1)
+GO
+INSERT [dbo].[rooms__category] ([id], [title], [description], [deletable]) VALUES (5, N'Chodba', N'Chodba propojující další místnosti', 1)
+GO
+INSERT [dbo].[rooms__category] ([id], [title], [description], [deletable]) VALUES (6, N'Společné prostory', N'Místnost sloužící pro více lidí', 1)
+GO
+SET IDENTITY_INSERT [dbo].[rooms__category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[rooms__room] ON
+GO
+INSERT [dbo].[rooms__room] ([id], [name], [purpouse], [code], [floor], [environment_id], [category_id]) VALUES (4, N'J2', N'kk', N'k', 1, 4, 2)
+GO
+INSERT [dbo].[rooms__room] ([id], [name], [purpouse], [code], [floor], [environment_id], [category_id]) VALUES (5, N'J3', N'pp', N'oo', 1, 4, 2)
+GO
+INSERT [dbo].[rooms__room] ([id], [name], [purpouse], [code], [floor], [environment_id], [category_id]) VALUES (1005, N'Interiér', N'Interier skladiště', N'fdsa', 1, 2, 2)
+GO
+SET IDENTITY_INSERT [dbo].[rooms__room] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tickets__category] ON
+GO
+INSERT [dbo].[tickets__category] ([id], [title], [description], [color_class], [deletable], [impact]) VALUES (2, N'Nekategorizováno', N'Problém není nijak kategorizovan', N'info', 0, 0)
+GO
+INSERT [dbo].[tickets__category] ([id], [title], [description], [color_class], [deletable], [impact]) VALUES (3, N'Může počkat', N'O problému se ví, ale není třeba ho řešit v krátkodobém horizontu', N'success', 1, 10)
+GO
+INSERT [dbo].[tickets__category] ([id], [title], [description], [color_class], [deletable], [impact]) VALUES (4, N'Je třeba řešitt', N'O problému se ví a je třeba ho řešit v krátkodobém horizontu', N'warning', 1, 20)
+GO
+INSERT [dbo].[tickets__category] ([id], [title], [description], [color_class], [deletable], [impact]) VALUES (5, N'Naléhavé', N'Problém je třeba vyřešit ihned!', N'danger', 1, 30)
+GO
+SET IDENTITY_INSERT [dbo].[tickets__category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tickets__status] ON
+GO
+INSERT [dbo].[tickets__status] ([id], [title], [description], [deletable], [color_class]) VALUES (1, N'Řeší se', N'Problém je aktuálně řešen', 0, N'info')
+GO
+INSERT [dbo].[tickets__status] ([id], [title], [description], [deletable], [color_class]) VALUES (2, N'Řešení naplánováno a přiřazeno', N'Řešení problému je přiřazeno pracovníkovi', 0, N'primary')
+GO
+INSERT [dbo].[tickets__status] ([id], [title], [description], [deletable], [color_class]) VALUES (3, N'Pouze zaznamenáno', N'O problému se ví, ale nikdo k němu nebyl přidělen', 0, N'warning')
+GO
+INSERT [dbo].[tickets__status] ([id], [title], [description], [deletable], [color_class]) VALUES (4, N'Vyřešeno', N'Problém byl vyřešen', 0, N'success')
+GO
+INSERT [dbo].[tickets__status] ([id], [title], [description], [deletable], [color_class]) VALUES (5, N'Archivováno', N'Záznam je archivován', 0, N'primary')
+GO
+SET IDENTITY_INSERT [dbo].[tickets__status] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tickets__ticket] ON
+GO
+INSERT [dbo].[tickets__ticket] ([id], [title], [description], [equipment_id], [author_id], [solver_id], [assigned_id], [status_id], [category_id], [created], [deadline]) VALUES (5, N'Nefunguje kohoutek', N'ooo', NULL, NULL, NULL, NULL, NULL, NULL, CAST(N'2019-03-26T14:45:42.700' AS DateTime), NULL)
+GO
+SET IDENTITY_INSERT [dbo].[tickets__ticket] OFF
+GO
+SET IDENTITY_INSERT [dbo].[users__role] ON
+GO
+INSERT [dbo].[users__role] ([id], [title], [description]) VALUES (1, N'admin', N'He has all the privililages and he can enter every section of the app')
+GO
+SET IDENTITY_INSERT [dbo].[users__role] OFF
+GO
+SET IDENTITY_INSERT [dbo].[users__user] ON
+GO
+INSERT [dbo].[users__user] ([id], [name], [surname], [password], [email], [role_id], [phone], [address_id], [deletable], [profession]) VALUES (1, N'Adam', N'Ouhrabka', N'930318', N'adam.ouhrabka@gmail.com', 1, N'776485123', NULL, 0, NULL)
+GO
+INSERT [dbo].[users__user] ([id], [name], [surname], [password], [email], [role_id], [phone], [address_id], [deletable], [profession]) VALUES (2, N'Tomáš', N'Tremp', N'930318', N'tomas.tremp@gmail.com', 1, N'775468154', NULL, 0, N'Správce systému')
+GO
+INSERT [dbo].[users__user] ([id], [name], [surname], [password], [email], [role_id], [phone], [address_id], [deletable], [profession]) VALUES (3002, N'Alois ', N'Vondraczek', N'123', N'alois@email.cz', 1, N'123456789', NULL, 1, NULL)
+GO
+INSERT [dbo].[users__user] ([id], [name], [surname], [password], [email], [role_id], [phone], [address_id], [deletable], [profession]) VALUES (3003, N'Patrik', N'Vanický', N'123', N'patrik@gmail.com', 1, N'4756423', NULL, 1, NULL)
+GO
+INSERT [dbo].[users__user] ([id], [name], [surname], [password], [email], [role_id], [phone], [address_id], [deletable], [profession]) VALUES (3004, N'Romanrrr', N'Patel', N'123', N'e@e.com', 1, N'4756423', NULL, 1, NULL)
+GO
+INSERT [dbo].[users__user] ([id], [name], [surname], [password], [email], [role_id], [phone], [address_id], [deletable], [profession]) VALUES (3005, N'Pepa', N'Test', N'123', N'pepa@pepa.com', 1, N'123456789', 2005, 1, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[users__user] OFF
+GO
+/****** Object:  Index [users__role_pk]    Script Date: 01.04.2019 13:24:21 ******/
+ALTER TABLE [dbo].[users__role] ADD  CONSTRAINT [users__role_pk] PRIMARY KEY NONCLUSTERED
+  (
+   [id] ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[controls__category] ADD  CONSTRAINT [DF_controls__category_deletable]  DEFAULT ((1)) FOR [deletable]
 GO
