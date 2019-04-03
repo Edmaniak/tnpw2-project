@@ -10,6 +10,7 @@ using Environment = DataAccess.Model.Environment;
 
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class ControlStatusController : BaseController
     {
         private ControlStatusDao _controlStatusDao;
@@ -19,29 +20,31 @@ namespace EAM_MINI.Controllers
             _controlStatusDao = new ControlStatusDao();
            
         }
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Add()
         {
             return View();
         }
-
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Delete(int id)
         {
             _controlStatusDao.Delete(id);
             return Refresh();
         } 
-
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Index()
         {
             ViewBag.statuses = _controlStatusDao.GetAll().ToList();
             return View();
         }
-        
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Detail(int id)
         {
             ControlStatus controlStatus = _controlStatusDao.GetById(id);
             return View(controlStatus);
         }
         
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Edit(ControlStatus category)
         {
             if (ModelState.IsValid)
@@ -60,6 +63,7 @@ namespace EAM_MINI.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Create(ControlStatus status)
         {
             if (ModelState.IsValid)

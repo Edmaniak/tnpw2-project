@@ -7,6 +7,7 @@ using DataAccess.Model;
 
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class EquipmentStatusController : Controller
     {
         private List<EquipmentStatus> _statuses;
@@ -18,12 +19,14 @@ namespace EAM_MINI.Controllers
             _statuses = _equipmentStatusDao.GetAll().ToList();
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Index()
         {
             ViewBag.statuses = _statuses;
             return View();
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Detail(int id)
         {
             EquipmentStatus equipmentStatus = _equipmentStatusDao.GetById(id);
@@ -31,6 +34,7 @@ namespace EAM_MINI.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Edit(EquipmentStatus status)
         {
             if (ModelState.IsValid)
@@ -48,7 +52,7 @@ namespace EAM_MINI.Controllers
             return View("Index");
         }
 
-        
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Delete(int id)
         {
             _equipmentStatusDao.Delete(id);
@@ -56,6 +60,7 @@ namespace EAM_MINI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Create(EquipmentStatus status)
         {
             if (ModelState.IsValid)

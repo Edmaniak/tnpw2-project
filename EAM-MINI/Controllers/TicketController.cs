@@ -10,6 +10,7 @@ using Environment = DataAccess.Model.Environment;
 
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class TicketController : BaseController
     {
         private TicketDao _ticketDao;

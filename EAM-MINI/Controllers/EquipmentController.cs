@@ -10,6 +10,7 @@ using Environment = DataAccess.Model.Environment;
 
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class EquipmentController : BaseController
     {
         private EnvironmentDao _environmentDao;
@@ -38,18 +39,21 @@ namespace EAM_MINI.Controllers
             ViewBag.rooms = _roomDao.GetAll().ToList();
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Add()
         {
             InitViewBag();
             return View();
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Delete(int id)
         {
             _equipmentDao.Delete(_equipmentDao.GetById(id));
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Detail(int id)
         {
             Equipment equipment = _equipmentDao.GetById(id);
@@ -59,12 +63,14 @@ namespace EAM_MINI.Controllers
             return View(equipment);
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Index()
         {
             List<Equipment> equipments = _equipmentDao.GetAll().ToList();
             return View(equipments);
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Create(Equipment equipment, int roomId, int statusId, int categoryId)
         {
             Room room = _roomDao.GetById(roomId);
@@ -82,18 +88,21 @@ namespace EAM_MINI.Controllers
             return View("Add", equipment);
         }
           
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Statuses()
         {
             List<EquipmentStatus> statuses = _statuses;
             return View(statuses);
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Rooms(int environmentId)
         {
             List<Room> rooms = _environmentDao.GetById(environmentId).Rooms.ToList();
             return PartialView("Rooms", rooms);
         }
         
+        [Authorize(Roles = "manager, admin")]
         public ActionResult SearchRooms(string phrase)
         {
             List<Room> rooms= new List<Room>();

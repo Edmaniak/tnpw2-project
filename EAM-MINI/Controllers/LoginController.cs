@@ -3,6 +3,7 @@ using System.Web.Security;
 
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class LoginController : BaseController
     {
         public ActionResult Index()

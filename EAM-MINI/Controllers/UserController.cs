@@ -9,6 +9,7 @@ using DataAccess.Model;
 
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class UserController : BaseController
     {
         private RoleDao _roleDao;
@@ -21,25 +22,29 @@ namespace EAM_MINI.Controllers
             _userDao = new UserDao();
             _roles = _roleDao.GetAll().ToList();
         }
-
+        
+        [Authorize(Roles = "admin")]
         public ActionResult Add()
         {
             ViewBag.roles = _roles;
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             List<User> users = _userDao.GetAll().ToList(); 
             return View(users);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
             _userDao.Delete(_userDao.GetById(id));
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Detail(int id)
         {
             User user = _userDao.GetById(id);
@@ -48,6 +53,7 @@ namespace EAM_MINI.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(User user, string roleId)
         {
             if (ModelState.IsValid)
@@ -73,6 +79,7 @@ namespace EAM_MINI.Controllers
         } 
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult Create(User user, string roleId)
         {
             if (ModelState.IsValid)

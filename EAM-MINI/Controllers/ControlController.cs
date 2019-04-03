@@ -9,6 +9,7 @@ using NHibernate.Mapping;
 
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class ControlController : BaseController
     {
         private ControlDao _controlDao;
@@ -34,7 +35,8 @@ namespace EAM_MINI.Controllers
             ViewBag.statuses = _controlStatusDao.GetAll();
             ViewBag.categories = _controlCategoryDao.GetAll();
         }
-
+        
+        
         public ActionResult Add()
         {
             InitViewBag();

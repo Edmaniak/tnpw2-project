@@ -10,6 +10,7 @@ using Environment = DataAccess.Model.Environment;
 
 namespace EAM_MINI.Controllers
 {
+    [Authorize]
     public class TicketCategoryController : BaseController
     {
         private TicketCategoryDao _ticketCategoryDao;
@@ -21,11 +22,14 @@ namespace EAM_MINI.Controllers
             _categories = _ticketCategoryDao.GetAll().ToList();
            
         }
+        
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Add()
         {
             return View();
         }
         
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Detail(int id)
         {
             TicketCategory equipmentCategory = _ticketCategoryDao.GetById(id);
@@ -33,6 +37,7 @@ namespace EAM_MINI.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Edit(TicketCategory category)
         {
             if (ModelState.IsValid)
@@ -50,13 +55,14 @@ namespace EAM_MINI.Controllers
             return View("Index");
         }
 
-      
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Delete(int id)
         {
             _ticketCategoryDao.Delete(id);
             return Refresh();
         }
 
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Index()
         {
             ViewBag.categories = _ticketCategoryDao.GetAll().ToList();
@@ -64,6 +70,7 @@ namespace EAM_MINI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "manager, admin")]
         public ActionResult Create(TicketCategory category)
         {
             if (ModelState.IsValid)
