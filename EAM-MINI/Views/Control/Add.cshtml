@@ -39,14 +39,15 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Deadline:</label>
-                        @Html.TextBoxFor(x => x.DatePlanned, "{0:dd. MM. yyyy}", new {@class = "form-control", @type = "date"})
+                        @Html.TextBoxFor(x => x.DatePlanned, "{0:d}", new {@class = "form-control date-picker"})
                         @Html.ValidationMessageFor(x => x.DatePlanned)
                     </div>
                     <div class="form-group">
                         <label for="email">Delegovat uživateli:</label>
-                        @Html.DropDownList("userId", new SelectList(ViewBag.users, "Id", "FullName"), new {@class = "form-control searchSelect"})
+                        @Html.DropDownList("userId", new SelectList(ViewBag.users, "Id", "UserInfo"), new {@class = "form-control searchSelect"})
                         @Html.ValidationMessageFor(x => x.UserToPerform)
                     </div>
+                    @Html.HiddenFor(x => x.Id)
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Vytvořit</button>
                     </div>

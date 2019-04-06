@@ -16,9 +16,8 @@
         {
             <tr>
                 <td>
-                    @ViewContext.Controller.ViewBag.selectedRoom
                     <input
-                        @if (ViewContext.Controller.ViewBag.selectedRoom == r.Id)
+                        @if (ViewBag.roomSelected == r.Id)
                         {<text>checked="checked"</text>}
                         name="equipmentId" type="radio" name="roomRadio" class="room-radio" value="@r.Id"/>
                 </td>
@@ -38,12 +37,13 @@
 
         </tbody>
     </table>
-    @Html.Hidden("roomId")
+    <input type="hidden" name="roomIdd" id="roomIdd"/>
 </div>
 
 <script>
+    $('#roomIdd').val($('.room-radio:checked').val());
     $('.room-radio').click(function() {
         console.log("dsa");
-        $('#roomId').val($(this).val());
-    })
+        $('#roomIdd').val($(this).val());
+    });
 </script>

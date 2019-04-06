@@ -35,12 +35,35 @@ namespace EAM_MINI.Controllers
             ViewBag.statuses = _controlStatusDao.GetAll();
             ViewBag.categories = _controlCategoryDao.GetAll();
         }
-        
-        
+
+
         public ActionResult Add()
         {
             InitViewBag();
             return View();
+        }
+
+        public ActionResult Edit(Control control, int categoryId, int statusId, int? equipmentId, int userId)
+        {
+            if (ModelState.IsValid)
+            {
+                Control con = _controlDao.GetById(control.Id);
+                con.Title = control.Title;
+                con.Status = control.Status;
+                con.Category = _controlCategoryDao.GetById(categoryId);
+                con.Equipment = equipmentId == null ? null : _equipmentDao.GetById(equipmentId.Value);
+                con.Description = control.Description;
+                con.DatePlanned = control.DatePlanned;
+                con.UserToPerform = _userDao.GetById(userId);
+                con.Status = _controlStatusDao.GetById(statusId);
+
+                _controlDao.Update(con);
+                InitViewBag();
+                return RedirectToAction("Index", "Control");
+            }
+            InitViewBag();
+            Control c = _controlDao.GetById(control.Id);
+            return View("Detail", c);
         }
 
         public ActionResult Detail(int id)

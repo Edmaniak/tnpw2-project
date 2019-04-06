@@ -59,6 +59,7 @@ namespace EAM_MINI.Controllers
         [Authorize(Roles = "manager, admin")]
         public ActionResult Edit(Environment environment, int categoryId)
         {
+           
             if (ModelState.IsValid)
             {
                 Environment env = _environmentDao.GetById(environment.Id);
@@ -72,8 +73,10 @@ namespace EAM_MINI.Controllers
                 _environmentDao.Update(env);
                 return RedirectToAction("Index", "Environment");
             }
-
-            return View("Add", environment);
+            
+            InitViewBag();
+            Environment e = _environmentDao.GetById(environment.Id);
+            return View("Detail",e);
         }
 
         [HttpPost]

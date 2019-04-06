@@ -32,7 +32,7 @@ namespace EAM_MINI.Controllers
             EquipmentStatus equipmentStatus = _equipmentStatusDao.GetById(id);
             return View(equipmentStatus);
         }
-        
+
         [HttpPost]
         [Authorize(Roles = "manager, admin")]
         public ActionResult Edit(EquipmentStatus status)
@@ -49,7 +49,8 @@ namespace EAM_MINI.Controllers
             }
 
             ViewBag.categories = _statuses;
-            return View("Index");
+            EquipmentStatus es = _equipmentStatusDao.GetById(status.Id);
+            return View("Index", es);
         }
 
         [Authorize(Roles = "manager, admin")]

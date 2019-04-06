@@ -56,7 +56,8 @@ namespace EAM_MINI.Controllers
             }
 
             ViewBag.categories = _categories;
-            return View("Index");
+            EnvironmentCategory ec = _environmentCategoryDao.GetById(category.Id);
+            return View("Detail", ec);
         }
 
         [Authorize(Roles = "manager, admin")]

@@ -24,17 +24,19 @@ namespace DataAccess.Model
         public virtual string Password { get; set; }
 
         public virtual string Phone { get; set; }
-        
+
         public virtual string Profession { get; set; }
 
         public virtual Address Address { get; set; }
 
         public virtual Role Role { get; set; }
-        
+
         public virtual bool Deletable { get; set; }
 
         public virtual string FullName => Name + " " + Surname;
-        
+
+        public virtual string UserInfo => FullName + " " + "(" + Profession + ")";
+
         public User()
         {
             Deletable = true;

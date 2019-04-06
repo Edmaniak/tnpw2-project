@@ -11,12 +11,11 @@ namespace DataAccess.Model
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
         
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+
         public virtual DateTime? DatePerformed { get; set; }
         
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd. mm. yyyy}", ApplyFormatInEditMode = true)]
         public virtual DateTime? DatePlanned { get; set; }
         public virtual User UserToPerform{ get; set; }
         public virtual User UserPerformed{ get; set; }

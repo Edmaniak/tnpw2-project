@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -66,12 +64,14 @@ namespace EAM_MINI.Controllers
                 roo.Category = _roomCategoryDao.GetById(categoryId);
                 roo.Purpouse = room.Purpouse;
                 roo.Environment = _environmentDao.GetById(environmentId);
-                
+
                 _roomDao.Update(roo);
-                return RedirectToAction("Index", "Environment");
+                return RedirectToAction("Index", "Room");
             }
 
-            return View("Add", room);
+            InitViewBag();
+            Room r = _roomDao.GetById(room.Id);
+            return View("Detail", room);
         }
 
         [Authorize(Roles = "manager, admin")]

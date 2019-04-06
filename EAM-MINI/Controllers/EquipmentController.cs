@@ -63,6 +63,31 @@ namespace EAM_MINI.Controllers
             return View(equipment);
         }
 
+        public ActionResult Edit(Equipment equipment, int roomIdd, int statusId, int categoryId)
+        {
+            if (ModelState.IsValid)
+            {
+                Equipment eq = _equipmentDao.GetById(equipment.Id);
+                eq.Code = equipment.Code;
+                eq.Room = _roomDao.GetById(roomIdd);
+                eq.Title = equipment.Title;
+                eq.Status = _equipmentStatusDao.GetById(statusId);
+                eq.Category = _equipmentCategoryDao.GetById(categoryId);
+                eq.Warranty = equipment.Warranty;
+                eq.Purchased = equipment.Purchased;
+                eq.Description = equipment.Description;
+
+                _equipmentDao.Update(eq);
+                
+                InitViewBag();
+                return RedirectToAction("Index", "Equipment");
+            }
+
+            Equipment e = _equipmentDao.GetById(equipment.Id);
+            InitViewBag();
+            return View("Detail", e);
+        }
+
         [Authorize(Roles = "manager, admin")]
         public ActionResult Index()
         {
@@ -71,10 +96,9 @@ namespace EAM_MINI.Controllers
         }
 
         [Authorize(Roles = "manager, admin")]
-        public ActionResult Create(Equipment equipment, int roomId, int statusId, int categoryId)
+        public ActionResult Create(Equipment equipment, int roomIdd, int statusId, int categoryId)
         {
-            Room room = _roomDao.GetById(roomId);
-            equipment.Room = room;
+            equipment.Room = _roomDao.GetById(roomIdd);
             equipment.Status = _equipmentStatusDao.GetById(statusId);
             equipment.Category = _equipmentCategoryDao.GetById(categoryId);
 
@@ -87,7 +111,7 @@ namespace EAM_MINI.Controllers
             InitViewBag();
             return View("Add", equipment);
         }
-          
+
         [Authorize(Roles = "manager, admin")]
         public ActionResult Statuses()
         {
@@ -96,16 +120,18 @@ namespace EAM_MINI.Controllers
         }
 
         [Authorize(Roles = "manager, admin")]
-        public ActionResult Rooms(int environmentId)
+        public ActionResult Rooms(int environmentId, int? selectedRoom)
         {
             List<Room> rooms = _environmentDao.GetById(environmentId).Rooms.ToList();
+            if (selectedRoom.HasValue)
+                ViewBag.roomSelected = selectedRoom;
             return PartialView("Rooms", rooms);
         }
-        
+
         [Authorize(Roles = "manager, admin")]
         public ActionResult SearchRooms(string phrase)
         {
-            List<Room> rooms= new List<Room>();
+            List<Room> rooms = new List<Room>();
 
             if (phrase.Length > 0)
             {

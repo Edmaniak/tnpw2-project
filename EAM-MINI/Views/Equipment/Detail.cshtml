@@ -1,9 +1,9 @@
 @using DataAccess.Model
 @model Equipment
 @{
-    ViewBag.Title = "Přidat vybavení";
+    ViewBag.Title = Model.Title;
 }
-@using (Html.BeginForm("Create", "Equipment", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Equipment", FormMethod.Post))
 {
     <div class="row">
         <div class="col-md-4">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Kategorie: (<a href="@Url.Action("Index", "EquipmentCategory")">Přidat</a>)</label>
-                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title" , Model.Category.Id), new {@class = "form-control"})
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title", Model.Category.Id), new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Category)
                     </div>
                     <div class="form-group">
@@ -47,6 +47,8 @@
                         @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Warranty)
                     </div>
+                    @Html.HiddenFor(x => x.Id)
+                    <input type="hidden" name="roomId" value="@Model.Room.Id" id="Room__Id"/>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Uložit</button>
                     </div>
@@ -92,6 +94,7 @@
     <script>
         function fetchRooms() {
             var val = $('#environmentId').val();
+            var selectedRoom = $('#Room__Id').val();
             $.ajax({
                 url: "@Url.Action("Rooms", "Equipment")",
                 type: "POST",
@@ -102,10 +105,13 @@
                 error: function(err) {
                     console.log(err);
                 },
-                data: { environmentId: val }
+                data: {
+                     environmentId: val,
+                     selectedRoom: selectedRoom
+                }
             });
         }
-        
+
         function searchRooms() {
             var phrase = $('#searchRooms').val();
             $.ajax({
@@ -128,7 +134,7 @@
             function() {
                 fetchRooms();
             });
-        
+
         $('#searchRooms').keyup(function() {
             searchRooms();
         });

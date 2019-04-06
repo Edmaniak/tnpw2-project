@@ -47,6 +47,8 @@
                         @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Warranty)
                     </div>
+                    @Html.HiddenFor(x => x.Id)
+                    @Html.HiddenFor(x => x.Room.Id)
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Vytvořit</button>
                     </div>
@@ -89,9 +91,11 @@
             </div>
         </div>
     </div>
+}
     <script>
         function fetchRooms() {
             var val = $('#environmentId').val();
+            var selectedRoom = $('#Room_Id').val();
             $.ajax({
                 url: "@Url.Action("Rooms", "Equipment")",
                 type: "POST",
@@ -102,7 +106,10 @@
                 error: function(err) {
                     console.log(err);
                 },
-                data: { environmentId: val }
+                data: { 
+                    environmentId: val,
+                    selectedRoom: selectedRoom
+                }
             });
         }
         
@@ -135,4 +142,3 @@
 
 
     </script>
-}

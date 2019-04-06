@@ -56,7 +56,8 @@ namespace EAM_MINI.Controllers
             }
 
             ViewBag.categories = _categories;
-            return View("Index");
+            RoomCategory rc = _roomCategoryDao.GetById(category.Id);
+            return View("Detail", rc);
         }
 
         [HttpPost]
