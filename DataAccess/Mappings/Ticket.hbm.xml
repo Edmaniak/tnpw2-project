@@ -8,6 +8,7 @@
         <property name="Description" column="description"/>
         <property name="Created" column="created"/>
         <property name="Deadline" column="deadline"/>
+        <many-to-one name="Equipment" class="Equipment" column="equipment_id"/>
         <many-to-one name="Author" class="User" column="author_id" />
         <many-to-one name="Solver" class="User" column="solver_id" />
         <many-to-one name="Assigned" class="User" column="assigned_id" />

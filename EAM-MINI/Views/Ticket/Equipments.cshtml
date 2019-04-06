@@ -4,6 +4,7 @@
     <table class="table table-bordered equipmentsTable">
         <thead>
         <tr>
+            <th></th>
             <th>Id</th>
             <th>Označení</th>
             <th>Lokace</th>
@@ -14,13 +15,13 @@
         @foreach (Equipment e in Model)
         {
             <tr>
-                <td><input name="equipmentId" type="radio" value="@e.Id"/> @e.Id (@e.Code)</td>
+                <td><input name="equipmentId" type="radio" value="@e.Id"/></td>
+                <td> @e.Id (@e.Code)</td>
                 <td>@e.Title</td>
                 <td>@e.Room.Name (@e.Room.Environment.Name)</td>
                 <td>@e.Status.Title</td>
             </tr>
         }
-
         </tbody>
     </table>
 </div>

@@ -1843,6 +1843,7 @@
         <Content Include="Views\TicketStatus\Index.cshtml" />
         <Content Include="Views\TicketStatus\Listing.cshtml" />
         <Content Include="Views\Ticket\Add.cshtml" />
+        <Content Include="Views\Ticket\Archive.cshtml" />
         <Content Include="Views\Ticket\Detail.cshtml" />
         <Content Include="Views\Ticket\Equipments.cshtml" />
         <Content Include="Views\Ticket\Index.cshtml" />

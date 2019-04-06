@@ -1,4 +1,5 @@
 using System;
+using DataAccess.Dao;
 using DataAccess.Interface;
 
 namespace DataAccess.Model
@@ -8,6 +9,8 @@ namespace DataAccess.Model
         public virtual int Id { get; set; }
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
+        public virtual Equipment Equipment { get; set; }
+        
         public virtual User Author { get; set; }
         public virtual User Solver { get; set; }
         public virtual User Assigned { get; set; }

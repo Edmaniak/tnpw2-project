@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using DataAccess.Model;
 using NHibernate.Criterion;
 
@@ -5,10 +7,6 @@ namespace DataAccess.Dao
 {
     public class UserDao : DaoBase<User>
     {
-        public UserDao() : base()
-        {
-        }
-
         public User GetByEmailAndPassword(string email, string password)
         {
             return session.CreateCriteria<User>()
@@ -22,6 +20,35 @@ namespace DataAccess.Dao
             return session.CreateCriteria<User>()
                 .Add(Restrictions.Eq("Email", email))
                 .UniqueResult<User>();
+        }
+
+        public IList<User> GetAdmins()
+        {
+            return session.Query<User>().Where(c => c.Role.Id == RoleDao.Constants.ADMIN_ID).ToList();
+        }
+
+        public IList<User> GetMaintainers()
+        {
+            return session.Query<User>().Where(c => c.Role.Id == RoleDao.Constants.MAINTAINER_ID).ToList();
+        }
+
+        public IList<User> GetMangers()
+        {
+            return session.Query<User>().Where(c => c.Role.Id == RoleDao.Constants.MANAGER_ID).ToList();
+        }
+
+        public IList<User> GetMangersAndMaintainers()
+        {
+            return session.Query<User>().Where(c =>
+                c.Role.Id == RoleDao.Constants.MANAGER_ID 
+                || c.Role.Id == RoleDao.Constants.MANAGER_ID
+                || c.Role.Id == RoleDao.Constants.ADMIN_ID).ToList();
+        }
+
+
+        public IList<User> GetEmployees()
+        {
+            return session.Query<User>().Where(c => c.Role.Id == RoleDao.Constants.EMPLOYEE_ID).ToList();
         }
     }
 }
