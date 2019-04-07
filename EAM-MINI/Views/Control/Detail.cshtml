@@ -19,15 +19,6 @@
                         @Html.ValidationMessageFor(x => x.Title)
                     </div>
                     <div class="form-group">
-                        <label for="password">Vybavení:</label>
-                        @{
-                            var list = new SelectList(ViewBag.equipments, "Id", "BaseInfo", Model.Equipment.Id).ToList();
-                            list.Insert(0, new SelectListItem { Value = "", Text = "Žádný"});
-                        }
-                        @Html.DropDownList("equipmentId", list, new {@class = "form-control searchSelect"})
-                        @Html.ValidationMessageFor(x => x.Equipment)
-                    </div>
-                    <div class="form-group">
                         <label for="name">Popis a účel:</label>
                         @Html.TextAreaFor(x => x.Description, new {@class = "form-control "})
                         @Html.ValidationMessageFor(x => x.Description)
@@ -53,11 +44,144 @@
                         @Html.ValidationMessageFor(x => x.UserToPerform)
                     </div>
                     @Html.HiddenFor(x => x.Id)
+                    <input type="hidden" value="@Model.Equipment.Id" id="equipmentIdFilled">
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Uložit</button>
                     </div>
                 </div>
             </div>
         </div>
+            <div class="col-8">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">Kde se problém nachází</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Prostředí:</label>
+                                @Html.DropDownList(
+                                    "environmentId", 
+                                    new SelectList(ViewBag.environments, "Id", "Name", Model.Equipment != null ? Model.Equipment.Room.Environment.Id : int.MinValue ), 
+                                    new {@class = "form-control", id = "environmentId"})
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Místnost:</label>
+                                <input type="hidden" value="@if (Model.Equipment != null){@Model.Equipment.Room.Id}" id="ticketRoom"/>
+                                <select name="roomId" id="roomSelect" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Hledej:</label>
+                                <div class="input-group">
+                                    <input id="searchEquipment" type="text" class="form-control bg-light border-0 small" placeholder="Vyhledej vybavení" aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @{ Html.RenderPartial("Equipments", new List<Equipment>()); }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script>
+        function fetchEquipments() {
+            var roomId = $('#roomSelect').val();
+            var equipmentIdFilled = $('#equipmentIdFilled').val();
+            console.log(roomId);
+            $.ajax({
+                url: "@Url.Action("Equipments", "Control")",
+                type: "GET",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#equipmentsTable').html(res);
+                    $('.equipmentsTable').DataTable({
+                        language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Czech.json' },
+                        scrollX: false,
+                        searching: false,
+                        lengthChange: false
+                    });
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: {
+                     roomId: roomId,
+                     equipmentId: equipmentIdFilled
+                }
+            });
+        }
+
+        function searchEquipments() {
+            var phrase = $('#searchEquipment').val();
+            console.log(phrase);
+            $.ajax({
+                url: "@Url.Action("Search", "Control")",
+                type: "GET",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#equipmentsTable').html(res);
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { phrase: phrase }
+            });
+        }
+
+
+        function fetchRooms() {
+            var val = $('#environmentId').val();
+            var ticketRoom = $("#ticketRoom").val();
+            $.ajax({
+                url: "@Url.Action("Rooms", "Control")",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                success: function(res) {
+                    $('#roomSelect').children().remove();
+                    console.log(res);
+                    res.forEach(function(value) {
+                        if(ticketRoom != value.Id)
+                            $('#roomSelect').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                        else 
+                            $('#roomSelect').append('<option selected value="' + value.Id + '">' + value.Name + '</option>');
+                    });
+                    fetchEquipments();
+
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                data: { environmentId: val }
+            });
+        }
+
+        fetchRooms();
+
+        $('#searchEquipment').keyup(function() {
+            searchEquipments();
+        });
+
+        $('#environmentId').on('change',
+            function() {
+                fetchRooms();
+            });
+        $('#roomSelect').on('change',
+            function() {
+                fetchEquipments();
+            });
+    </script>
 }

@@ -12,7 +12,7 @@ namespace DataAccess.Dao
             return session.Query<Ticket>()
                 .Where(
                     c => c.Status.Id == TicketStatusDao.Constants.SOLVING ||
-                         c.Status.Id == TicketStatusDao.Constants.PLANNED
+                         c.Status.Id == TicketStatusDao.Constants.ASSIGNED
                             )
                 .ToList();
         }
@@ -20,7 +20,7 @@ namespace DataAccess.Dao
         public List<Ticket> GetNotAssignedTickets()
         {
             return session.Query<Ticket>()
-                .Where(c => c.Status.Id == TicketStatusDao.Constants.RECORDED)
+                .Where(c => c.Status.Id == TicketStatusDao.Constants.RECORDED && c.Assigned == null)
                 .ToList();
         }
         
@@ -33,5 +33,9 @@ namespace DataAccess.Dao
         {
             return session.Query<Ticket>().Where(c => c.Status.Id == TicketStatusDao.Constants.ARCHIVATED).ToList();
         }
+        
+    
+        
+        
     }
 }

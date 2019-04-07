@@ -1804,6 +1804,7 @@
         <Content Include="Views\Control\Add.cshtml" />
         <Content Include="Views\Control\Archive.cshtml" />
         <Content Include="Views\Control\Detail.cshtml" />
+        <Content Include="Views\Control\Equipments.cshtml" />
         <Content Include="Views\Control\Index.cshtml" />
         <Content Include="Views\Control\StatusChangeModal.cshtml" />
         <Content Include="Views\EnvironmentCategory\Add.cshtml" />
@@ -1826,6 +1827,9 @@
         <Content Include="Views\Equipment\Rooms.cshtml" />
         <Content Include="Views\Equipment\Index.cshtml" />
         <Content Include="Views\Equipment\Statuses.cshtml" />
+        <Content Include="Views\Home\Employee.cshtml" />
+        <Content Include="Views\Home\Equipments.cshtml" />
+        <Content Include="Views\Home\Maintainer.cshtml" />
         <Content Include="Views\Login\Index.cshtml" />
         <Content Include="Views\RoomCategory\Add.cshtml" />
         <Content Include="Views\RoomCategory\Detail.cshtml" />
@@ -1850,6 +1854,7 @@
         <Content Include="Views\User\Add.cshtml" />
         <Content Include="Views\User\Detail.cshtml" />
         <Content Include="Views\User\Index.cshtml" />
+        <Content Include="Views\User\Profile.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">
             <DependentUpon>Web.config</DependentUpon>

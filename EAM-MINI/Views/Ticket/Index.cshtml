@@ -67,15 +67,15 @@
                                 <td>
                                     @if (t.Assigned == null)
                                     {
-                                        <a href="#" class="btn btn-primary">Přidělit</a>
+                                        <a href="#" data-toggle="modal" data-ticket-id="@t.Id" data-target="#assignModal" class="btn btn-primary assign-button">Přidělit</a>
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("Detail", "User", new {id = t.Assigned.Id})">@t.Assigned.FullName</a>
+                                        <a target="_blank" href="@Url.Action("Detail", "User", new {id = t.Assigned.Id})">@t.Assigned.FullName</a>
                                     }
                                 </td>
                                 <td>
-                                     <a href="@Url.Action("Detail", "User", new {id = t.Author.Id})">@t.Author.FullName</a>
+                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = t.Author.Id})">@t.Author.FullName</a>
                                 </td>
                                 <td>
                                     @t.Status.Title
@@ -94,3 +94,55 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Přidělit</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Přiřadit problém pracovníkovi:</label>
+                @Html.DropDownList("assignId", new SelectList(ViewBag.maintainers, "Id", "UserInfo"), new {@class = "form-control", id = "assignId"})
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary save-assign" type="button" data-dismiss="modal">Přiřadit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var ticketId;
+    function assignUser() {
+        var userId = $('#assignId').val();
+        console.log(userId);
+        $.ajax({
+            url: "@Url.Action("AssignUser", "Ticket")",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(res) {
+                location.reload();
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            data: {
+                ticketId: ticketId,
+                userId: userId
+            }
+        });
+    }
+
+    $('.save-assign').on('click',
+        function() {
+            console.log("DDD");
+            assignUser();
+        });
+    
+    $('.assign-button').click(function() {
+        ticketId = $(this).data('ticket-id');
+    });
+</script>

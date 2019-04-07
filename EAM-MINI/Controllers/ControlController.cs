@@ -15,12 +15,16 @@ namespace EAM_MINI.Controllers
         private ControlDao _controlDao;
         private UserDao _userDao;
         private EquipmentDao _equipmentDao;
+        private EnvironmentDao _environmentDao;
+        private RoomDao _roomDao;
         private ControlStatusDao _controlStatusDao;
         private ControlCategoryDao _controlCategoryDao;
 
         public ControlController()
         {
             _userDao = new UserDao();
+            _roomDao = new RoomDao();
+            _environmentDao = new EnvironmentDao();
             _controlDao = new ControlDao();
             _controlStatusDao = new ControlStatusDao();
             _controlCategoryDao = new ControlCategoryDao();
@@ -30,8 +34,8 @@ namespace EAM_MINI.Controllers
         public void InitViewBag()
         {
             ViewBag.users = _userDao.GetAll();
-            List<Equipment> equipments = _equipmentDao.GetAll().ToList();
-            ViewBag.equipments = equipments;
+            ViewBag.equipments = _equipmentDao.GetAll().ToList();
+            ViewBag.environments = _environmentDao.GetAll().ToList();
             ViewBag.statuses = _controlStatusDao.GetAll();
             ViewBag.categories = _controlCategoryDao.GetAll();
         }
@@ -61,6 +65,7 @@ namespace EAM_MINI.Controllers
                 InitViewBag();
                 return RedirectToAction("Index", "Control");
             }
+
             InitViewBag();
             Control c = _controlDao.GetById(control.Id);
             return View("Detail", c);
@@ -118,19 +123,20 @@ namespace EAM_MINI.Controllers
             return View(controls);
         }
 
-        public ActionResult Create(Control control, int userId, string equipmentId)
+        public ActionResult Create(Control control, int categoryId, int userId, int? equipmentId)
         {
             if (ModelState.IsValid)
             {
-                if (equipmentId.Length > 0)
+                if (equipmentId.HasValue)
                 {
-                    Equipment equipment = _equipmentDao.GetById(int.Parse(equipmentId));
+                    Equipment equipment = _equipmentDao.GetById(equipmentId.Value);
                     control.Equipment = equipment;
                 }
 
                 User user = _userDao.GetById(userId);
                 control.UserToPerform = user;
                 control.Status = _controlStatusDao.GetById(ControlStatusDao.Constants.PLANNED);
+                control.Category = _controlCategoryDao.GetById(categoryId);
 
                 _controlDao.Create(control);
                 return RedirectToAction("Index", "Control");
@@ -138,6 +144,39 @@ namespace EAM_MINI.Controllers
 
             InitViewBag();
             return View("Add", control);
+        }
+
+        public ActionResult Equipments(int? equipmentId, int? roomId)
+        {
+            InitViewBag();
+            ViewBag.equipmentId = equipmentId;
+            List<Equipment> equipments = new List<Equipment>();
+            if (roomId != null)
+            {
+                equipments = _roomDao.GetById(roomId.Value).Equipments.ToList();
+            }
+
+            return PartialView("Equipments", equipments);
+        }
+
+        public ActionResult Rooms(int environmentId)
+        {
+            List<Room> rooms = _environmentDao.GetById(environmentId).Rooms.ToList();
+            List<Room> roomsReturn = new List<Room>();
+            foreach (Room room in rooms) roomsReturn.Add(new Room {Id = room.Id, Name = room.Name});
+            return Json(roomsReturn);
+        }
+
+        public ActionResult Search(string phrase)
+        {
+            List<Equipment> equipments = new List<Equipment>();
+
+            if (phrase.Length > 0)
+            {
+                equipments = _equipmentDao.Search(phrase).ToList();
+            }
+
+            return PartialView("Equipments", equipments);
         }
     }
 }

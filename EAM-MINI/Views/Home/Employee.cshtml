@@ -1,10 +1,10 @@
-@using DataAccess.Model
+﻿@using DataAccess.Model
 @using DataAccess.Dao
 @model Ticket
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = "Dashboard - přidat ticket";
 }
-@using (Html.BeginForm("Edit", "Ticket", FormMethod.Post))
+@using (Html.BeginForm("Create", "Ticket", FormMethod.Post))
 {
     <div class="row">
         <div class="col-4">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Kategorie:</label>
-                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title", Model.Category.Id), new {@class = "form-control"})
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title"), new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Category)
                     </div>
                     @if (!User.IsInRole("employee"))
@@ -36,13 +36,13 @@
                         {
                             <div class="form-group">
                                 <label for="name">Deadline:</label>
-                                @Html.TextBoxFor(x => x.Deadline,"{0:dd. MM. yyyy}", new {@class = "form-control date-picker"})
+                                @Html.TextBoxFor(x => x.Deadline, new {@class = "form-control date-picker"})
                                 @Html.ValidationMessageFor(x => x.Deadline)
                             </div>
                             <div class="form-group">
                                 <label for="password">Přiřadit pracovníkovi:</label>
                                 @{
-                                    var list = new SelectList(ViewBag.maintainers, "Id", "FullName", Model.Assigned != null ? Model.Assigned.Id : int.MinValue).ToList();
+                                    var list = new SelectList(ViewBag.maintainers, "Id", "FullName").ToList();
                                     list.Insert(0, new SelectListItem { Value = "", Text = "Zatím nepřiřazovat"});
                                 }
                                 @Html.DropDownList("assignedId", list, new {@class = "form-control searchSelect"})
@@ -51,11 +51,8 @@
                           
                         }
                     }
-                    @Html.Hidden("authorId", User.Identity.Name)
-                    @Html.HiddenFor(x => x.Id)
-                    <input type="hidden" value="@Model.Equipment.Id" id="equipmentIdFilled">
                     <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Uložit</button>
+                        <button class="btn btn-primary" type="submit">Vytvořit</button>
                     </div>
                 </div>
             </div>
@@ -70,16 +67,12 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name">Prostředí:</label>
-                                @Html.DropDownList(
-                                    "environmentId", 
-                                    new SelectList(ViewBag.environments, "Id", "Name", Model.Equipment != null ? Model.Equipment.Room.Environment.Id : int.MinValue ), 
-                                    new {@class = "form-control", id = "environmentId"})
+                                @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name"), new {@class = "form-control", id = "environmentId"})
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name">Místnost:</label>
-                                <input type="hidden" value="@if (Model.Equipment != null){@Model.Equipment.Room.Id}" id="ticketRoom"/>
                                 <select name="roomId" id="roomSelect" class="form-control"></select>
                             </div>
                         </div>
@@ -107,9 +100,10 @@
         </div>
     </div>
     <script>
+
+
         function fetchEquipments() {
             var roomId = $('#roomSelect').val();
-            var FequipmentIdilled = $('#equipmentIdFilled').val();
             console.log(roomId);
             $.ajax({
                 url: "@Url.Action("Equipments", "Ticket")",
@@ -127,10 +121,7 @@
                 error: function(err) {
                     console.log(err);
                 },
-                data: {
-                     roomId: roomId,
-                     equipmentId: equipmentIdFilled
-                }
+                data: { roomId: roomId }
             });
         }
 
@@ -154,7 +145,6 @@
 
         function fetchRooms() {
             var val = $('#environmentId').val();
-            var ticketRoom = $("#ticketRoom").val();
             $.ajax({
                 url: "@Url.Action("Rooms", "Ticket")",
                 type: "POST",
@@ -163,10 +153,7 @@
                     $('#roomSelect').children().remove();
                     console.log(res);
                     res.forEach(function(value) {
-                        if(ticketRoom != value.Id)
-                            $('#roomSelect').append('<option value="' + value.Id + '">' + value.Name + '</option>');
-                        else 
-                            $('#roomSelect').append('<option selected value="' + value.Id + '">' + value.Name + '</option>');
+                        $('#roomSelect').append('<option value="' + value.Id + '">' + value.Name + '</option>');
                     });
                     fetchEquipments();
 

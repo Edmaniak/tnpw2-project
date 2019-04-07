@@ -51,7 +51,7 @@
                                 <td>@r.Purpouse</td>
                                 <td>@r.Category.Title</td>
                                 <td>
-                                    <a href="@Url.Action("Detail", "Environment", new {id = r.Environment.Id})">@r.Environment.Name</a></td>
+                                    <a target="_blank" href="@Url.Action("Detail", "Environment", new {id = r.Environment.Id})">@r.Environment.Name</a></td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Room", new {id = r.Id})" class="btn btn-primary">Detail</a>
                                     <a href="@Url.Action("Delete", "Room", new {id = r.Id})" class="btn btn-danger">Smazat</a>

@@ -29,7 +29,7 @@
                     <a href="@Url.Action("Detail", "Room", new {id = r.Id})">@r.Name</a>
                 </td>
                 <td>
-                    <a href="@Url.Action("Detail", "Environment", new {id = r.Id})">@r.Environment.Name</a>
+                    <a target="_blank" href="@Url.Action("Detail", "Environment", new {id = r.Id})">@r.Environment.Name</a>
                 </td>
                 <td>@r.Category.Title</td>
             </tr>

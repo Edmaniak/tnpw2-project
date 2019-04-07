@@ -60,12 +60,12 @@
                                 </td>
                                 <td>@c.DatePlanned.Value.ToString("d. M. yyyy")</td>
                                 <td>
-                                    <a href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
+                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
                                 </td>
                                 <td>
                                     @if (c.Equipment != null)
                                     {
-                                        <a href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.EquipmentInfo</a>
+                                        <a target="_blank" href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.EquipmentInfo</a>
                                     }
                                     else
                                     {

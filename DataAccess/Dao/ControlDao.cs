@@ -54,6 +54,8 @@ namespace DataAccess.Dao
             return session.Query<Control>().Where(c => c.Status.Id == ControlStatusDao.Constants.PLANNED).ToList();
         }
         
+       
+        
         
     }
 }

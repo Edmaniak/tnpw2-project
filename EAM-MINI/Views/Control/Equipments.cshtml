@@ -19,8 +19,8 @@
                     <input @if (ViewBag.equipmentId == e.Id) {<text>checked="checked"</text>}  name="equipmentId" type="radio" value="@e.Id"/>
                 </td>
                 <td> @e.Id (@e.Code)</td>
-                <td><a href="@Url.Action("Detail", "Equipment", new {Id = e.Id})">@e.Title</a></td>
-                <td><a href="@Url.Action("Detail", "Room", new {Id = e.Room.Id})">@e.Room.Name (@e.Room.Environment.Name)</a></td>
+                <td><a target="_blank" href="@Url.Action("Detail", "Equipment", new {Id = e.Id})">@e.Title</a></td>
+                <td><a target="_blank" href="@Url.Action("Detail", "Room", new {Id = e.Room.Id})">@e.Room.Name (@e.Room.Environment.Name)</a></td>
                 <td>@e.Status.Title</td>
             </tr>
         }

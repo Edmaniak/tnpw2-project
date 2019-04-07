@@ -22,66 +22,13 @@
             </span>
             <span class="text">Naplánovat kontrolu</span>
         </a>
-        <a href="@Url.Action("Add", "Equipment")" class="btn btn-success btn-icon-split btn-lg">
-            <span class="icon text-white-50">
-                <i class="fas fa-cash-register"></i>
-            </span>
-            <span class="text">Přidat vybavení</span>
-        </a>
-    </div>
-</div>
-<div class="row"> 
-    <div class="col-xl-3 col-md-6">
-        <div class="card border-left-danger shadow py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Nahlášené problémy bez řešitele</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.openTickets.Count</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-bug fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card border-left-warning shadow py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Řešené problémy</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.solvingTickets.Count</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-bug fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card border-left-primary shadow py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Naplánované kontroly</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.plannedControls.Count</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-cash-register fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Naplánované kontroly</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Kontroly</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -90,13 +37,13 @@
                         <tr>
                             <th>Název</th>
                             <th>Deadline</th>
-                            <th>Zodpovědný</th>
                             <th>Týká se</th>
+                            <th>Status</th>
                             <th>Akce</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach (DataAccess.Model.Control c in ViewBag.plannedControls)
+                        @foreach (DataAccess.Model.Control c in ViewBag.myControls)
                         {
                             <tr data-controlId="@c.Id">
                                 <td>
@@ -104,19 +51,16 @@
                                 </td>
                                 <td>@c.DatePlanned.Value.ToString("d. M. yyyy")</td>
                                 <td>
-                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.UserToPerform.Id})">@c.UserToPerform.FullName</a>
-                                </td>
-                                <td>
                                     @if (c.Equipment != null)
                                     {
-                                        <a target="_blank" href="@Url.Action("Detail", "Equipment", new {id = c.Equipment.Id})">@c.EquipmentInfo</a>
+                                        <a href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.EquipmentInfo</a>
                                     }
                                     else
                                     {
                                         <span>@c.EquipmentInfo</span>
                                     }
                                 </td>
-
+                                <td>@c.Status.Title</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>
                                 </td>
@@ -131,7 +75,7 @@
     <div class="col-md-6">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Otevřené problémy</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Opravy</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -140,29 +84,18 @@
                         <tr>
                             <th>Název</th>
                             <th>Kategorie</th>
-                            <th>Přiděleno</th>
                             <th>Status</th>
                             <th>Akce</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach (Ticket t in ViewBag.openTickets)
+                        @foreach (Ticket t in ViewBag.myTickets)
                         {
                             <tr>
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})">@t.Title</a>
                                 </td>
                                 <td>@t.Category.Title</td> 
-                                <td>
-                                    @if (t.Assigned == null)
-                                    {
-                                        <a href="#" class="btn btn-primary">Přidělit</a>
-                                    }
-                                    else
-                                    {
-                                        @t.Assigned.FullName
-                                    }
-                                </td>
                                 <td>
                                     @t.Status.Title 
                                 </td>

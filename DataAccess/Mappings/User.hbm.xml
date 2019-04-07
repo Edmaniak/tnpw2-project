@@ -13,5 +13,13 @@
         <property name="Profession" column="profession"/>
         <many-to-one name="Role" column="role_id" foreign-key="role_id"/>
         <many-to-one name="Address" column="address_id" foreign-key="address_id" cascade="all" />
+        <bag name="AssignedTickets" cascade="none">
+            <key column="assigned_id"/>
+            <one-to-many class="Ticket"/>
+        </bag>
+        <bag name="AssignedControls" cascade="none">
+            <key column="user_to_perform_id"/>
+            <one-to-many class="Control"/>
+        </bag>
     </class>
 </hibernate-mapping>

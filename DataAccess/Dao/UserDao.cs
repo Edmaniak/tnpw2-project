@@ -37,11 +37,11 @@ namespace DataAccess.Dao
             return session.Query<User>().Where(c => c.Role.Id == RoleDao.Constants.MANAGER_ID).ToList();
         }
 
-        public IList<User> GetMangersAndMaintainers()
+        public IList<User> GetManagersAndMaintainers()
         {
             return session.Query<User>().Where(c =>
                 c.Role.Id == RoleDao.Constants.MANAGER_ID 
-                || c.Role.Id == RoleDao.Constants.MANAGER_ID
+                || c.Role.Id == RoleDao.Constants.MAINTAINER_ID
                 || c.Role.Id == RoleDao.Constants.ADMIN_ID).ToList();
         }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DataAccess.Interface;
 using System.Web;
@@ -32,6 +33,10 @@ namespace DataAccess.Model
         public virtual Role Role { get; set; }
 
         public virtual bool Deletable { get; set; }
+
+        public virtual IList<Control> AssignedControls { get; set; }
+
+        public virtual IList<Ticket> AssignedTickets { get; set; }
 
         public virtual string FullName => Name + " " + Surname;
 

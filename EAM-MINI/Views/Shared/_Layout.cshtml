@@ -30,13 +30,13 @@
     <!-- Datagrid-->
     <script src="/Assets/js/libs/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="/Assets/js/libs/dataTables.bootstrap4.min.js" type="text/javascript"></script>
-    
+
     <script src="/Assets/js/libs/jquery-ui.min.js"></script>
-    
+
     <link src="/Assets/js/libs/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link src="/Assets/js/libs/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-    <link src="/Assets/js/libs/jquery-ui.theme.min.css"  rel="stylesheet" type="text/css"/>
-    
+    <link src="/Assets/js/libs/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
+
     <!-- Custom -->
     <link href="/Assets/css/custom.css" rel="stylesheet">
 
@@ -70,88 +70,96 @@
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Moduly
-    </div>
-    @if (User.IsInRole(RoleDao.Constants.ADMIN))
+    @if (!User.IsInRole(RoleDao.Constants.EMPLOYEE))
     {
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Moduly
+        </div>
+        if (User.IsInRole(RoleDao.Constants.ADMIN))
+        {
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userModul" aria-expanded="true" aria-controls="userModul">
+                    <i class="fas fa-users"></i>
+                    <span>Uživatelé</span>
+                </a>
+                <div id="userModul" class="collapse" aria-labelledby="headingTwo" data-parent="#userModul">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Uživatelský modul</h6>
+                        <a class="collapse-item" href="@Url.Action("Add", "User")">Přidat uživatele</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "User")">Uživatelé</a>
+                    </div>
+                </div>
+            </li>
+        }
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#userModul" aria-expanded="true" aria-controls="userModul">
-                <i class="fas fa-users"></i>
-                <span>Uživatelé</span>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ticketModul" aria-expanded="true" aria-controls="ticketModul">
+                <i class="fas fa-bug"></i>
+                <span>Problémy (tikety)</span>
             </a>
-            <div id="userModul" class="collapse" aria-labelledby="headingTwo" data-parent="#userModul">
+            <div id="ticketModul" class="collapse" aria-labelledby="headingTwo" data-parent="#ticketModul">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Uživatelský modul</h6>
-                    <a class="collapse-item" href="@Url.Action("Add", "User")">Přidat uživatele</a>
-                    <a class="collapse-item" href="@Url.Action("Index", "User")">Uživatelé</a>
+                    <h6 class="collapse-header">Tiket modul</h6>
+                    <a class="collapse-item" href="@Url.Action("Add", "Ticket")">Přidat tiket problému</a>
+                    <a class="collapse-item" href="@Url.Action("Index", "Ticket")">Přehled problémů</a>
+                    <a class="collapse-item" href="@Url.Action("Archive", "Ticket")">Archiv problémů</a>
+                    @if (User.IsInRole(RoleDao.Constants.ADMIN) || User.IsInRole(RoleDao.Constants.MANAGER))
+                    {
+                        <h6 class="collapse-header">Stavy a kategorie</h6>
+                        <a class="collapse-item" href="@Url.Action("Index", "TicketCategory")">Spravovat kategorie</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "TicketStatus")">Spravovat stavy</a>
+                    }
                 </div>
             </div>
         </li>
-    }
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ticketModul" aria-expanded="true" aria-controls="ticketModul">
-            <i class="fas fa-bug"></i>
-            <span>Problémy (tikety)</span>
-        </a>
-        <div id="ticketModul" class="collapse" aria-labelledby="headingTwo" data-parent="#ticketModul">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Tiket modul</h6>
-                <a class="collapse-item" href="@Url.Action("Add", "Ticket")">Přidat tiket problému</a>
-                <a class="collapse-item" href="@Url.Action("Index", "Ticket")">Přehled problémů</a>
-                <a class="collapse-item" href="@Url.Action("Archive", "Ticket")">Archiv</a>
-                <h6 class="collapse-header">Stavy a kategorie</h6>
-                <a class="collapse-item" href="@Url.Action("Index", "TicketCategory")">Spravovat kategorie</a>
-                <a class="collapse-item" href="@Url.Action("Index", "TicketStatus")">Spravovat stavy</a>
-            </div>
-        </div>
-    </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @if (User.IsInRole(RoleDao.Constants.ADMIN) || User.IsInRole(RoleDao.Constants.MANAGER))
-    {
+        <!-- Nav Item - Pages Collapse Menu -->
+        if (User.IsInRole(RoleDao.Constants.ADMIN) || User.IsInRole(RoleDao.Constants.MANAGER))
+        {
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#equipmentModule" aria-expanded="true" aria-controls="equipmentModule">
+                    <i class="fas fa-cash-register"></i>
+                    <span>Vybavení</span>
+                </a>
+                <div id="equipmentModule" class="collapse" aria-labelledby="headingTwo" data-parent="#equipmentModule">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Vybavení</h6>
+                        <a class="collapse-item" href="@Url.Action("Add", "Equipment")">Přidat vybavení</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "Equipment")">Přehled vybavení</a>
+                        <h6 class="collapse-header">Stavy a kategorie</h6>
+                        <a class="collapse-item" href="@Url.Action("Index", "EquipmentCategory")">Spravovat kategorie</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "EquipmentStatus")">Spravovat stavy</a>
+                    </div>
+                </div>
+            </li>
+        }
+
+        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#equipmentModule" aria-expanded="true" aria-controls="equipmentModule">
-                <i class="fas fa-cash-register"></i>
-                <span>Vybavení</span>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#controlModule" aria-expanded="true" aria-controls="controlModule">
+                <i class="fas fa-calendar-check"></i>
+                <span>Plánování kontrol</span>
             </a>
-            <div id="equipmentModule" class="collapse" aria-labelledby="headingTwo" data-parent="#equipmentModule">
+            <div id="controlModule" class="collapse" aria-labelledby="headingTwo" data-parent="#controlModule">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Vybavení</h6>
-                    <a class="collapse-item" href="@Url.Action("Add", "Equipment")">Přidat vybavení</a>
-                    <a class="collapse-item" href="@Url.Action("Index", "Equipment")">Přehled vybavení</a>
-                    <h6 class="collapse-header">Stavy a kategorie</h6>
-                    <a class="collapse-item" href="@Url.Action("Index", "EquipmentCategory")">Spravovat kategorie</a>
-                    <a class="collapse-item" href="@Url.Action("Index", "EquipmentStatus")">Spravovat stavy</a>
+                    <h6 class="collapse-header">Modul Kontrol</h6>
+                    <a class="collapse-item" href="@Url.Action("Add", "Control")">Naplánovat kontrolu</a>
+                    <a class="collapse-item" href="@Url.Action("Index", "Control")">Kontroly</a>
+                    <a class="collapse-item" href="@Url.Action("Archive", "Control")">Archiv kontrol</a>
+                    @if (User.IsInRole(RoleDao.Constants.ADMIN) || User.IsInRole(RoleDao.Constants.MANAGER))
+                    {
+                        <h6 class="collapse-header">Stavy a kategorie</h6>
+                        <a class="collapse-item" href="@Url.Action("Index", "ControlCategory")">Spravovat kategorie</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "ControlStatus")">Spravovat stavy</a>
+                    }
                 </div>
             </div>
         </li>
-    }
+    
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#controlModule" aria-expanded="true" aria-controls="controlModule">
-            <i class="fas fa-calendar-check"></i>
-            <span>Plánování kontrol</span>
-        </a>
-        <div id="controlModule" class="collapse" aria-labelledby="headingTwo" data-parent="#controlModule">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Modul Kontrol</h6>
-                <a class="collapse-item" href="@Url.Action("Add", "Control")">Naplánovat kontrolu</a>
-                <a class="collapse-item" href="@Url.Action("Index", "Control")">Kontroly</a>
-                <a class="collapse-item" href="@Url.Action("Archive", "Control")">Archiv kontrol</a>
-                <h6 class="collapse-header">Stavy a kategorie</h6>
-                <a class="collapse-item" href="@Url.Action("Index", "ControlCategory")">Spravovat kategorie</a>
-                <a class="collapse-item" href="@Url.Action("Index", "ControlStatus")">Spravovat stavy</a>
-            </div>
-        </div>
-    </li>
-
-    @if (User.IsInRole(RoleDao.Constants.ADMIN) || User.IsInRole(RoleDao.Constants.MANAGER))
+    if (User.IsInRole(RoleDao.Constants.ADMIN) || User.IsInRole(RoleDao.Constants.MANAGER))
     {
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -175,7 +183,8 @@
     }
     <!-- Divider -->
     <hr class="sidebar-divider">
-    <!-- Sidebar Toggler (Sidebar) -->
+        <!-- Sidebar Toggler (Sidebar) -->
+    }
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
@@ -413,33 +422,38 @@
     </div>
 </div>
 <script>
-    
-    jQuery(function($){
+
+    jQuery(function($) {
         $.datepicker.regional['cs'] = {
             closeText: 'Zavřít',
             prevText: 'Předchozí',
             nextText: 'Další',
             currentText: 'Dnes',
-            monthNames: ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'],
+            monthNames: [
+                'Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen',
+                'Listopad', 'Prosinec'
+            ],
             monthNamesShort: ['Led', 'Úno', 'Bře', 'Dub', 'Kvě', 'Čer', 'Čvc', 'Srp', 'Zář', 'Říj', 'Lis', 'Pro'],
             dayNames: ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'],
-            dayNamesShort: ['Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So', ],
+            dayNamesShort: ['Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So',],
             dayNamesMin: ['Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So'],
             weekHeader: 'Týd',
             dateFormat: 'dd.mm.yy',
             firstDay: 1,
             isRTL: false,
             showMonthAfterYear: false,
-            yearSuffix: ''};
+            yearSuffix: ''
+        };
         $.datepicker.setDefaults($.datepicker.regional['cs']);
     });
-    
+
     $(document).ready(function() {
         $('.dataTable').DataTable({
             language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Czech.json' },
             scrollX: false
         });
-        
+
+
         $('.searchSelect')
             .addClass('selectpicker')
             .attr('data-live-search', 'true')

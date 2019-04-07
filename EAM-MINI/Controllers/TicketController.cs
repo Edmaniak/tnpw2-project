@@ -38,7 +38,7 @@ namespace EAM_MINI.Controllers
             ViewBag.categories = _ticketCategoryDao.GetAll().ToList();
             ViewBag.statuses = _ticketStatusDao.GetAll().ToList();
             ViewBag.environments = _environmentDao.GetAll().ToList();
-            ViewBag.maintainers = _userDao.GetMangersAndMaintainers();
+            ViewBag.maintainers = _userDao.GetManagersAndMaintainers();
             ViewBag.equipments = _equipmentDao.GetAll().ToList();
         }
 
@@ -70,9 +70,10 @@ namespace EAM_MINI.Controllers
             return RedirectToAction("Archive", "Ticket");
         }
 
-        public ActionResult Equipments(int? environmentId, int? roomId)
+        public ActionResult Equipments(int? equipmentId, int? roomId)
         {
             InitViewBag();
+            ViewBag.equipmentId = equipmentId;
             List<Equipment> equipments = new List<Equipment>();
             if (roomId != null)
             {
@@ -127,6 +128,7 @@ namespace EAM_MINI.Controllers
                 InitViewBag();
                 return RedirectToAction("Index", "Ticket");
             }
+
             InitViewBag();
             Ticket t = _ticketDao.GetById(ticket.Id);
             return View("Detail", t);
@@ -142,6 +144,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Index()
         {
             List<Ticket> tickets = _ticketDao.GetAllNotArchivated();
+            InitViewBag();
             return View(tickets);
         }
 
@@ -150,18 +153,31 @@ namespace EAM_MINI.Controllers
             if (ModelState.IsValid)
             {
                 ticket.Category = _ticketCategoryDao.GetById(categoryId);
+                ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.RECORDED);
                 if (assignedId.HasValue)
+                {
                     ticket.Assigned = _userDao.GetById(assignedId.Value);
+                    ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.ASSIGNED);
+                }
+
                 if (equipmentId.HasValue)
                     ticket.Equipment = _equipmentDao.GetById(equipmentId.Value);
-                ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.RECORDED);
+
                 ticket.Author = _userDao.GetByEmail(User.Identity.Name);
                 _ticketDao.Create(ticket);
                 return RedirectToAction("Index", "Ticket");
             }
-            
+
             InitViewBag();
             return View("Add");
+        }
+
+        public ActionResult AssignUser(int ticketId, int userId)
+        {
+            Ticket ticket = _ticketDao.GetById(ticketId);
+            ticket.Assigned = _userDao.GetById(userId);
+            _ticketDao.Update(ticket);
+            return Refresh();
         }
     }
 }

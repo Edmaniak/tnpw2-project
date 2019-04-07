@@ -51,6 +51,12 @@ namespace EAM_MINI.Controllers
             ViewBag.roles = _roles;
             return View(user);
         }
+
+        public ActionResult Profile(int id)
+        {
+            User user = _userDao.GetById(id);
+            return View(user);
+        }
         
         [HttpPost]
         [Authorize(Roles = "admin")]
