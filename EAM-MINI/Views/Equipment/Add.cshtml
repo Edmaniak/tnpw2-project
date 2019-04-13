@@ -39,16 +39,15 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Pořízeno dne:</label>
-                        @Html.TextBoxFor(x => x.Purchased, "{0:dd. MM. yyyy}", new {@class = "form-control"})
+                        @Html.TextBoxFor(x => x.Purchased, "{0:dd. MM. yyyy}", new {@class = "form-control date-picker"})
                         @Html.ValidationMessageFor(x => x.Purchased)
                     </div>
                     <div class="form-group">
                         <label for="email">Záruka končí:</label>
-                        @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control"})
+                        @Html.TextBoxFor(x => x.Warranty, "{0:dd. MM. yyyy}", new {@class = "form-control date-picker"})
                         @Html.ValidationMessageFor(x => x.Warranty)
                     </div>
-                    @Html.HiddenFor(x => x.Id)
-                    @Html.HiddenFor(x => x.Room.Id)
+                    <input type="hidden" id="roomIdds"/>    
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Vytvořit</button>
                     </div>
@@ -95,7 +94,7 @@
     <script>
         function fetchRooms() {
             var val = $('#environmentId').val();
-            var selectedRoom = $('#Room_Id').val();
+            var selectedRoom = $('#roomIdds').val();
             $.ajax({
                 url: "@Url.Action("Rooms", "Equipment")",
                 type: "POST",

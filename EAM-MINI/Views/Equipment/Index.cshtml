@@ -78,7 +78,7 @@
                                 <td>
                                     <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})" class="btn btn-primary">Detail</a>
                                     <a href="@Url.Action("Delete", "Equipment", new {id = e.Id})" class="btn btn-danger">Smazat</a>
-                                    <a href="@Url.Action("Add", "Ticket", new {id = e.Id})" class="btn btn-warning">Nahlásit problém</a>
+                                    <a href="@Url.Action("Add", "Ticket", new {equipmentId = e.Id})" class="btn btn-warning">Nahlásit problém</a>
                                 </td>
                             </tr>
                         }

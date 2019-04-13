@@ -45,6 +45,8 @@ namespace EAM_MINI.Controllers
         public ActionResult Add(int? equipmentId)
         {
             InitViewBag();
+            if (equipmentId.HasValue)
+                ViewBag.equipment = _equipmentDao.GetById(equipmentId.Value);
             return View();
         }
 

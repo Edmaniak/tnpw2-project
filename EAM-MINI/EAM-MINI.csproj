@@ -1744,6 +1744,7 @@
         <Content Include="Assets\css\fontawesome-free\webfonts\fa-solid-900.ttf" />
         <Content Include="Assets\css\fontawesome-free\webfonts\fa-solid-900.woff" />
         <Content Include="Assets\css\fontawesome-free\webfonts\fa-solid-900.woff2" />
+        <Content Include="Assets\css\libs\basictable.css" />
         <Content Include="Assets\css\libs\bootstrap-select.min.css" />
         <Content Include="Assets\css\libs\dataTables.bootstrap4.css" />
         <Content Include="Assets\css\libs\jquery-ui.css" />
@@ -1773,6 +1774,7 @@
         <Content Include="Assets\js\libs\jquery-ui.min.js" />
         <Content Include="Assets\js\libs\jquery-ui.structure.min.css" />
         <Content Include="Assets\js\libs\jquery-ui.theme.min.css" />
+        <Content Include="Assets\js\libs\jquery.basictable.js" />
         <Content Include="Assets\js\libs\jquery.dataTables.min.js" />
         <Content Include="Assets\js\libs\jquery.easing.min.js" />
         <Content Include="Assets\js\libs\jquery.min.js" />

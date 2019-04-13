@@ -78,7 +78,7 @@ namespace EAM_MINI.Controllers
                 eq.Description = equipment.Description;
 
                 _equipmentDao.Update(eq);
-                
+
                 InitViewBag();
                 return RedirectToAction("Index", "Equipment");
             }
@@ -96,9 +96,9 @@ namespace EAM_MINI.Controllers
         }
 
         [Authorize(Roles = "manager, admin")]
-        public ActionResult Create(Equipment equipment, int roomIdd, int statusId, int categoryId)
+        public ActionResult Create(Equipment equipment, int? roomIdd, int statusId, int categoryId)
         {
-            equipment.Room = _roomDao.GetById(roomIdd);
+            if (roomIdd.HasValue) equipment.Room = _roomDao.GetById(roomIdd.Value);
             equipment.Status = _equipmentStatusDao.GetById(statusId);
             equipment.Category = _equipmentCategoryDao.GetById(categoryId);
 

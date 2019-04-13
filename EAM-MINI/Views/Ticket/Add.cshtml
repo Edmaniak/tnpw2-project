@@ -51,6 +51,7 @@
                           
                         }
                     }
+                    <input type="hidden" value="@if (@ViewBag.equipment != null) {@ViewBag.equipment.Id}" id="equipmentIdFilled">
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Vytvořit</button>
                     </div>
@@ -67,12 +68,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name">Prostředí:</label>
-                                @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name"), new {@class = "form-control", id = "environmentId"})
+                                @Html.DropDownList("environmentId", new SelectList(ViewBag.environments, "Id", "Name", ViewBag.equipment != null ? ViewBag.equipment.Room.Environment.Id : int.MinValue), new {@class = "form-control", id = "environmentId"})
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name">Místnost:</label>
+                                <input type="hidden" value="@if (ViewBag.equipment != null){@ViewBag.equipment.Room.Id}" id="ticketRoom"/>
                                 <select name="roomId" id="roomSelect" class="form-control"></select>
                             </div>
                         </div>
@@ -104,6 +106,7 @@
 
         function fetchEquipments() {
             var roomId = $('#roomSelect').val();
+            var equipmentIdFilled = $('#equipmentIdFilled').val();
             console.log(roomId);
             $.ajax({
                 url: "@Url.Action("Equipments", "Ticket")",
@@ -121,7 +124,10 @@
                 error: function(err) {
                     console.log(err);
                 },
-                data: { roomId: roomId }
+                data: {
+                     roomId: roomId,
+                     equipmentId: equipmentIdFilled
+                }
             });
         }
 
@@ -145,6 +151,7 @@
 
         function fetchRooms() {
             var val = $('#environmentId').val();
+            var ticketRoom = $("#ticketRoom").val();
             $.ajax({
                 url: "@Url.Action("Rooms", "Ticket")",
                 type: "POST",
@@ -153,7 +160,10 @@
                     $('#roomSelect').children().remove();
                     console.log(res);
                     res.forEach(function(value) {
-                        $('#roomSelect').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                        if(ticketRoom != value.Id)
+                            $('#roomSelect').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                        else 
+                            $('#roomSelect').append('<option selected value="' + value.Id + '">' + value.Name + '</option>');
                     });
                     fetchEquipments();
 

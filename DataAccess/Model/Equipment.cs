@@ -18,19 +18,17 @@ namespace DataAccess.Model
 
         public virtual string Code { get; set; }
 
-        [DataType(DataType.Date)] public virtual DateTime Purchased { get; set; }
+        [Required(ErrorMessage = "Datum pořízení je povinný údaj.")]
+        public virtual DateTime Purchased { get; set; }
 
-        [DataType(DataType.Date)] public virtual DateTime Warranty { get; set; }
-
+        [Required(ErrorMessage = "Datum záruky je povinný údaj.")]
+        public virtual DateTime Warranty { get; set; }
 
         public virtual EquipmentCategory Category { get; set; }
 
-
         public virtual EquipmentStatus Status { get; set; }
 
-
         public virtual Room Room { get; set; }
-
 
         public virtual string GenerateCode()
         {

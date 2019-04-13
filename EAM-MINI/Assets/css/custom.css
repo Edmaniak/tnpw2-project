@@ -40,6 +40,10 @@ main {
     border-bottom: none;
 }
 
+.table .btn {
+    line-height: 1em;
+}
+
 .table th {
     padding: .4rem;
     background-color: #4e73df;
