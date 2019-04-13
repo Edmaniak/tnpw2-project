@@ -50,7 +50,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _equipmentDao.Delete(_equipmentDao.GetById(id));
-            return Redirect(Request.UrlReferrer.ToString());
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "manager, admin")]

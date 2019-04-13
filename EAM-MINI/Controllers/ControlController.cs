@@ -99,7 +99,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _controlDao.Delete(id);
-            return Refresh();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

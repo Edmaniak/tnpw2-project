@@ -15,6 +15,7 @@ namespace DataAccess.Model
         public virtual string Purpouse { get; set; }
         public virtual string Code { get; set; }
         public virtual string Floor { get; set; }
+        
         public virtual Environment Environment { get; set; }
 
         public virtual RoomCategory Category { get; set; }

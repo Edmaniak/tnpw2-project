@@ -137,7 +137,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _ticketDao.Delete(id);
-            return Refresh();
+            return RedirectToAction("Index");
         }
 
 

@@ -51,8 +51,8 @@ namespace EAM_MINI.Controllers
         [Authorize(Roles = "manager, admin")]
         public ActionResult Delete(int id)
         {
-            _environmentDao.Delete(_environmentDao.GetById(id));
-            return Refresh();
+            _environmentDao.Delete(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

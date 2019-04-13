@@ -59,7 +59,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _ticketCategoryDao.Delete(id);
-            return Refresh();
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "manager, admin")]

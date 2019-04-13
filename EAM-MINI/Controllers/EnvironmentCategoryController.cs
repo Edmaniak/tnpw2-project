@@ -30,7 +30,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _environmentCategoryDao.Delete(id);
-            return RedirectToAction("Index", "EnvironmentCategory");
+            return RedirectToAction("Index");
         }
         
         [Authorize(Roles = "manager, admin")]

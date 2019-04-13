@@ -14,8 +14,7 @@ namespace DataAccess.Model
 
         public virtual DateTime? DatePerformed { get; set; }
         
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd. mm. yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Datum naplánování je povinný údaj.")]
         public virtual DateTime? DatePlanned { get; set; }
         public virtual User UserToPerform{ get; set; }
         public virtual User UserPerformed{ get; set; }

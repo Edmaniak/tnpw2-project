@@ -10,6 +10,12 @@
             </span>
             <span class="text">Zobrazit povinnosti</span>
         </a>
+        <a href="@Url.Action("Delete", "User", new {id = Model.Id})" class="btn btn-danger btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="far fa-times-circle"></i>
+            </span>
+            <span class="text">Odstranit</span>
+        </a>
     </div>
 </div>
 @using (Html.BeginForm("Edit", "User", FormMethod.Post))

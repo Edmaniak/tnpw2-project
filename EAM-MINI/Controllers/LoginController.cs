@@ -19,7 +19,7 @@ namespace EAM_MINI.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            TempData["error"] = "Login failed";
+            TempData["error"] = "Přihlašovací údaje jsou špatné";
             return RedirectToAction("Index", "Login");
         }
 

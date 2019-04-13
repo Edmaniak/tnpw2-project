@@ -29,7 +29,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _controlStatusDao.Delete(id);
-            return Refresh();
+            return RedirectToAction("Index");
         } 
         [Authorize(Roles = "manager, admin")]
         public ActionResult Index()

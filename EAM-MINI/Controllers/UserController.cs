@@ -41,7 +41,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _userDao.Delete(_userDao.GetById(id));
-            return Redirect(Request.UrlReferrer.ToString());
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "admin")]

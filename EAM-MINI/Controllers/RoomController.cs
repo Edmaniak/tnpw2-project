@@ -39,7 +39,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _roomDao.Delete(_roomDao.GetById(id));
-            return Redirect(Request.UrlReferrer.ToString());
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "manager, admin")]
@@ -84,14 +84,16 @@ namespace EAM_MINI.Controllers
         [Authorize(Roles = "manager, admin")]
         public ActionResult Create(Room room, int environmentId, int categoryId)
         {
+            room.Category = _roomCategoryDao.GetById(categoryId);
+            room.Environment = _environmentDao.GetById(environmentId);
+            
             if (ModelState.IsValid)
             {
-                room.Category = _roomCategoryDao.GetById(categoryId);
-                room.Environment = _environmentDao.GetById(environmentId);
                 _roomDao.Create(room);
                 return RedirectToAction("Index", "Room");
             }
-
+            
+            InitViewBag();
             return View("Add", room);
         }
     }

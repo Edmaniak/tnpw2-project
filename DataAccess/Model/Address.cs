@@ -8,7 +8,7 @@ namespace DataAccess.Model
         public virtual int Id { get; set; }
 
         [Required(ErrorMessage = "PSČ je povinný údaj")]
-        [Range(0, int.MaxValue, ErrorMessage = "PSČ je povinný údaj")]
+        [RegularExpression(@"^\d{5}(-\d{2})?$", ErrorMessage = "Špatný formát psč - správně je například 513 01")]
         public virtual int Zip { get; set; }
         public virtual string Street { get; set; }
         [Required(ErrorMessage = "Město je povinný údaj")]

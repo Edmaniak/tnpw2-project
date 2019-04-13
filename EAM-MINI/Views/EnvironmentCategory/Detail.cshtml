@@ -3,6 +3,16 @@
 @{
     ViewBag.Title = Model.Title;
 }
+<div class="row">
+    <div class="col-12 mb-3">
+        <a href="@Url.Action("Delete", "EnvironmentCategory", new {id = Model.Id})" class="btn btn-danger btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="far fa-times-circle"></i>
+            </span>
+            <span class="text">Odstranit</span>
+        </a>
+    </div>
+</div>
 @using (Html.BeginForm("Edit", "EnvironmentCategory", FormMethod.Post))
 {
     <div class="row">

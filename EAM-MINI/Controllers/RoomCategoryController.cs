@@ -37,7 +37,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _roomCategoryDao.Delete(id);
-            return RedirectToAction("Index", "RoomCategory");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

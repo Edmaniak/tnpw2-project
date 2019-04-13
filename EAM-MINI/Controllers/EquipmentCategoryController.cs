@@ -8,7 +8,7 @@ using DataAccess.Model;
 namespace EAM_MINI.Controllers
 {
     [Authorize]
-    public class EquipmentCategoryController : Controller
+    public class EquipmentCategoryController : BaseController
     {
         private List<EquipmentCategory> _categories;
         private EquipmentCategoryDao _equipmentCategoryDao;
@@ -30,7 +30,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _equipmentCategoryDao.Delete(id);
-            return RedirectToAction("Index", "EquipmentCategory");
+            return RedirectToAction("Index");
         }
         
         [Authorize(Roles = "manager, admin")]

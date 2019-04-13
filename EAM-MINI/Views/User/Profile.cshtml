@@ -1,3 +1,4 @@
+@using DataAccess.Model
 @model DataAccess.Model.User
 @{
     ViewBag.Title = Model.FullName + " - Profil";
@@ -13,13 +14,21 @@
                     <table class="table table-bordered dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Jméno</th>
-                            <th>Role</th>
-                            <th>Povolání</th>
-                            <th>Akce</th>
+                            <th>Název</th>
+                            <th>Popis</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach (DataAccess.Model.Control c in Model.AssignedControls)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("Detail", "Control", new {id = c.Id})">@c.Title</a></td>
+                                <td>@c.Description</td>
+                                <td>@c.Status.Title</td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
                 </div>
@@ -36,13 +45,22 @@
                     <table class="table table-bordered dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Jméno</th>
-                            <th>Role</th>
-                            <th>Povolání</th>
-                            <th>Akce</th>
+                            <th>Název</th>
+                            <th>Popis</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach (Ticket t in Model.AssignedTickets)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})">@t.Title</a>
+                                </td>
+                                <td>@t.Description</td>
+                                <td>@t.Status.Title</td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
                 </div>

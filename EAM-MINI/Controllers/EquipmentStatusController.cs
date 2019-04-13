@@ -8,7 +8,7 @@ using DataAccess.Model;
 namespace EAM_MINI.Controllers
 {
     [Authorize]
-    public class EquipmentStatusController : Controller
+    public class EquipmentStatusController : BaseController
     {
         private List<EquipmentStatus> _statuses;
         private EquipmentStatusDao _equipmentStatusDao;
@@ -57,7 +57,7 @@ namespace EAM_MINI.Controllers
         public ActionResult Delete(int id)
         {
             _equipmentStatusDao.Delete(id);
-            return RedirectToAction("Index", "EquipmentStatus");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
