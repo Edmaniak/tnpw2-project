@@ -67,5 +67,11 @@ namespace DataAccess.Dao
                          c.Assigned.Id == userId)
                 .ToList();
         }
+        
+        public int GetTicketCountByEquipmentId(int equipmentId)
+        {
+            return session.QueryOver<Ticket>().Where(c => c.Equipment.Id == equipmentId).RowCount();
+        }
+    
     }
 }

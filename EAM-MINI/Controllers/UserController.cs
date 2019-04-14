@@ -49,6 +49,7 @@ namespace EAM_MINI.Controllers
             return View(user);
         }
 
+        [Authorize(Roles = "admin, manager, maintainer")]
         public ActionResult Profile(int id)
         {
             User user = _userDao.GetById(id);

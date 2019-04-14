@@ -48,6 +48,8 @@
                             <th>Záruka vyprší</th>
                             <th>Kategorie</th>
                             <th>Stav</th>
+                            <th>Poruchovost</th>
+                            <th>Kontroly</th>
                             <th>Akce</th>
                         </tr>
                         </thead>
@@ -75,6 +77,8 @@
                                 <td>@e.Warranty.ToString("dd. MM. yyyy")</td>
                                 <td>@e.Category.Title</td>
                                 <td>@e.Status.Title</td>
+                                <td><a href="@Url.Action("TicketRecords", "Equipment", new {id = @e.Id})">@e.Tickets.Count</a></td>
+                                <td><a href="@Url.Action("ControlRecords", "Equipment", new {id = @e.Id})">@e.Controls.Count</a></td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Equipment", new {id = e.Id})" class="btn btn-primary">Detail</a>
                                     <a href="@Url.Action("Delete", "Equipment", new {id = e.Id})" class="btn btn-danger">Smazat</a>

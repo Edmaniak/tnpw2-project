@@ -121,16 +121,16 @@ namespace EAM_MINI.Controllers
             ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.SOLVING);
             ticket.Solver = _userDao.GetByEmail(User.Identity.Name);
             _ticketDao.Update(ticket);
-            return Refresh(); 
+            return Refresh();
         }
-        
+
         public ActionResult SetRecorded(int id)
         {
             Ticket ticket = _ticketDao.GetById(id);
             ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.RECORDED);
             ticket.Solver = _userDao.GetByEmail(User.Identity.Name);
             _ticketDao.Update(ticket);
-            return Refresh(); 
+            return Refresh();
         }
 
         public ActionResult Rooms(int environmentId)
@@ -173,7 +173,7 @@ namespace EAM_MINI.Controllers
                 tic.Assigned = assignedId.HasValue ? _userDao.GetById(assignedId.Value) : null;
                 tic.Equipment = equipmentId.HasValue ? _equipmentDao.GetById(equipmentId.Value) : null;
                 tic.Author = _userDao.GetByEmail(User.Identity.Name);
-                
+
                 if (statusId.HasValue)
                     tic.Status = _ticketStatusDao.GetById(statusId.Value);
 
@@ -224,6 +224,10 @@ namespace EAM_MINI.Controllers
 
                 ticket.Author = _userDao.GetByEmail(User.Identity.Name);
                 _ticketDao.Create(ticket);
+                
+                if (User.IsInRole("employee"))
+                    return Refresh();
+                
                 return RedirectToAction("Index", "Ticket");
             }
 

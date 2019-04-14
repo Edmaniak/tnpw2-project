@@ -63,7 +63,10 @@ namespace DataAccess.Dao
                 .ToList();
         }
         
-       
+        public int GetControlCountByEquipmentId(int equipmentId)
+        {
+            return session.QueryOver<Control>().Where(c => c.Equipment.Id == equipmentId).RowCount();
+        }
         
         
     }
