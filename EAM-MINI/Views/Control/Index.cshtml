@@ -12,18 +12,21 @@
             </span>
             <span class="text">Přidat kontrolu</span>
         </a>
-        <a href="@Url.Action("Index", "ControlCategory")" class="btn btn-info btn-icon-split btn-lg mr-2">
-            <span class="icon text-white-50">
-                <i class="fas fa-pen"></i>
-            </span>
-            <span class="text">Spravovat kategorie</span>
-        </a>
-        <a href="@Url.Action("Index", "ControlStatus")" class="btn btn-info btn-icon-split btn-lg mr-2">
-            <span class="icon text-white-50">
-                <i class="fas fa-pen"></i>
-            </span>
-            <span class="text">Spravovat stavy</span>
-        </a>
+        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+        {
+            <a href="@Url.Action("Index", "ControlCategory")" class="btn btn-info btn-icon-split btn-lg mr-2">
+                <span class="icon text-white-50">
+                    <i class="fas fa-pen"></i>
+                </span>
+                <span class="text">Spravovat kategorie</span>
+            </a>
+            <a href="@Url.Action("Index", "ControlStatus")" class="btn btn-info btn-icon-split btn-lg mr-2">
+                <span class="icon text-white-50">
+                    <i class="fas fa-pen"></i>
+                </span>
+                <span class="text">Spravovat stavy</span>
+            </a>
+        }
         <a href="@Url.Action("Archive", "Control")" class="btn btn-info btn-icon-split btn-lg mr-2">
             <span class="icon text-white-50">
                 <i class="fas fa-list"></i>
@@ -77,7 +80,14 @@
                                     }
                                 </td>
                                 <td>
-                                    @Html.DropDownList("statusId", new SelectList(ViewBag.statuses, "Id", "Title", c.Status.Id), new {@class = "form-control status-change"})
+                                    @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                                    {
+                                        @Html.DropDownList("statusId", new SelectList(ViewBag.statuses, "Id", "Title", c.Status.Id), new {@class = "form-control status-change"})
+                                    }
+                                    else
+                                    {
+                                        @c.Status.Title
+                                    }
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>

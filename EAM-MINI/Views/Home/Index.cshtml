@@ -52,7 +52,7 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Řešené problémy</div>
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Řešené a přiřazené problémy</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.solvingTickets.Count</div>
                     </div>
                     <div class="col-auto">
@@ -79,7 +79,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
                 <h6 class="m-0 font-weight-bold text-primary">Naplánované kontroly</h6>
@@ -120,7 +120,7 @@
 
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>
-                                @if (c.Status.Id != ControlStatusDao.Constants.DONE)
+                                @if (c.Status.Id != ControlStatusDao.Constants.DONE && ViewBag.User.Id == c.UserToPerform.Id)
                                 {
                                     <a href="@Url.Action("SetDone", "Control", new {id = c.Id})" class="btn btn-success">Provedeno</a>
                                 }
@@ -133,7 +133,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+   <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
                 <h6 class="m-0 font-weight-bold text-primary">Otevřené problémy</h6>
@@ -143,9 +143,14 @@
                     <table class="table table-bordered dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Název</th>
                             <th>Kategorie</th>
-                            <th>Přiděleno</th>
+                            @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                            {
+                                <th>Přiděleno</th>
+                            }
+                            <th>Přidal</th>
                             <th>Status</th>
                             <th>Akce</th>
                         </tr>
@@ -153,30 +158,54 @@
                         <tbody>
                         @foreach (Ticket t in ViewBag.openTickets)
                         {
-                            <tr>
+                            <tr data-ticketId="@t.Id">
+                                <td>
+                                    <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})">@t.Id</a>
+                                </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})">@t.Title</a>
                                 </td>
-                                <td>@t.Category.Title</td> 
+
+                                <td>@t.Category.Title</td>
+                                @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                                {
+                                    <td>
+                                        @if (t.Assigned == null)
+                                        {
+                                            <a href="#" data-toggle="modal" data-ticket-id="@t.Id" data-target="#assignModal" class="btn btn-primary assign-button">Přidělit</a>
+                                        }
+                                        else
+                                        {
+                                            <a target="_blank" href="@Url.Action("Detail", "User", new {id = t.Assigned.Id})">@t.Assigned.FullName</a>
+                                        }
+                                    </td>
+                                }
                                 <td>
-                                    @if (t.Assigned == null)
-                                    {
-                                        <a href="#" class="btn btn-primary">Přidělit</a>
-                                    }
-                                    else
-                                    {
-                                        @t.Assigned.FullName
-                                    }
+                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = t.Author.Id})">@t.Author.FullName</a>
                                 </td>
                                 <td>
-                                    @t.Status.Title 
+                                    @if (User.IsInRole("manager") || User.IsInRole("admin"))
+                                    {
+                                            var list = new SelectList(ViewBag.statuses, "Id", "Title",t.Status.Id).ToList();
+                                            if (t.Assigned == null)
+                                            {
+                                                list.RemoveAt(1);
+                                            }                
+                                        @Html.DropDownList("statusId", list, new {@class = "form-control status-change"})
+                                    }                                                             
+                                    else
+                                    {
+                                        @t.Status.Title
+                                    }
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})" class="btn btn-primary">Detail</a>
-                                @if (t.Status.Id != TicketStatusDao.Constants.SOLVED)
-                                {
-                                    <a href="@Url.Action("SetDone", "Ticket", new {id = t.Id})" class="btn btn-success">Opraveno</a>
-                                }
+                                    <a href="@Url.Action("Archivate", "Ticket", new {id = t.Id})" class="btn btn-warning">Archivovat</a>
+                                    <a href="@Url.Action("Delete", "Ticket", new {id = t.Id})" class="btn btn-danger">Smazat</a>
+                                    @if (t.Status.Id != TicketStatusDao.Constants.SOLVED && t.Assigned != null && ViewBag.User.Id == t.Assigned.Id)
+                                    {
+                                        <a href="@Url.Action("SetDone", "Ticket", new {id = t.Id})" class="btn btn-success">Opraveno</a>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -187,3 +216,88 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Přidělit</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Přiřadit problém pracovníkovi:</label>
+                @Html.DropDownList("assignId", new SelectList(ViewBag.maintainers, "Id", "UserInfo"), new {@class = "form-control searchSelect", id = "assignId"})
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary save-assign" type="button" data-dismiss="modal">Přiřadit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalPlaceholder"></div>
+<script>
+    var ticketId;
+
+    function assignUser() {
+        var userId = $('#assignId').val();
+        console.log(userId);
+        $.ajax({
+            url: "@Url.Action("AssignUser", "Ticket")",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(res) {
+                location.reload();
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            data: {
+                ticketId: ticketId,
+                userId: userId
+            }
+        });
+    }
+
+    function saveStatus(ticketId, statusId) {
+        console.log(ticketId);
+        console.log(statusId);
+        $.ajax({
+            url: "@Url.Action("SaveStatus", "Ticket")",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(res) {
+                console.log(res);
+                console.log("sddd");
+                $('#modalPlaceholder').html(res);
+                $('#statusModal').modal("show");
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            data: {
+                ticketId: ticketId,
+                statusId: statusId
+            }
+        });
+    }
+
+    $('.status-change').on('change',
+        function() {
+            console.log("DDD");
+            var ticketId = $(this).parents('tr').data('ticketid');
+            console.log(ticketId);
+            saveStatus(ticketId, $(this).val());
+        });
+
+    $('.save-assign').on('click',
+        function() {
+            console.log("DDD");
+            assignUser();
+        });
+
+    $('.assign-button').click(function() {
+        ticketId = $(this).data('ticket-id');
+    });
+</script>

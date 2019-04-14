@@ -18,6 +18,7 @@ namespace EAM_MINI.Controllers
         private TicketCategoryDao _ticketCategoryDao;
         private EnvironmentDao _environmentDao;
         private UserDao _userDao;
+        private TicketStatusDao _ticketStatusDao;
 
         public HomeController()
         {
@@ -26,6 +27,7 @@ namespace EAM_MINI.Controllers
             _userDao = new UserDao();
             _environmentDao = new EnvironmentDao();
             _ticketCategoryDao = new TicketCategoryDao();
+            _ticketStatusDao = new TicketStatusDao();
         }
 
         public ActionResult Index()
@@ -48,6 +50,8 @@ namespace EAM_MINI.Controllers
             ViewBag.openTickets = _ticketDao.GetNotAssignedTickets();
             ViewBag.solvingTickets = _ticketDao.GetSolvingTickets();
             ViewBag.plannedControls = _controlDao.GetPlannedControls();
+            ViewBag.statuses = _ticketStatusDao.GetAll();
+            ViewBag.maintainers = _userDao.GetMaintainers();
             return View("Index");
         }
     }

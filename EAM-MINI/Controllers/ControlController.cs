@@ -102,7 +102,7 @@ namespace EAM_MINI.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        
         public ActionResult SaveStatus(int controlId, int statusId)
         {
             Control control = _controlDao.GetById(controlId);
@@ -112,7 +112,13 @@ namespace EAM_MINI.Controllers
             ViewBag.controlName = control.Title;
             ViewBag.controlId = control.Id;
             _controlDao.Update(control);
-            return PartialView("StatusChangeModal");
+            
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("StatusChangeModal");
+            }
+
+            return Refresh();
         }
 
 
@@ -146,7 +152,7 @@ namespace EAM_MINI.Controllers
             InitViewBag();
             return View("Add", control);
         }
-        
+
         public ActionResult SetDone(int id)
         {
             Control control = _controlDao.GetById(id);

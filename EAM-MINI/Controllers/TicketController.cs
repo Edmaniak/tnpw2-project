@@ -38,7 +38,7 @@ namespace EAM_MINI.Controllers
             ViewBag.categories = _ticketCategoryDao.GetAll().ToList();
             ViewBag.statuses = _ticketStatusDao.GetAll().ToList();
             ViewBag.environments = _environmentDao.GetAll().ToList();
-            ViewBag.maintainers = _userDao.GetManagersAndMaintainers();
+            ViewBag.maintainers = _userDao.GetMaintainers();
             ViewBag.equipments = _equipmentDao.GetAll().ToList();
         }
 
@@ -81,7 +81,6 @@ namespace EAM_MINI.Controllers
             return PartialView("Equipments", equipments);
         }
 
-        [HttpPost]
         public ActionResult SaveStatus(int ticketId, int statusId)
         {
             Ticket control = _ticketDao.GetById(ticketId);
@@ -99,7 +98,12 @@ namespace EAM_MINI.Controllers
             ViewBag.controlName = control.Title;
             ViewBag.controlId = control.Id;
             _ticketDao.Update(control);
-            return PartialView("StatusChangeModal");
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("StatusChangeModal");
+            }
+
+            return Refresh();
         }
 
         public ActionResult SetDone(int id)
@@ -109,6 +113,24 @@ namespace EAM_MINI.Controllers
             ticket.Solver = _userDao.GetByEmail(User.Identity.Name);
             _ticketDao.Update(ticket);
             return Refresh();
+        }
+
+        public ActionResult SetWIP(int id)
+        {
+            Ticket ticket = _ticketDao.GetById(id);
+            ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.SOLVING);
+            ticket.Solver = _userDao.GetByEmail(User.Identity.Name);
+            _ticketDao.Update(ticket);
+            return Refresh(); 
+        }
+        
+        public ActionResult SetRecorded(int id)
+        {
+            Ticket ticket = _ticketDao.GetById(id);
+            ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.RECORDED);
+            ticket.Solver = _userDao.GetByEmail(User.Identity.Name);
+            _ticketDao.Update(ticket);
+            return Refresh(); 
         }
 
         public ActionResult Rooms(int environmentId)

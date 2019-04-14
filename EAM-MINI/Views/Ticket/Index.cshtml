@@ -12,18 +12,21 @@
             </span>
             <span class="text">Nahlásit problém</span>
         </a>
-        <a href="@Url.Action("Index", "TicketCategory")" class="btn btn-info btn-icon-split btn-lg mr-2">
-            <span class="icon text-white-50">
-                <i class="fas fa-pen"></i>
-            </span>
-            <span class="text">Spravovat kategorie</span>
-        </a>
-        <a href="@Url.Action("Index", "TicketStatus")" class="btn btn-info btn-icon-split btn-lg mr-2">
-            <span class="icon text-white-50">
-                <i class="fas fa-pen"></i>
-            </span>
-            <span class="text">Spravovat stavy</span>
-        </a>
+        @if (User.IsInRole("admin") || User.IsInRole("manager"))
+        {
+            <a href="@Url.Action("Index", "TicketCategory")" class="btn btn-info btn-icon-split btn-lg mr-2">
+                <span class="icon text-white-50">
+                    <i class="fas fa-pen"></i>
+                </span>
+                <span class="text">Spravovat kategorie</span>
+            </a>
+            <a href="@Url.Action("Index", "TicketStatus")" class="btn btn-info btn-icon-split btn-lg mr-2">
+                <span class="icon text-white-50">
+                    <i class="fas fa-pen"></i>
+                </span>
+                <span class="text">Spravovat stavy</span>
+            </a>
+        }
         <a href="@Url.Action("Archive", "Ticket")" class="btn btn-info btn-icon-split btn-lg mr-2">
             <span class="icon text-white-50">
                 <i class="fas fa-list"></i>
@@ -86,7 +89,12 @@
                                 <td>
                                     @if (User.IsInRole("manager") || User.IsInRole("admin"))
                                     {
-                                        @Html.DropDownList("statusId", new SelectList(ViewBag.statuses, "Id", "Title", t.Status.Id), new {@class = "form-control status-change"})
+                                        var list = new SelectList(ViewBag.statuses, "Id", "Title", t.Status.Id).ToList();
+                                        if (t.Assigned == null)
+                                        {
+                                            list.RemoveAt(1);
+                                        }
+                                        @Html.DropDownList("statusId", list, new {@class = "form-control status-change"})
                                     }
                                     else
                                     {

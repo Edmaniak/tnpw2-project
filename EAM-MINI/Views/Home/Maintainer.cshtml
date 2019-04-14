@@ -26,7 +26,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
                 <h6 class="m-0 font-weight-bold text-primary">Kontroly k provedení</h6>
@@ -64,9 +64,17 @@
                                 <td>@c.Status.Title</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>
+                                    @if (c.Status.Id != ControlStatusDao.Constants.SOLVING)
+                                    {
+                                        <a href="@Url.Action("SaveStatus", "Control", new {controlId = c.Id, statusId = ControlStatusDao.Constants.SOLVING})" class="btn btn-warning">Pracuji na tom</a>
+                                    }
+                                    @if (c.Status.Id == ControlStatusDao.Constants.SOLVING)
+                                    {
+                                        <a href="@Url.Action("SaveStatus", "Control", new {controlId = c.Id, statusId = ControlStatusDao.Constants.PLANNED})" class="btn btn-danger">Práce pozastaveny</a>
+                                    }
                                     @if (c.Status.Id != ControlStatusDao.Constants.DONE)
                                     {
-                                        <a href="@Url.Action("SetDone", "Control", new {id = c.Id})" class="btn btn-success">Provedeno</a>
+                                        <a href="@Url.Action("SaveStatus", "Control", new {controlId = c.Id, statusId = ControlStatusDao.Constants.DONE})" class="btn btn-success">Opraveno</a>
                                     }
                                 </td>
                             </tr>
@@ -77,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
                 <h6 class="m-0 font-weight-bold text-primary">Opravy k provedení</h6>
@@ -106,9 +114,17 @@
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})" class="btn btn-primary">Detail</a>
+                                    @if (t.Status.Id != TicketStatusDao.Constants.SOLVING)
+                                    {
+                                        <a href="@Url.Action("SaveStatus", "Ticket", new {ticketId = t.Id, statusId = TicketStatusDao.Constants.SOLVING})" class="btn btn-warning">Pracuji na tom</a>
+                                    }
+                                    @if (t.Status.Id == TicketStatusDao.Constants.SOLVING)
+                                    {
+                                        <a href="@Url.Action("SaveStatus", "Ticket", new {ticketId = t.Id, statusId = TicketStatusDao.Constants.ASSIGNED})" class="btn btn-danger">Práce pozastaveny</a>
+                                    }
                                     @if (t.Status.Id != TicketStatusDao.Constants.SOLVED)
                                     {
-                                        <a href="@Url.Action("SetDone", "Ticket", new {id = t.Id})" class="btn btn-success">Opraveno</a>
+                                        <a href="@Url.Action("SaveStatus", "Ticket", new {ticketId = t.Id, statusId = TicketStatusDao.Constants.SOLVED})" class="btn btn-success">Opraveno</a>
                                     }
                                 </td>
                             </tr>
