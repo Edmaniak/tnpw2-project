@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DataAccess.Dao;
 using DataAccess.Interface;
@@ -27,6 +28,10 @@ namespace DataAccess.Model
         public virtual EquipmentCategory Category { get; set; }
 
         public virtual EquipmentStatus Status { get; set; }
+
+        public virtual IList<Control> Controls { get; set; }
+
+        public virtual IList<Ticket> Tickets { get; set; }
 
         public virtual Room Room { get; set; }
 

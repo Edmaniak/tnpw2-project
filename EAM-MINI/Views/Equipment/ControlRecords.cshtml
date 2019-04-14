@@ -1,0 +1,62 @@
+@using DataAccess.Model
+@model List<DataAccess.Model.Control>
+@{
+    ViewBag.Title = ViewBag.Equipment.Title + " - Kontroly";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Kontroly v systému</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Název</th>
+                            <th>Deadline</th>
+                            <th>Zodpovědný</th>
+                            <th>Provedl</th>
+                            <th>Stav</th>
+                            <th>Akce</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (DataAccess.Model.Control c in Model)
+                        {
+                            <tr data-controlId="@c.Id">
+                                <td>
+                                    <a href="@Url.Action("Detail", "Control", new {id = c.Id})">@c.Title</a>
+                                </td>
+                                <td>@c.DatePlanned.Value.ToString("d. M. yyyy")</td>
+                                <td>
+                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
+                                </td>
+                                <td>
+                                    @if (c.Equipment != null)
+                                    {
+                                        <a target="_blank" href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.EquipmentInfo</a>
+                                    }
+                                    else
+                                    {
+                                        <span>@c.EquipmentInfo</span>
+                                    }
+                                </td>
+                                <td>
+                                    @c.Status.Title
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>
+                                    <a href="@Url.Action("Delete", "Control", new {id = c.Id})" class="btn btn-danger">Smazat</a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   

@@ -1830,7 +1830,9 @@
         <Content Include="Views\Equipment\Detail.cshtml" />
         <Content Include="Views\Equipment\Rooms.cshtml" />
         <Content Include="Views\Equipment\Index.cshtml" />
+        <Content Include="Views\Equipment\ControlRecords.cshtml" />
         <Content Include="Views\Equipment\Statuses.cshtml" />
+        <Content Include="Views\Equipment\TicketRecords.cshtml" />
         <Content Include="Views\Home\Employee.cshtml" />
         <Content Include="Views\Home\Equipments.cshtml" />
         <Content Include="Views\Home\Maintainer.cshtml" />

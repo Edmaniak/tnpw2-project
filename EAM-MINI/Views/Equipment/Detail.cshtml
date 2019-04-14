@@ -11,6 +11,18 @@
             </span>
             <span class="text">Odstranit</span>
         </a>
+        <a href="@Url.Action("TicketRecords", "Equipment", new {id = Model.Id})" class="btn btn-primary btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-bug"></i>
+            </span>
+            <span class="text">Záznamy problémů</span>
+        </a>
+        <a href="@Url.Action("ControlRecords", "Equipment", new {id = Model.Id})" class="btn btn-primary btn-icon-split btn-lg mr-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-calendar-check"></i>
+            </span>
+            <span class="text">Záznamy kontol</span>
+        </a>
     </div>
 </div>
 @using (Html.BeginForm("Edit", "Equipment", FormMethod.Post))

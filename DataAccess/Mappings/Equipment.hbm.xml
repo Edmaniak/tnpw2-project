@@ -12,5 +12,13 @@
         <many-to-one name="Room" class="Room" column="room_id" />
         <many-to-one name="Status" class="EquipmentStatus" column="status_id"/>
         <many-to-one name="Category" class="EquipmentCategory" column="category_id"/>
+        <bag name="Controls" cascade="none">
+            <key column="equipment_id"/>
+            <one-to-many class="Control"/>
+        </bag>
+        <bag name="Tickets" cascade="none">
+            <key column="ticket_id"/>
+            <one-to-many class="Ticket"/>
+        </bag>
     </class>
 </hibernate-mapping>

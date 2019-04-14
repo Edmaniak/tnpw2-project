@@ -140,5 +140,21 @@ namespace EAM_MINI.Controllers
 
             return PartialView("Rooms", rooms);
         }
+
+        public ActionResult ControlRecords(int id)
+        {
+            Equipment equipment = _equipmentDao.GetById(id);
+            List<Control> controls = equipment.Controls.ToList();
+            ViewBag.Equipment = equipment;
+            return View(controls);
+        }
+
+        public ActionResult TicketRecords(int id)
+        {
+            Equipment equipment = _equipmentDao.GetById(id);
+            List<Ticket> tickets = equipment.Tickets.ToList();
+            ViewBag.Equipment = equipment;
+            return View(tickets);
+        }
     }
 }
