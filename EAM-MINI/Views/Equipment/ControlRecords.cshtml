@@ -31,16 +31,16 @@
                                 </td>
                                 <td>@c.DatePlanned.Value.ToString("d. M. yyyy")</td>
                                 <td>
-                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
+                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.UserToPerform.Id})">@c.UserToPerform.FullName</a>
                                 </td>
                                 <td>
-                                    @if (c.Equipment != null)
+                                    @if (c.UserPerformed != null)
                                     {
-                                        <a target="_blank" href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.EquipmentInfo</a>
+                                        <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.UserPerformed.Id})">@c.UserPerformed.FullName</a>
                                     }
                                     else
                                     {
-                                        <span>@c.EquipmentInfo</span>
+                                        <span>Není známo nebo nebylo provedeno</span>
                                     }
                                 </td>
                                 <td>

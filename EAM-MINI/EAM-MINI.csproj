@@ -1857,6 +1857,7 @@
         <Content Include="Views\Ticket\Detail.cshtml" />
         <Content Include="Views\Ticket\Equipments.cshtml" />
         <Content Include="Views\Ticket\Index.cshtml" />
+        <Content Include="Views\Ticket\StatusChangeModal.cshtml" />
         <Content Include="Views\User\Add.cshtml" />
         <Content Include="Views\User\Detail.cshtml" />
         <Content Include="Views\User\Index.cshtml" />

@@ -17,7 +17,7 @@
             <one-to-many class="Control"/>
         </bag>
         <bag name="Tickets" cascade="none">
-            <key column="ticket_id"/>
+            <key column="equipment_id"/>
             <one-to-many class="Ticket"/>
         </bag>
     </class>

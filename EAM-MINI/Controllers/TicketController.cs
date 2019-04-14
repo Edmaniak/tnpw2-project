@@ -58,17 +58,13 @@ namespace EAM_MINI.Controllers
 
         public ActionResult Archivate(int id)
         {
-            Ticket ticket = _ticketDao.GetById(id);
-            ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.ARCHIVATED);
-            _ticketDao.Update(ticket);
+            _ticketDao.Archivate(id);
             return RedirectToAction("Index", "Ticket");
         }
 
         public ActionResult Unarchivate(int id)
         {
-            Ticket ticket = _ticketDao.GetById(id);
-            ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.RECORDED);
-            _ticketDao.Update(ticket);
+            _ticketDao.Unarchivate(id);
             return RedirectToAction("Archive", "Ticket");
         }
 
@@ -83,6 +79,36 @@ namespace EAM_MINI.Controllers
             }
 
             return PartialView("Equipments", equipments);
+        }
+
+        [HttpPost]
+        public ActionResult SaveStatus(int ticketId, int statusId)
+        {
+            Ticket control = _ticketDao.GetById(ticketId);
+            TicketStatus status = _ticketStatusDao.GetById(statusId);
+
+            if (statusId == TicketStatusDao.Constants.RECORDED)
+                control.Assigned = null;
+
+            if (statusId == TicketStatusDao.Constants.ARCHIVATED)
+                _ticketDao.Archivate(ticketId);
+
+            control.Status = status;
+
+            ViewBag.statusName = status.Title;
+            ViewBag.controlName = control.Title;
+            ViewBag.controlId = control.Id;
+            _ticketDao.Update(control);
+            return PartialView("StatusChangeModal");
+        }
+
+        public ActionResult SetDone(int id)
+        {
+            Ticket ticket = _ticketDao.GetById(id);
+            ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.SOLVED);
+            ticket.Solver = _userDao.GetByEmail(User.Identity.Name);
+            _ticketDao.Update(ticket);
+            return Refresh();
         }
 
         public ActionResult Rooms(int environmentId)
@@ -113,7 +139,7 @@ namespace EAM_MINI.Controllers
             return View(ticket);
         }
 
-        public ActionResult Edit(Ticket ticket, int categoryId, int? assignedId, int? equipmentId)
+        public ActionResult Edit(Ticket ticket, int categoryId, int? assignedId, int? equipmentId, int? statusId)
         {
             if (ModelState.IsValid)
             {
@@ -125,6 +151,15 @@ namespace EAM_MINI.Controllers
                 tic.Assigned = assignedId.HasValue ? _userDao.GetById(assignedId.Value) : null;
                 tic.Equipment = equipmentId.HasValue ? _equipmentDao.GetById(equipmentId.Value) : null;
                 tic.Author = _userDao.GetByEmail(User.Identity.Name);
+                
+                if (statusId.HasValue)
+                    tic.Status = _ticketStatusDao.GetById(statusId.Value);
+
+                if (assignedId.HasValue)
+                {
+                    tic.Assigned = _userDao.GetById(assignedId.Value);
+                    tic.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.ASSIGNED);
+                }
 
                 _ticketDao.Update(tic);
                 InitViewBag();
@@ -178,6 +213,7 @@ namespace EAM_MINI.Controllers
         {
             Ticket ticket = _ticketDao.GetById(ticketId);
             ticket.Assigned = _userDao.GetById(userId);
+            ticket.Status = _ticketStatusDao.GetById(TicketStatusDao.Constants.ASSIGNED);
             _ticketDao.Update(ticket);
             return Refresh();
         }

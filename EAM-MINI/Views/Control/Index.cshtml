@@ -45,6 +45,7 @@
                         <tr>
                             <th>Název</th>
                             <th>Deadline</th>
+                            <th>Vytvořil</th>
                             <th>Zodpovědný</th>
                             <th>Týká se</th>
                             <th>Stav</th>
@@ -58,14 +59,17 @@
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})">@c.Title</a>
                                 </td>
-                                <td>@c.DatePlanned.Value.ToString("d. M. yyyy")</td>
+                                <td>@c.DatePlanned.Value.ToString("dd. MM. yyyy")</td>
                                 <td>
-                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
+                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.UserPlanned.Id})">@c.UserPlanned.FullName</a>
+                                </td>
+                                <td>
+                                    <a target="_blank" href="@Url.Action("Detail", "User", new {id = c.UserToPerform.Id})">@c.UserToPerform.FullName</a>
                                 </td>
                                 <td>
                                     @if (c.Equipment != null)
                                     {
-                                        <a target="_blank" href="@Url.Action("Detail", "Equipment", new {id = c.Id})">@c.EquipmentInfo</a>
+                                        <a target="_blank" href="@Url.Action("Detail", "Equipment", new {id = c.Equipment.Id})">@c.EquipmentInfo</a>
                                     }
                                     else
                                     {

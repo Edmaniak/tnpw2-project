@@ -1,13 +1,13 @@
 @using DataAccess.Model
 @model List<DataAccess.Model.Ticket>
 @{
-    ViewBag.Title = ViewBag.Equipment.Title + " - Kontroly";
+    ViewBag.Title = ViewBag.Equipment.Title + " - Záznamy problémů";
 }
 <div class="row">
     <div class="col-12">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Kontroly v systému</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Problémy v systémů týkající se @ViewBag.Equipment.Title</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -22,6 +22,7 @@
                                 <th>Přiděleno</th>
                             }
                             <th>Přidal</th>
+                            <th>Opravil</th>
                             <th>Status</th>
                             <th>Akce</th>
                         </tr>
@@ -43,7 +44,7 @@
                                     <td>
                                         @if (t.Assigned == null)
                                         {
-                                            <a href="#" data-toggle="modal" data-ticket-id="@t.Id" data-target="#assignModal" class="btn btn-primary assign-button">Přidělit</a>
+                                            <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})" class="btn btn-primary assign-button">Přidělit</a>
                                         }
                                         else
                                         {
@@ -53,6 +54,17 @@
                                 }
                                 <td>
                                     <a target="_blank" href="@Url.Action("Detail", "User", new {id = t.Author.Id})">@t.Author.FullName</a>
+                                </td>
+                                <td>
+                                    @if (t.Solver != null)
+                                    {
+                                        <a target="_blank" href="@Url.Action("Detail", "User", new {id = t.Solver.Id})">@t.Solver.FullName</a>
+
+                                    }
+                                    else
+                                    {
+                                        <span>Není známo nebo nebylo provedeno</span>
+                                    }
                                 </td>
                                 <td>
                                     @t.Status.Title

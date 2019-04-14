@@ -450,7 +450,7 @@
                 language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Czech.json' },
                 scrollX: false
             });
-        
+
         $('.dataTable').basictable({
             breakpoint: 1024
         });
@@ -465,6 +465,11 @@
                 dateformat: "dd. mm. yy"
             })
             .attr('readonly', 'readonly');
+
+        $('#sidebarToggle').click(function() {
+            $('#page-top').toggleClass('sidebar-toggled');
+            $('#accordionSidebar').toggleClass('toggled');
+        });
     });
 </script>
 <!-- select-->

@@ -39,6 +39,13 @@
                         @Html.DropDownList("categoryId", new SelectList(ViewBag.categories, "Id", "Title", Model.Category.Id), new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Category)
                     </div>
+                    @if (User.IsInRole("admin") || User.IsInRole("manager"))
+                    {
+                    <div class="form-group">
+                        <label for="name">Status:</label>
+                        @Html.DropDownList("categoryId", new SelectList(ViewBag.statuses, "Id", "Title", Model.Status.Id), new {@class = "form-control"})
+                        @Html.ValidationMessageFor(x => x.Status)
+                    </div>}
                     @if (!User.IsInRole("employee"))
                     {
                         if (User.IsInRole("admin") || User.IsInRole("manager"))
@@ -61,7 +68,10 @@
                     }
                     @Html.Hidden("authorId", User.Identity.Name)
                     @Html.HiddenFor(x => x.Id)
-                    <input type="hidden" value="@if (Model.Equipment != null){@Model.Equipment.Id}" id="equipmentIdFilled">
+                    <input type="hidden" value="@if (Model.Equipment != null)
+                                                {
+                                                    @Model.Equipment.Id
+                                                }" id="equipmentIdFilled">
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Uložit</button>
                     </div>

@@ -33,8 +33,8 @@ namespace EAM_MINI.Controllers
             if (User.IsInRole("maintainer"))
             {
                 User user = _userDao.GetByEmail(User.Identity.Name);
-                ViewBag.myTickets = user.AssignedTickets;
-                ViewBag.myControls = user.AssignedControls;
+                ViewBag.myTickets = _ticketDao.GetUndoneForUser(user.Id);
+                ViewBag.myControls = _controlDao.GetUndoneForUser(user.Id);
                 return View("Maintainer");
             }
 

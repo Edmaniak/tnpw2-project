@@ -134,6 +134,7 @@ namespace EAM_MINI.Controllers
                 }
 
                 User user = _userDao.GetById(userId);
+                control.UserPlanned = _userDao.GetByEmail(User.Identity.Name);
                 control.UserToPerform = user;
                 control.Status = _controlStatusDao.GetById(ControlStatusDao.Constants.PLANNED);
                 control.Category = _controlCategoryDao.GetById(categoryId);
@@ -144,6 +145,15 @@ namespace EAM_MINI.Controllers
 
             InitViewBag();
             return View("Add", control);
+        }
+        
+        public ActionResult SetDone(int id)
+        {
+            Control control = _controlDao.GetById(id);
+            control.Status = _controlStatusDao.GetById(ControlStatusDao.Constants.DONE);
+            control.UserPerformed = _userDao.GetByEmail(User.Identity.Name);
+            _controlDao.Update(control);
+            return Refresh();
         }
 
         public ActionResult Equipments(int? equipmentId, int? roomId)

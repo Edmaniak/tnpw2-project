@@ -1,4 +1,5 @@
-﻿@using DataAccess.Model
+﻿@using DataAccess.Dao
+@using DataAccess.Model
 @{
     ViewBag.Title = "Dashboard";
 }
@@ -119,6 +120,10 @@
 
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>
+                                @if (c.Status.Id != ControlStatusDao.Constants.DONE)
+                                {
+                                    <a href="@Url.Action("SetDone", "Control", new {id = c.Id})" class="btn btn-success">Provedeno</a>
+                                }
                                 </td>
                             </tr>
                         }
@@ -168,7 +173,10 @@
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})" class="btn btn-primary">Detail</a>
-                                    <a href="@Url.Action("Delete", "Ticket", new {id = t.Id})" class="btn btn-danger">Smazat</a>
+                                @if (t.Status.Id != TicketStatusDao.Constants.SOLVED)
+                                {
+                                    <a href="@Url.Action("SetDone", "Ticket", new {id = t.Id})" class="btn btn-success">Opraveno</a>
+                                }
                                 </td>
                             </tr>
                         }

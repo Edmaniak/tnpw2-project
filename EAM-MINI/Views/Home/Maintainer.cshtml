@@ -1,4 +1,5 @@
-﻿@using DataAccess.Model
+﻿@using DataAccess.Dao
+@using DataAccess.Model
 @{
     ViewBag.Title = "Dashboard";
 }
@@ -28,11 +29,11 @@
     <div class="col-md-6">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Kontroly</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Kontroly k provedení</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                     <table class="table table-bordered dataTable" id="dataTable" width="100%">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%">
                         <thead>
                         <tr>
                             <th>Název</th>
@@ -63,6 +64,10 @@
                                 <td>@c.Status.Title</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})" class="btn btn-primary">Detail</a>
+                                    @if (c.Status.Id != ControlStatusDao.Constants.DONE)
+                                    {
+                                        <a href="@Url.Action("SetDone", "Control", new {id = c.Id})" class="btn btn-success">Provedeno</a>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -75,7 +80,7 @@
     <div class="col-md-6">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0 font-weight-bold text-primary">Opravy</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Opravy k provedení</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -95,13 +100,16 @@
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})">@t.Title</a>
                                 </td>
-                                <td>@t.Category.Title</td> 
+                                <td>@t.Category.Title</td>
                                 <td>
-                                    @t.Status.Title 
+                                    @t.Status.Title
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})" class="btn btn-primary">Detail</a>
-                                    <a href="@Url.Action("Delete", "Ticket", new {id = t.Id})" class="btn btn-danger">Smazat</a>
+                                    @if (t.Status.Id != TicketStatusDao.Constants.SOLVED)
+                                    {
+                                        <a href="@Url.Action("SetDone", "Ticket", new {id = t.Id})" class="btn btn-success">Opraveno</a>
+                                    }
                                 </td>
                             </tr>
                         }

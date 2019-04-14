@@ -54,6 +54,15 @@ namespace DataAccess.Dao
             return session.Query<Control>().Where(c => c.Status.Id == ControlStatusDao.Constants.PLANNED).ToList();
         }
         
+        public List<Control> GetUndoneForUser(int userId)
+        {
+            return session.Query<Control>().Where(
+                    c => c.Status.Id != ControlStatusDao.Constants.DONE &&
+                         c.Status.Id != ControlStatusDao.Constants.ARCHIVATED &&
+                         c.UserToPerform.Id == userId)
+                .ToList();
+        }
+        
        
         
         

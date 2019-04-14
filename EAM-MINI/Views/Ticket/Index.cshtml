@@ -58,7 +58,7 @@
                         <tbody>
                         @foreach (Ticket t in Model)
                         {
-                            <tr>
+                            <tr data-ticketId="@t.Id">
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})">@t.Id</a>
                                 </td>
@@ -84,7 +84,14 @@
                                     <a target="_blank" href="@Url.Action("Detail", "User", new {id = t.Author.Id})">@t.Author.FullName</a>
                                 </td>
                                 <td>
-                                    @t.Status.Title
+                                    @if (User.IsInRole("manager") || User.IsInRole("admin"))
+                                    {
+                                        @Html.DropDownList("statusId", new SelectList(ViewBag.statuses, "Id", "Title", t.Status.Id), new {@class = "form-control status-change"})
+                                    }
+                                    else
+                                    {
+                                        @t.Status.Title
+                                    }
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})" class="btn btn-primary">Detail</a>
@@ -112,7 +119,7 @@
             </div>
             <div class="modal-body">
                 <label>Přiřadit problém pracovníkovi:</label>
-                @Html.DropDownList("assignId", new SelectList(ViewBag.maintainers, "Id", "UserInfo"), new {@class = "form-control", id = "assignId"})
+                @Html.DropDownList("assignId", new SelectList(ViewBag.maintainers, "Id", "UserInfo"), new {@class = "form-control searchSelect", id = "assignId"})
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary save-assign" type="button" data-dismiss="modal">Přiřadit</button>
@@ -120,6 +127,7 @@
         </div>
     </div>
 </div>
+<div id="modalPlaceholder"></div>
 <script>
     var ticketId;
 
@@ -142,6 +150,37 @@
             }
         });
     }
+
+    function saveStatus(ticketId, statusId) {
+        console.log(ticketId);
+        console.log(statusId);
+        $.ajax({
+            url: "@Url.Action("SaveStatus", "Ticket")",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(res) {
+                console.log(res);
+                console.log("sddd");
+                $('#modalPlaceholder').html(res);
+                $('#statusModal').modal("show");
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            data: {
+                ticketId: ticketId,
+                statusId: statusId
+            }
+        });
+    }
+
+    $('.status-change').on('change',
+        function() {
+            console.log("DDD");
+            var ticketId = $(this).parents('tr').data('ticketid');
+            console.log(ticketId);
+            saveStatus(ticketId, $(this).val());
+        });
 
     $('.save-assign').on('click',
         function() {
