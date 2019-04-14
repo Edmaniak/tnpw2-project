@@ -51,7 +51,7 @@
                                 <td>
                                     <a href="@Url.Action("Detail", "Control", new {id = c.Id})">@c.Title</a>
                                 </td>
-                                <td>@c.DatePlanned.Value.ToString("d. M. yyyy")</td>
+                                <td>@c.DatePlanned.Value.ToString("dd. MM. yyyy")</td>
                                 <td>
                                     <a href="@Url.Action("Detail", "User", new {id = c.Id})">@c.UserToPerform.FullName</a>
                                 </td>

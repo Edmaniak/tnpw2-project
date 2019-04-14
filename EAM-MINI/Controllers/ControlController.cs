@@ -9,7 +9,7 @@ using NHibernate.Mapping;
 
 namespace EAM_MINI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "manager, admin, maintainer")]
     public class ControlController : BaseController
     {
         private ControlDao _controlDao;

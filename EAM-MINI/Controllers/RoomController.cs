@@ -6,7 +6,7 @@ using DataAccess.Model;
 
 namespace EAM_MINI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "manager, admin")]
     public class RoomController : BaseController
     {
         private RoomDao _roomDao;
@@ -28,21 +28,18 @@ namespace EAM_MINI.Controllers
             ViewBag.categories = _roomCategoryDao.GetAll().ToList();
         }
 
-        [Authorize(Roles = "manager, admin")]
         public ActionResult Add()
         {
             InitViewBag();
             return View();
         }
 
-        [Authorize(Roles = "manager, admin")]
         public ActionResult Delete(int id)
         {
             _roomDao.Delete(_roomDao.GetById(id));
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "manager, admin")]
         public ActionResult Detail(int id)
         {
             Room room = _roomDao.GetById(id);
@@ -51,7 +48,6 @@ namespace EAM_MINI.Controllers
             return View(room);
         }
 
-        [Authorize(Roles = "manager, admin")]
         public ActionResult Edit(Room room, int environmentId, int categoryId)
         {
             if (ModelState.IsValid)
@@ -70,18 +66,15 @@ namespace EAM_MINI.Controllers
             }
 
             InitViewBag();
-            Room r = _roomDao.GetById(room.Id);
             return View("Detail", room);
         }
 
-        [Authorize(Roles = "manager, admin")]
         public ActionResult Index()
         {
             List<Room> rooms = _roomDao.GetAll().ToList();
             return View(rooms);
         }
 
-        [Authorize(Roles = "manager, admin")]
         public ActionResult Create(Room room, int environmentId, int categoryId)
         {
             room.Category = _roomCategoryDao.GetById(categoryId);

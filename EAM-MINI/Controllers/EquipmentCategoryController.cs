@@ -7,7 +7,7 @@ using DataAccess.Model;
 
 namespace EAM_MINI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "manager, admin")]
     public class EquipmentCategoryController : BaseController
     {
         private List<EquipmentCategory> _categories;
@@ -19,21 +19,21 @@ namespace EAM_MINI.Controllers
             _categories = _equipmentCategoryDao.GetAll().ToList();
         }
         
-        [Authorize(Roles = "manager, admin")]
+       
         public ActionResult Index()
         {
             ViewBag.categories = _categories;
             return View();
         }
         
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Delete(int id)
         {
             _equipmentCategoryDao.Delete(id);
             return RedirectToAction("Index");
         }
         
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Detail(int id)
         {
             EquipmentCategory equipmentCategory = _equipmentCategoryDao.GetById(id);
@@ -41,7 +41,7 @@ namespace EAM_MINI.Controllers
         }
         
         [HttpPost]
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Edit(EquipmentCategory category)
         {
             if (ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace EAM_MINI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Create(EquipmentCategory category)
         {
             if (ModelState.IsValid)

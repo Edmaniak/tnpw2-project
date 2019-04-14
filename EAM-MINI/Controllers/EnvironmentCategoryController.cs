@@ -7,7 +7,7 @@ using DataAccess.Model;
 
 namespace EAM_MINI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "manager, admin")]
     public class EnvironmentCategoryController : Controller
     {
         private List<EnvironmentCategory> _categories;
@@ -19,28 +19,28 @@ namespace EAM_MINI.Controllers
             _categories = _environmentCategoryDao.GetAll().ToList();
         }
 
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Index()
         {
             ViewBag.categories = _categories;
             return View();
         }
         
-        [Authorize(Roles = "manager, admin")]
+   
         public ActionResult Delete(int id)
         {
             _environmentCategoryDao.Delete(id);
             return RedirectToAction("Index");
         }
         
-        [Authorize(Roles = "manager, admin")]
+   
         public ActionResult Detail(int id)
         {
             EnvironmentCategory environmentCategory = _environmentCategoryDao.GetById(id);
             return View(environmentCategory);
         }
         
-        [Authorize(Roles = "manager, admin")]
+       
         [HttpPost]
         public ActionResult Edit(EnvironmentCategory category)
         {
@@ -60,7 +60,7 @@ namespace EAM_MINI.Controllers
             return View("Detail", ec);
         }
 
-        [Authorize(Roles = "manager, admin")]
+       
         [HttpPost]
         public ActionResult Create(EnvironmentCategory category)
         {

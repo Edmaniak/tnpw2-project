@@ -25,7 +25,7 @@ namespace EAM_MINI.Controllers
 
         public ActionResult LogOut()
         {
-            if (User.Identity.Name == null) return Redirect(Request.UrlReferrer.ToString());
+            if (User.Identity.Name == null) return Refresh();
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Login");
         }

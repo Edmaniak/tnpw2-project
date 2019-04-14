@@ -7,7 +7,7 @@ using DataAccess.Model;
 
 namespace EAM_MINI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "manager, admin")]
     public class RoomCategoryController : Controller
     {
         private List<RoomCategory> _categories;
@@ -19,21 +19,21 @@ namespace EAM_MINI.Controllers
             _categories = _roomCategoryDao.GetAll().ToList();
         }
 
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Index()
         {
             ViewBag.categories = _categories;
             return View();
         }
 
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Detail(int id)
         {
             RoomCategory roomCategory = _roomCategoryDao.GetById(id);
             return View(roomCategory);
         }
 
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Delete(int id)
         {
             _roomCategoryDao.Delete(id);
@@ -41,7 +41,7 @@ namespace EAM_MINI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Edit(RoomCategory category)
         {
             if (ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace EAM_MINI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Create(RoomCategory category)
         {
             if (ModelState.IsValid)

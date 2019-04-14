@@ -7,7 +7,7 @@ using NHibernate.Mapping;
 
 namespace EAM_MINI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "manager, admin")]
     public class EnvironmentController : BaseController
     {
         private BusinessDao _businessDao;
@@ -26,14 +26,14 @@ namespace EAM_MINI.Controllers
             ViewBag.categories = _environmentCategoryDao.GetAll().ToList();
         }
 
-        [Authorize(Roles = "manager, admin")]
+       
         public ActionResult Add()
         {
             InitViewBag();
             return View();
         }
 
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Detail(int id)
         {
             Environment environment = _environmentDao.GetById(id);
@@ -41,14 +41,14 @@ namespace EAM_MINI.Controllers
             return View(environment);
         }
         
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Index()
         {
             List<Environment> environments = _environmentDao.GetAll().ToList();
             return View(environments);
         }
 
-        [Authorize(Roles = "manager, admin")]
+       
         public ActionResult Delete(int id)
         {
             _environmentDao.Delete(id);
@@ -56,7 +56,7 @@ namespace EAM_MINI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Edit(Environment environment, int categoryId)
         {
            
@@ -80,7 +80,7 @@ namespace EAM_MINI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "manager, admin")]
+        
         public ActionResult Create(Environment environment, int categoryId)
         {
             if (ModelState.IsValid)
