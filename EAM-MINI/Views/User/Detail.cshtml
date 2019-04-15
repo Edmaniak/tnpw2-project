@@ -54,13 +54,13 @@
                         @Html.ValidationMessageFor(x => x.Phone)
                     </div>
                     <div class="form-group">
-                        <label for="password">Heslo:</label>
-                        @Html.TextBoxFor(x => x.Password, new {@class = "form-control", @type = "password"})
+                        <label for="password">Změnit heslo na:</label>
+                        <input name="password" id="password" type="password" class="form-control"/>
                         @Html.ValidationMessageFor(x => x.Password)
                     </div>
                     <div class="form-group">
                         <label for="role">Role:</label>
-                        @Html.DropDownList("roleId", new SelectList(ViewBag.roles, "Id", "Title"), new {@class = "form-control"})
+                        @Html.DropDownList("roleId", new SelectList(ViewBag.roles, "Id", "Title", Model.Role.Id), new {@class = "form-control"})
                         @Html.ValidationMessageFor(x => x.Role)
                     </div>
                     @Html.HiddenFor(x => x.Id)

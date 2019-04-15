@@ -74,7 +74,7 @@
                                     }
                                     @if (c.Status.Id != ControlStatusDao.Constants.DONE)
                                     {
-                                        <a href="@Url.Action("SaveStatus", "Control", new {controlId = c.Id, statusId = ControlStatusDao.Constants.DONE})" class="btn btn-success">Opraveno</a>
+                                        <a href="@Url.Action("SaveStatus", "Control", new {controlId = c.Id, statusId = ControlStatusDao.Constants.DONE})" class="btn btn-success">Provedeno</a>
                                     }
                                 </td>
                             </tr>
@@ -97,6 +97,7 @@
                         <tr>
                             <th>Název</th>
                             <th>Kategorie</th>
+                            <th>Přidáno</th>
                             <th>Status</th>
                             <th>Akce</th>
                         </tr>
@@ -109,6 +110,7 @@
                                     <a href="@Url.Action("Detail", "Ticket", new {id = t.Id})">@t.Title</a>
                                 </td>
                                 <td>@t.Category.Title</td>
+                                <td>@t.Created.Value.ToString("dd. MM. yyyy - H : mm")</td>
                                 <td>
                                     @t.Status.Title
                                 </td>

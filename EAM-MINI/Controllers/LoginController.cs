@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -13,6 +16,9 @@ namespace EAM_MINI.Controllers
         [HttpPost]
         public ActionResult SignIn(string email, string password, string remember)
         {
+            SHA256 sha256 = new SHA256CryptoServiceProvider();
+            Byte [] hashedPassword = sha256.ComputeHash(GetBytesForPassword(password));
+            password = Encoding.ASCII.GetString(hashedPassword);
             if (Membership.ValidateUser(email, password))
             {
                 FormsAuthentication.SetAuthCookie(email, remember == "1");
@@ -28,6 +34,10 @@ namespace EAM_MINI.Controllers
             if (User.Identity.Name == null) return Refresh();
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Login");
+        }
+        private byte[] GetBytesForPassword(string password)
+        {
+            return Encoding.ASCII.GetBytes(password);
         }
     }
 }

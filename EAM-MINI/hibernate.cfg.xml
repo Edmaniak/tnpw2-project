@@ -2,7 +2,7 @@
     <session-factory name="NHibernate.Test">
         <property name="connection.driver_class">NHibernate.Driver.Sql2008ClientDriver</property>
         <property name="connection.connection_string">
-            Data Source=DESKTOP-ELGBAM8;Initial Catalog=tnpw_eam;Integrated Security=SSPI;
+            Data Source=ADAM;Initial Catalog=tnpw_eam;Integrated Security=SSPI;
         </property>
         <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
         <mapping assembly="DataAccess" />

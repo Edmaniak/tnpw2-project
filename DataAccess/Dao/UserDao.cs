@@ -50,5 +50,10 @@ namespace DataAccess.Dao
         {
             return session.Query<User>().Where(c => c.Role.Id == RoleDao.Constants.EMPLOYEE_ID).ToList();
         }
+
+        public bool IsEmailUnique(string email)
+        {
+            return !session.Query<User>().Any(c => c.Email == email);
+        }
     }
 }

@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="password">Přiřadit pracovníkovi:</label>
                                 @{
-                                    var list = new SelectList(ViewBag.maintainers, "Id", "FullName").ToList();
+                                    var list = new SelectList(ViewBag.maintainers, "Id", "UserInfo").ToList();
                                     list.Insert(0, new SelectListItem { Value = "", Text = "Zatím nepřiřazovat"});
                                 }
                                 @Html.DropDownList("assignedId", list, new {@class = "form-control searchSelect"})

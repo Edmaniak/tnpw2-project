@@ -85,6 +85,7 @@
                                 }
                                 <td>
                                     <a target="_blank" href="@Url.Action("Detail", "User", new {id = t.Author.Id})">@t.Author.FullName</a>
+                                    @t.Created.Value.ToString("dd. MM. yyyy - H : mm")
                                 </td>
                                 <td>
                                     @if (User.IsInRole("manager") || User.IsInRole("admin"))
